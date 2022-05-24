@@ -71,12 +71,12 @@
     return Unit;
   }
   function main$lambda$lambda$lambda$lambda$lambda_1($receiver) {
-    $receiver.attrs.path = '/teachers';
-    $receiver.attrs.element = createElement(fcContainerTeacherList());
+    $receiver.attrs.to = '/subjects';
+    $receiver.unaryPlus_pdl1vz$('Subjects');
     return Unit;
   }
   function main$lambda$lambda$lambda$lambda$lambda_2($receiver) {
-    $receiver.attrs.path = '/teachers/:id';
+    $receiver.attrs.path = '/teachers';
     $receiver.attrs.element = createElement(fcContainerTeacherList());
     return Unit;
   }
@@ -86,12 +86,11 @@
     return Unit;
   }
   function main$lambda$lambda$lambda$lambda$lambda_4($receiver) {
-    $receiver.attrs.path = '/groups/:group';
-    $receiver.attrs.element = createElement(fcContainerGroupList());
+    $receiver.attrs.path = '/subjects';
+    $receiver.attrs.element = createElement(fcContainerSubjectList());
     return Unit;
   }
   function main$lambda$lambda$lambda$lambda($receiver) {
-    $receiver.invoke_qk0v40$($module$react_router.Route, main$lambda$lambda$lambda$lambda$lambda_1);
     $receiver.invoke_qk0v40$($module$react_router.Route, main$lambda$lambda$lambda$lambda$lambda_2);
     $receiver.invoke_qk0v40$($module$react_router.Route, main$lambda$lambda$lambda$lambda$lambda_3);
     $receiver.invoke_qk0v40$($module$react_router.Route, main$lambda$lambda$lambda$lambda$lambda_4);
@@ -108,6 +107,9 @@
     var $receiver_0_0 = RDOMBuilder.Companion.invoke_f6ihu2$(div$lambda(null));
     $receiver_0_0.invoke_qk0v40$($module$react_router_dom.Link, main$lambda$lambda$lambda$lambda$lambda_0);
     $receiver.child_30b5ua$($receiver_0_0.create());
+    var $receiver_0_1 = RDOMBuilder.Companion.invoke_f6ihu2$(div$lambda(null));
+    $receiver_0_1.invoke_qk0v40$($module$react_router_dom.Link, main$lambda$lambda$lambda$lambda$lambda_1);
+    $receiver.child_30b5ua$($receiver_0_1.create());
     $receiver.invoke_qk0v40$($module$react_router.Routes, main$lambda$lambda$lambda$lambda);
     $receiver.child_1mw94g$(cReactQueryDevtools(), void 0, main$lambda$lambda$lambda$lambda_0);
     return Unit;
@@ -228,19 +230,19 @@
       return new DIV_init(attributesMapOf('class', closure$classes), it);
     };
   }
-  function fcTeacherList$lambda$lambda$lambda$lambda$lambda(closure$teacherItem, closure$teacher) {
+  function fcSubjectList$lambda$lambda$lambda$lambda$lambda(closure$subjectItem, closure$subject) {
     return function ($receiver) {
-      $receiver.attrs.to = '/teachers/' + closure$teacherItem.uuid;
-      $receiver.unaryPlus_pdl1vz$(closure$teacher.firstName + ' ' + closure$teacher.lastName + ' ' + closure$teacher.patronymic + ' ' + '\t');
+      $receiver.attrs.to = '/groups/' + closure$subjectItem.uuid;
+      $receiver.unaryPlus_pdl1vz$(closure$subject + ' ' + '\t');
       return Unit;
     };
   }
-  function fcTeacherList$lambda($receiver, props) {
+  function fcSubjectList$lambda($receiver, props) {
     var $receiver_0 = RDOMBuilder.Companion.invoke_f6ihu2$(h3$lambda_0(null));
-    $receiver_0.unaryPlus_pdl1vz$('Teachers');
+    $receiver_0.unaryPlus_pdl1vz$('Subjects');
     $receiver.child_30b5ua$($receiver_0.create());
     var $receiver_0_0 = RDOMBuilder.Companion.invoke_f6ihu2$(ol$lambda_0(null));
-    var $receiver_1 = props.teachers;
+    var $receiver_1 = props.subjects;
     var destination = ArrayList_init(collectionSizeOrDefault($receiver_1, 10));
     var tmp$, tmp$_0;
     var index = 0;
@@ -250,6 +252,91 @@
       var tmp$_1 = destination.add_11rb$;
       checkIndexOverflow((tmp$_0 = index, index = tmp$_0 + 1 | 0, tmp$_0));
       var $receiver_0_1 = RDOMBuilder.Companion.invoke_f6ihu2$(li$lambda_0(null));
+      var subject = item.elem;
+      $receiver_0_1.invoke_qk0v40$($module$react_router_dom.Link, fcSubjectList$lambda$lambda$lambda$lambda$lambda(item, subject));
+      $receiver_0_0.child_30b5ua$($receiver_0_1.create());
+      tmp$_1.call(destination, Unit);
+    }
+    $receiver.child_30b5ua$($receiver_0_0.create());
+    return Unit;
+  }
+  function fcSubjectList() {
+    return fc('SubjectList', fcSubjectList$lambda);
+  }
+  function fcContainerSubjectList$lambda$lambda(it) {
+    var $receiver = {};
+    $receiver.url = Config.Companion.subjectsURL;
+    return $module$axios($receiver);
+  }
+  function fcContainerSubjectList$lambda$lambda_0(closure$items) {
+    return function ($receiver) {
+      $receiver.attrs.subjects = closure$items;
+      return Unit;
+    };
+  }
+  function fcContainerSubjectList$lambda($receiver, f) {
+    var tmp$, tmp$_0, tmp$_1;
+    var queryClient = $module$react_query.useQueryClient();
+    var query = useQuery('subjectList', fcContainerSubjectList$lambda$lambda);
+    if (query.isLoading) {
+      var $receiver_0 = RDOMBuilder.Companion.invoke_f6ihu2$(div$lambda_1(null));
+      $receiver_0.unaryPlus_pdl1vz$('Loading ..');
+      $receiver.child_30b5ua$($receiver_0.create());
+    } else if (query.isError) {
+      var $receiver_0_0 = RDOMBuilder.Companion.invoke_f6ihu2$(div$lambda_1(null));
+      $receiver_0_0.unaryPlus_pdl1vz$('Error!');
+      $receiver.child_30b5ua$($receiver_0_0.create());
+    } else {
+      var items = (tmp$_1 = (tmp$_0 = (tmp$ = query.data) != null ? tmp$.data : null) != null ? toList(tmp$_0) : null) != null ? tmp$_1 : emptyList();
+      $receiver.child_1mw94g$(fcSubjectList(), void 0, fcContainerSubjectList$lambda$lambda_0(items));
+    }
+    return Unit;
+  }
+  function fcContainerSubjectList() {
+    return fc('QuerySubjectList', fcContainerSubjectList$lambda);
+  }
+  function li$lambda_1(closure$classes) {
+    return function (it) {
+      return new LI_init(attributesMapOf('class', closure$classes), it);
+    };
+  }
+  function h3$lambda_1(closure$classes) {
+    return function (it) {
+      return new H3_init(attributesMapOf('class', closure$classes), it);
+    };
+  }
+  function ol$lambda_1(closure$classes) {
+    return function (it) {
+      return new OL_init(attributesMapOf('class', closure$classes), it);
+    };
+  }
+  function div$lambda_2(closure$classes) {
+    return function (it) {
+      return new DIV_init(attributesMapOf('class', closure$classes), it);
+    };
+  }
+  function fcTeacherList$lambda$lambda$lambda$lambda$lambda(closure$teacherItem, closure$teacher) {
+    return function ($receiver) {
+      $receiver.attrs.to = '/teachers/' + closure$teacherItem.uuid;
+      $receiver.unaryPlus_pdl1vz$(closure$teacher.firstName + ' ' + closure$teacher.lastName + ' ' + closure$teacher.patronymic + ' ' + '\t');
+      return Unit;
+    };
+  }
+  function fcTeacherList$lambda($receiver, props) {
+    var $receiver_0 = RDOMBuilder.Companion.invoke_f6ihu2$(h3$lambda_1(null));
+    $receiver_0.unaryPlus_pdl1vz$('Teachers');
+    $receiver.child_30b5ua$($receiver_0.create());
+    var $receiver_0_0 = RDOMBuilder.Companion.invoke_f6ihu2$(ol$lambda_1(null));
+    var $receiver_1 = props.teachers;
+    var destination = ArrayList_init(collectionSizeOrDefault($receiver_1, 10));
+    var tmp$, tmp$_0;
+    var index = 0;
+    tmp$ = $receiver_1.iterator();
+    while (tmp$.hasNext()) {
+      var item = tmp$.next();
+      var tmp$_1 = destination.add_11rb$;
+      checkIndexOverflow((tmp$_0 = index, index = tmp$_0 + 1 | 0, tmp$_0));
+      var $receiver_0_1 = RDOMBuilder.Companion.invoke_f6ihu2$(li$lambda_1(null));
       var teacher = new Teacher(item.elem.firstName, item.elem.lastName, item.elem.patronymic);
       $receiver_0_1.invoke_qk0v40$($module$react_router_dom.Link, fcTeacherList$lambda$lambda$lambda$lambda$lambda(item, teacher));
       $receiver_0_0.child_30b5ua$($receiver_0_1.create());
@@ -277,11 +364,11 @@
     var queryClient = $module$react_query.useQueryClient();
     var query = useQuery('teacherList', fcContainerTeacherList$lambda$lambda);
     if (query.isLoading) {
-      var $receiver_0 = RDOMBuilder.Companion.invoke_f6ihu2$(div$lambda_1(null));
+      var $receiver_0 = RDOMBuilder.Companion.invoke_f6ihu2$(div$lambda_2(null));
       $receiver_0.unaryPlus_pdl1vz$('Loading ..');
       $receiver.child_30b5ua$($receiver_0.create());
     } else if (query.isError) {
-      var $receiver_0_0 = RDOMBuilder.Companion.invoke_f6ihu2$(div$lambda_1(null));
+      var $receiver_0_0 = RDOMBuilder.Companion.invoke_f6ihu2$(div$lambda_2(null));
       $receiver_0_0.unaryPlus_pdl1vz$('Error!');
       $receiver.child_30b5ua$($receiver_0_0.create());
     } else {
@@ -316,6 +403,8 @@
   var package$component = _.component || (_.component = {});
   package$component.fcGroupList = fcGroupList;
   package$component.fcContainerGroupList = fcContainerGroupList;
+  package$component.fcSubjectList = fcSubjectList;
+  package$component.fcContainerSubjectList = fcContainerSubjectList;
   package$component.fcTeacherList = fcTeacherList;
   package$component.fcContainerTeacherList = fcContainerTeacherList;
   var package$wrappers = _.wrappers || (_.wrappers = {});

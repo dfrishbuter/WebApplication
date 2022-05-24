@@ -1,5 +1,6 @@
 //import component.fcContainerGroup
 import component.fcContainerGroupList
+import component.fcContainerSubjectList
 //import component.fcContainerStudent
 import component.fcContainerTeacherList
 import kotlinx.browser.document
@@ -33,14 +34,15 @@ fun main() {
                         + "Groups"
                     }
                 }
+                div {
+                    Link {
+                        attrs.to = "/subjects"
+                        + "Subjects"
+                    }
+                }
                 Routes {
                     Route {
                         attrs.path = "/teachers"
-                        attrs.element =
-                            createElement(fcContainerTeacherList())
-                    }
-                    Route {
-                        attrs.path = "/teachers/:id" // ":id" это параметр
                         attrs.element =
                             createElement(fcContainerTeacherList())
                     }
@@ -50,9 +52,9 @@ fun main() {
                             createElement(fcContainerGroupList())
                     }
                     Route {
-                        attrs.path = "/groups/:group" // ":group" это параметр
+                        attrs.path = "/subjects"
                         attrs.element =
-                            createElement(fcContainerGroupList())
+                            createElement(fcContainerSubjectList())
                     }
                 }
                 child(cReactQueryDevtools()) {} // работает только в отладочной версии
