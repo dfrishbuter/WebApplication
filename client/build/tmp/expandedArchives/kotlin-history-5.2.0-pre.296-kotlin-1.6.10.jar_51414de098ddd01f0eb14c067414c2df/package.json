@@ -1,0 +1,13 @@
+{
+  "name": "kotlin-history",
+  "version": "5.2.0-pre.296-kotlin-1.6.10",
+  "main": "kotlin-history.js",
+  "devDependencies": {
+    "history": "^5.2.0",
+    "dukat": "0.5.8-rc.4"
+  },
+  "dependencies": {},
+  "peerDependencies": {},
+  "optionalDependencies": {},
+  "bundledDependencies": []
+}

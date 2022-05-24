@@ -1,0 +1,14 @@
+{
+  "name": "kotlin-react-router-dom",
+  "version": "6.2.1-pre.296-kotlin-1.6.10",
+  "main": "kotlin-react-router-dom.js",
+  "devDependencies": {
+    "dukat": "0.5.8-rc.4"
+  },
+  "dependencies": {
+    "react-router-dom": "^6.2.1"
+  },
+  "peerDependencies": {},
+  "optionalDependencies": {},
+  "bundledDependencies": []
+}

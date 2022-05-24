@@ -1,0 +1,14 @@
+{
+  "name": "kotlin-react-redux",
+  "version": "7.2.6-pre.296-kotlin-1.6.10",
+  "main": "kotlin-react-redux.js",
+  "devDependencies": {
+    "dukat": "0.5.8-rc.4"
+  },
+  "dependencies": {
+    "react-redux": "^7.2.6"
+  },
+  "peerDependencies": {},
+  "optionalDependencies": {},
+  "bundledDependencies": []
+}

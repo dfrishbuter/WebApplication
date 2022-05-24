@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module external.system.module.type="sourceSet" type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <output url="file://$MODULE_DIR$/../../build/js/packages/NewWebApplication/kotlin" />
+    <exclude-output />
+    <content url="file://$MODULE_DIR$/../../build/externals/NewWebApplication/src" />
+    <content url="file://$MODULE_DIR$/../../src/jsMain">
+      <sourceFolder url="file://$MODULE_DIR$/../../src/jsMain/kotlin" type="kotlin-source" />
+      <sourceFolder url="file://$MODULE_DIR$/../../src/jsMain/resources" type="kotlin-resource" />
+    </content>
+    <orderEntry type="jdk" jdkName="Kotlin SDK" jdkType="KotlinSDK" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="NewWebApplication.commonMain" />
+    <orderEntry type="library" name="Gradle: org.jetbrains.kotlin-wrappers:kotlin-react-dom:17.0.2-pre.240-kotlin-1.5.30" level="project" />
+    <orderEntry type="library" name="Gradle: org.jetbrains.kotlin-wrappers:kotlin-react:17.0.2-pre.240-kotlin-1.5.30" level="project" />
+    <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib-js:1.6.10" level="project" />
+    <orderEntry type="library" name="Gradle: org.jetbrains.kotlin-wrappers:kotlin-extensions:1.0.1-pre.240-kotlin-1.5.30" level="project" />
+    <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib-js:1.5.30" level="project" />
+    <orderEntry type="library" name="Gradle: org.jetbrains.kotlinx:kotlinx-html-js:0.7.3" level="project" />
+  </component>
+</module>
