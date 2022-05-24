@@ -16,16 +16,4 @@ fun Route.teacher() =
                 call.respondText("No teachers found", status = HttpStatusCode.NotFound)
             }
         }
-        get("{id}") {
-            val id = call.parameters["id"] ?: return@get call.respondText(
-                "Missing or malformed id",
-                status = HttpStatusCode.BadRequest
-            )
-            val teacherItem =
-                teachersRepo[id] ?: return@get call.respondText(
-                    "No teacher with id $id found",
-                    status = HttpStatusCode.NotFound
-                )
-            call.respond(teacherItem)
-        }
     }

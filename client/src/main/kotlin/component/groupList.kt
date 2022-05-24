@@ -30,7 +30,7 @@ fun fcGroupList() = fc("GroupList") { props: GroupListProps ->
                 val group = Group(groupItem.elem.name, groupItem.elem.code, groupItem.elem.formOfEducation)
                 Link {
                     attrs.to = "/groups/${groupItem.uuid}"
-                    +"${group.description} \t"
+                    + "${group.toString()} \t"
                 }
             }
         }

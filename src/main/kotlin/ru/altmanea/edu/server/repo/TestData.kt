@@ -18,7 +18,7 @@ fun ListRepo<Teacher>.urlByUUID(uuid: String) =
     }
 
 fun ListRepo<Teacher>.urlByName(name: String) =
-    this.find { it.name == name }.let {
+    this.find { it.lastName == name }.let {
         if (it.size == 1)
             Config.teachersURL + it.first().uuid
         else

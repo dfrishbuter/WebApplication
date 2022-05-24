@@ -14,33 +14,28 @@
   'use strict';
   var Kind_OBJECT = Kotlin.Kind.OBJECT;
   var Kind_CLASS = Kotlin.Kind.CLASS;
-  var Enum = Kotlin.kotlin.Enum;
-  var throwISE = Kotlin.throwISE;
   var PluginGeneratedSerialDescriptor = $module$kotlinx_serialization_kotlinx_serialization_core_js_legacy.kotlinx.serialization.internal.PluginGeneratedSerialDescriptor;
-  var EnumSerializer = $module$kotlinx_serialization_kotlinx_serialization_core_js_legacy.kotlinx.serialization.internal.EnumSerializer;
   var UnknownFieldException = $module$kotlinx_serialization_kotlinx_serialization_core_js_legacy.kotlinx.serialization.UnknownFieldException;
   var internal = $module$kotlinx_serialization_kotlinx_serialization_core_js_legacy.kotlinx.serialization.internal;
   var GeneratedSerializer = $module$kotlinx_serialization_kotlinx_serialization_core_js_legacy.kotlinx.serialization.internal.GeneratedSerializer;
   var MissingFieldException_init = $module$kotlinx_serialization_kotlinx_serialization_core_js_legacy.kotlinx.serialization.MissingFieldException_init_61zpoe$;
   var Kind_INTERFACE = Kotlin.Kind.INTERFACE;
-  FormOfEducation.prototype = Object.create(Enum.prototype);
-  FormOfEducation.prototype.constructor = FormOfEducation;
   function Config() {
     Config$Companion_getInstance();
   }
   function Config$Companion() {
     Config$Companion_instance = this;
     this.serverDomain = 'localhost';
-    this.serverPort = 8000;
+    this.serverPort = 8080;
     this.serverApi = '1';
-    this.serverUrl = 'http://localhost:8000/';
+    this.serverUrl = 'http://localhost:8080/';
     this.pathPrefix = 'api1/';
     this.teachersPath = 'api1/teachers/';
-    this.teachersURL = 'http://localhost:8000/api1/teachers/';
+    this.teachersURL = 'http://localhost:8080/api1/teachers/';
     this.groupsPath = 'api1/groups/';
-    this.groupsURL = 'http://localhost:8000/api1/groups/';
+    this.groupsURL = 'http://localhost:8080/api1/groups/';
     this.subjectsPath = 'api1/subjects/';
-    this.subjectsURL = 'http://localhost:8000/api1/subjects/';
+    this.subjectsURL = 'http://localhost:8080/api1/subjects/';
   }
   Config$Companion.$metadata$ = {kind: Kind_OBJECT, simpleName: 'Companion', interfaces: []};
   var Config$Companion_instance = null;
@@ -49,51 +44,15 @@
       new Config$Companion();
     }return Config$Companion_instance;
   }
-  function FormOfEducation(name, ordinal) {
-    Enum.call(this);
-    this.name$ = name;
-    this.ordinal$ = ordinal;
-  }
-  function FormOfEducation_initFields() {
-    FormOfEducation_initFields = function () {
-    };
-    FormOfEducation$fullTime_instance = new FormOfEducation('fullTime', 0);
-    FormOfEducation$partTime_instance = new FormOfEducation('partTime', 1);
-  }
-  var FormOfEducation$fullTime_instance;
-  function FormOfEducation$fullTime_getInstance() {
-    FormOfEducation_initFields();
-    return FormOfEducation$fullTime_instance;
-  }
-  var FormOfEducation$partTime_instance;
-  function FormOfEducation$partTime_getInstance() {
-    FormOfEducation_initFields();
-    return FormOfEducation$partTime_instance;
-  }
-  FormOfEducation.$metadata$ = {kind: Kind_CLASS, simpleName: 'FormOfEducation', interfaces: [Enum]};
-  function FormOfEducation$values() {
-    return [FormOfEducation$fullTime_getInstance(), FormOfEducation$partTime_getInstance()];
-  }
-  FormOfEducation.values = FormOfEducation$values;
-  function FormOfEducation$valueOf(name) {
-    switch (name) {
-      case 'fullTime':
-        return FormOfEducation$fullTime_getInstance();
-      case 'partTime':
-        return FormOfEducation$partTime_getInstance();
-      default:throwISE('No enum constant ru.altmanea.edu.server.model.FormOfEducation.' + name);
-    }
-  }
-  FormOfEducation.valueOf_61zpoe$ = FormOfEducation$valueOf;
   function Group(name, code, formOfEducation) {
     Group$Companion_getInstance();
     this.name = name;
     this.code = code;
     this.formOfEducation = formOfEducation;
   }
-  Object.defineProperty(Group.prototype, 'description', {configurable: true, get: function () {
+  Group.prototype.toString = function () {
     return this.code + ' ' + this.name + ', ' + this.formOfEducation;
-  }});
+  };
   function Group$Companion() {
     Group$Companion_instance = this;
   }
@@ -121,7 +80,7 @@
     var output = encoder.beginStructure_24f42q$(this.descriptor);
     output.encodeStringElement_iij8qq$(this.descriptor, 0, value.name);
     output.encodeStringElement_iij8qq$(this.descriptor, 1, value.code);
-    output.encodeSerializableElement_r4qlx7$(this.descriptor, 2, new EnumSerializer('ru.altmanea.edu.server.model.FormOfEducation', FormOfEducation$values()), value.formOfEducation);
+    output.encodeStringElement_iij8qq$(this.descriptor, 2, value.formOfEducation);
     output.endStructure_24f42q$(this.descriptor);
   };
   Group$$serializer.prototype.deserialize_bq71mq$ = function (decoder) {
@@ -141,7 +100,7 @@
           bitMask0 |= 2;
           break;
         case 2:
-          local2 = input.decodeSerializableElement_12e8id$(this.descriptor, 2, new EnumSerializer('ru.altmanea.edu.server.model.FormOfEducation', FormOfEducation$values()), local2);
+          local2 = input.decodeStringElement_szpzho$(this.descriptor, 2);
           bitMask0 |= 4;
           break;
         case -1:
@@ -153,7 +112,7 @@
     return Group_init(bitMask0, local0, local1, local2, null);
   };
   Group$$serializer.prototype.childSerializers = function () {
-    return [internal.StringSerializer, internal.StringSerializer, new EnumSerializer('ru.altmanea.edu.server.model.FormOfEducation', FormOfEducation$values())];
+    return [internal.StringSerializer, internal.StringSerializer, internal.StringSerializer];
   };
   Group$$serializer.$metadata$ = {kind: Kind_OBJECT, simpleName: '$serializer', interfaces: [GeneratedSerializer]};
   var Group$$serializer_instance = null;
@@ -179,9 +138,11 @@
     return $this;
   }
   Group.$metadata$ = {kind: Kind_CLASS, simpleName: 'Group', interfaces: []};
-  function Teacher(name) {
+  function Teacher(firstName, lastName, patronymic) {
     Teacher$Companion_getInstance();
-    this.name = name;
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.patronymic = patronymic;
   }
   function Teacher$Companion() {
     Teacher$Companion_instance = this;
@@ -197,8 +158,10 @@
     }return Teacher$Companion_instance;
   }
   function Teacher$$serializer() {
-    this.descriptor_zaedhh$_0 = new PluginGeneratedSerialDescriptor('ru.altmanea.edu.server.model.Teacher', this, 1);
-    this.descriptor.addElement_ivxn3r$('name', false);
+    this.descriptor_zaedhh$_0 = new PluginGeneratedSerialDescriptor('ru.altmanea.edu.server.model.Teacher', this, 3);
+    this.descriptor.addElement_ivxn3r$('firstName', false);
+    this.descriptor.addElement_ivxn3r$('lastName', false);
+    this.descriptor.addElement_ivxn3r$('patronymic', false);
     Teacher$$serializer_instance = this;
   }
   Object.defineProperty(Teacher$$serializer.prototype, 'descriptor', {configurable: true, get: function () {
@@ -206,13 +169,15 @@
   }});
   Teacher$$serializer.prototype.serialize_55azsf$ = function (encoder, value) {
     var output = encoder.beginStructure_24f42q$(this.descriptor);
-    output.encodeStringElement_iij8qq$(this.descriptor, 0, value.name);
+    output.encodeStringElement_iij8qq$(this.descriptor, 0, value.firstName);
+    output.encodeStringElement_iij8qq$(this.descriptor, 1, value.lastName);
+    output.encodeStringElement_iij8qq$(this.descriptor, 2, value.patronymic);
     output.endStructure_24f42q$(this.descriptor);
   };
   Teacher$$serializer.prototype.deserialize_bq71mq$ = function (decoder) {
     var index;
     var bitMask0 = 0;
-    var local0;
+    var local0, local1, local2;
     var input = decoder.beginStructure_24f42q$(this.descriptor);
     loopLabel: while (true) {
       index = input.decodeElementIndex_24f42q$(this.descriptor);
@@ -221,16 +186,24 @@
           local0 = input.decodeStringElement_szpzho$(this.descriptor, 0);
           bitMask0 |= 1;
           break;
+        case 1:
+          local1 = input.decodeStringElement_szpzho$(this.descriptor, 1);
+          bitMask0 |= 2;
+          break;
+        case 2:
+          local2 = input.decodeStringElement_szpzho$(this.descriptor, 2);
+          bitMask0 |= 4;
+          break;
         case -1:
           break loopLabel;
         default:throw new UnknownFieldException(index);
       }
     }
     input.endStructure_24f42q$(this.descriptor);
-    return Teacher_init(bitMask0, local0, null);
+    return Teacher_init(bitMask0, local0, local1, local2, null);
   };
   Teacher$$serializer.prototype.childSerializers = function () {
-    return [internal.StringSerializer];
+    return [internal.StringSerializer, internal.StringSerializer, internal.StringSerializer];
   };
   Teacher$$serializer.$metadata$ = {kind: Kind_OBJECT, simpleName: '$serializer', interfaces: [GeneratedSerializer]};
   var Teacher$$serializer_instance = null;
@@ -239,12 +212,20 @@
       new Teacher$$serializer();
     }return Teacher$$serializer_instance;
   }
-  function Teacher_init(seen1, name, serializationConstructorMarker) {
+  function Teacher_init(seen1, firstName, lastName, patronymic, serializationConstructorMarker) {
     var $this = serializationConstructorMarker || Object.create(Teacher.prototype);
     if ((seen1 & 1) === 0)
-      throw MissingFieldException_init('name');
+      throw MissingFieldException_init('firstName');
     else
-      $this.name = name;
+      $this.firstName = firstName;
+    if ((seen1 & 2) === 0)
+      throw MissingFieldException_init('lastName');
+    else
+      $this.lastName = lastName;
+    if ((seen1 & 4) === 0)
+      throw MissingFieldException_init('patronymic');
+    else
+      $this.patronymic = patronymic;
     return $this;
   }
   Teacher.$metadata$ = {kind: Kind_CLASS, simpleName: 'Teacher', interfaces: []};
@@ -255,16 +236,13 @@
   var package$server = package$edu.server || (package$edu.server = {});
   var package$model = package$server.model || (package$server.model = {});
   package$model.Config = Config;
-  Object.defineProperty(FormOfEducation, 'fullTime', {get: FormOfEducation$fullTime_getInstance});
-  Object.defineProperty(FormOfEducation, 'partTime', {get: FormOfEducation$partTime_getInstance});
-  package$model.FormOfEducation = FormOfEducation;
   Object.defineProperty(Group, 'Companion', {get: Group$Companion_getInstance});
   Object.defineProperty(Group, '$serializer', {get: Group$$serializer_getInstance});
-  package$model.Group_init_5yitjz$ = Group_init;
+  package$model.Group_init_9zxaf4$ = Group_init;
   package$model.Group = Group;
   Object.defineProperty(Teacher, 'Companion', {get: Teacher$Companion_getInstance});
   Object.defineProperty(Teacher, '$serializer', {get: Teacher$$serializer_getInstance});
-  package$model.Teacher_init_q11ckg$ = Teacher_init;
+  package$model.Teacher_init_9zxaf4$ = Teacher_init;
   package$model.Teacher = Teacher;
   Group$$serializer.prototype.typeParametersSerializers = GeneratedSerializer.prototype.typeParametersSerializers;
   Teacher$$serializer.prototype.typeParametersSerializers = GeneratedSerializer.prototype.typeParametersSerializers;

@@ -23,10 +23,10 @@ fun fcTeacherList() = fc("TeacherList") { props: TeacherListProps ->
     ol {
         props.teachers.mapIndexed { index, teacherItem ->
             li {
-                val teacher = Teacher(teacherItem.elem.name)
+                val teacher = Teacher(teacherItem.elem.firstName, teacherItem.elem.lastName, teacherItem.elem.patronymic)
                 Link {
                     attrs.to = "/teachers/${teacherItem.uuid}"
-                    +"${teacher.name} \t"
+                    + "${teacher.firstName} ${teacher.lastName} ${teacher.patronymic} \t"
                 }
             }
         }

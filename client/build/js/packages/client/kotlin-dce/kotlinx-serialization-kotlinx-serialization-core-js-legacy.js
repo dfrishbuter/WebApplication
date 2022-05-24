@@ -1816,42 +1816,6 @@
     return -1;
   };
   ElementMarker.$metadata$ = {kind: Kind_CLASS, simpleName: 'ElementMarker', interfaces: []};
-  function EnumSerializer(serialName, values) {
-    this.values_0 = values;
-    this.descriptor_ulj9cc$_0 = buildSerialDescriptor(serialName, SerialKind$ENUM_getInstance(), [], EnumSerializer$descriptor$lambda(this, serialName));
-  }
-  Object.defineProperty(EnumSerializer.prototype, 'descriptor', {configurable: true, get: function () {
-    return this.descriptor_ulj9cc$_0;
-  }});
-  EnumSerializer.prototype.serialize_55azsf$ = function (encoder, value) {
-    var index = indexOf(this.values_0, value);
-    if (index === -1) {
-      throw SerializationException_init_0(value.toString() + ' is not a valid enum ' + this.descriptor.serialName + ', ' + ('must be one of ' + contentToString(this.values_0)));
-    }encoder.encodeEnum_szpzho$(this.descriptor, index);
-  };
-  EnumSerializer.prototype.deserialize_bq71mq$ = function (decoder) {
-    var index = decoder.decodeEnum_24f42q$(this.descriptor);
-    if (!get_indices(this.values_0).contains_mef7kx$(index)) {
-      throw SerializationException_init_0(index.toString() + ' is not among valid ' + this.descriptor.serialName + ' enum values, ' + ('values size is ' + this.values_0.length));
-    }return this.values_0[index];
-  };
-  EnumSerializer.prototype.toString = function () {
-    return 'kotlinx.serialization.internal.EnumSerializer<' + this.descriptor.serialName + '>';
-  };
-  function EnumSerializer$descriptor$lambda(this$EnumSerializer, closure$serialName) {
-    return function ($receiver) {
-      var $receiver_0 = this$EnumSerializer.values_0;
-      var tmp$;
-      for (tmp$ = 0; tmp$ !== $receiver_0.length; ++tmp$) {
-        var element = $receiver_0[tmp$];
-        var fqn = closure$serialName + '.' + element.name;
-        var enumMemberDescriptor = buildSerialDescriptor(fqn, StructureKind$OBJECT_getInstance(), []);
-        $receiver.element_vxrguq$(element.name, enumMemberDescriptor);
-      }
-      return Unit;
-    };
-  }
-  EnumSerializer.$metadata$ = {kind: Kind_CLASS, simpleName: 'EnumSerializer', interfaces: [KSerializer]};
   function InlineClassDescriptor(name, generatedSerializer) {
     PluginGeneratedSerialDescriptor.call(this, name, generatedSerializer, 1);
     this.isInline_4xqniz$_0 = true;
@@ -3651,7 +3615,6 @@
   package$internal.ArrayListSerializer = ArrayListSerializer;
   package$internal.LinkedHashMapSerializer = LinkedHashMapSerializer;
   package$internal.ElementMarker = ElementMarker;
-  package$internal.EnumSerializer = EnumSerializer;
   package$internal.InlineClassDescriptor = InlineClassDescriptor;
   package$internal.InlinePrimitiveDescriptor_adhoip$ = InlinePrimitiveDescriptor;
   Object.defineProperty(package$internal, 'UIntSerializer', {get: UIntSerializer_getInstance});

@@ -4,6 +4,8 @@ import kotlinx.serialization.*
 
 @Serializable
 class Teacher(
-    val name: String
+    val firstName: String,
+    val lastName: String,
+    val patronymic: String
 ) {
 }

@@ -6,8 +6,9 @@ import kotlinx.serialization.*
 class Group(
     var name: String,
     var code: String,
-    var formOfEducation: FormOfEducation
+    var formOfEducation: String
 ) {
-    val description: String
-        get() = "$code $name, $formOfEducation"
+    override fun toString(): String {
+        return "$code $name, $formOfEducation"
+    }
 }

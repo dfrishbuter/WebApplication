@@ -5,7 +5,6 @@ import org.apache.poi.ss.usermodel.CellType
 
 import ru.altmanea.edu.server.model.Teacher
 import ru.altmanea.edu.server.model.Group
-import ru.altmanea.edu.server.model.FormOfEducation
 import ru.altmanea.edu.server.model.WorkPlan
 
 class Controller(tableFile: XSSFWorkbook, sheetIndex: Int) {
@@ -27,13 +26,16 @@ class Controller(tableFile: XSSFWorkbook, sheetIndex: Int) {
             val teacherCell = getCell(row, 10) ?: continue
             val typeOfEmploymentCell = getCell(row, 11) ?: continue
 
+            val nameComponents = teacherCell.toString().split("\\s".toRegex()).toTypedArray()
             val teacher = Teacher(
-                name = teacherCell.toString()
+                firstName = nameComponents[0],
+                lastName = nameComponents[1],
+                patronymic = nameComponents[2]
             )
 
             val isPartTime = typeOfLoadCell.toString().contains("Заочное")
             val numberOfStudentsString = numberOfStudentsCell.toString()
-            val numberOfStudents = numberOfStudentsString.toInt() ?: continue
+            val numberOfStudents = numberOfStudentsString.toInt()
             val groupData = groupCell.toString()
             val regex = "[0-9]{2,}-?[\\p{L}]{1,2}".toRegex()
             val groupCodes = regex.findAll(groupData).map { it.value }.toList()
@@ -42,17 +44,17 @@ class Controller(tableFile: XSSFWorkbook, sheetIndex: Int) {
                 val groupNames = removeOccurrences(groupCodes, groupData).trimStart { listOf(',', ' ').contains(it)}.split(",")
                 groups = groupCodes.zip(groupNames).map {
                     Group(
-                        name = removeOccurrences(listOf("Очная", "Заочная"), it.second.trim()),
+                        name = removeOccurrences(listOf("Очная", "Заочная", "Очно-заочная"), it.second.trim()),
                         code = it.first,
-                        formOfEducation = if (isPartTime) FormOfEducation.partTime else FormOfEducation.fullTime
+                        formOfEducation = if (isPartTime) "Заочная" else "Очная"
                     )
                 }
             } else {
                 groups = listOf(
                     Group(
-                        name = removeOccurrences(listOf("Очная", "Заочная"), removeOccurrences(groupCodes, groupData)),
+                        name = removeOccurrences(listOf("Очная", "Заочная", "Очно-заочная"), removeOccurrences(groupCodes, groupData)),
                         code = groupCodes.first(),
-                        formOfEducation = if (isPartTime) FormOfEducation.partTime else FormOfEducation.fullTime
+                        formOfEducation = if (isPartTime) "Заочная" else "Очная"
                     )
                 )
             }
