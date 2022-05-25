@@ -4,6 +4,7 @@ import ru.altmanea.edu.server.model.Config
 import ru.altmanea.edu.server.model.Teacher
 import ru.altmanea.edu.server.model.Group
 import org.apache.poi.xssf.usermodel.XSSFWorkbook
+import ru.altmanea.edu.server.model.WorkPlan
 
 val controller = Controller(XSSFWorkbook("src/main/resources/schedule.xlsx"), 0)
 val workPlansTestData = controller.getWorkPlans()
@@ -11,6 +12,7 @@ val workPlansTestData = controller.getWorkPlans()
 val teachersRepo = ListRepo<Teacher>()
 val groupsRepo = ListRepo<Group>()
 val subjectsRepo = ListRepo<String>()
+val workPlansRepo = ListRepo<WorkPlan>()
 
 fun ListRepo<Teacher>.urlByUUID(uuid: String) =
     this[uuid]?.let {

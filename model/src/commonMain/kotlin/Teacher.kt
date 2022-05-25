@@ -7,5 +7,4 @@ class Teacher(
     val firstName: String,
     val lastName: String,
     val patronymic: String
-) {
-}
+)

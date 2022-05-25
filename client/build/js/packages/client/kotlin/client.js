@@ -52,6 +52,10 @@
   var H3_init = $module$kotlin_react_dom_legacy.$$importsForInline$$['kotlinx-html-js'].kotlinx.html.H3;
   var OL_init = $module$kotlin_react_dom_legacy.$$importsForInline$$['kotlinx-html-js'].kotlinx.html.OL;
   var Teacher = $module$model.ru.altmanea.edu.server.model.Teacher;
+  var joinToString = Kotlin.kotlin.collections.joinToString_fmv235$;
+  var TD_init = $module$kotlin_react_dom_legacy.$$importsForInline$$['kotlinx-html-js'].kotlinx.html.TD;
+  var TR_init = $module$kotlin_react_dom_legacy.$$importsForInline$$['kotlinx-html-js'].kotlinx.html.TR;
+  var TABLE_init = $module$kotlin_react_dom_legacy.$$importsForInline$$['kotlinx-html-js'].kotlinx.html.TABLE;
   var Kind_CLASS = Kotlin.Kind.CLASS;
   var Kind_INTERFACE = Kotlin.Kind.INTERFACE;
   function div$lambda(closure$classes) {
@@ -276,7 +280,6 @@
   }
   function fcContainerSubjectList$lambda($receiver, f) {
     var tmp$, tmp$_0, tmp$_1;
-    var queryClient = $module$react_query.useQueryClient();
     var query = useQuery('subjectList', fcContainerSubjectList$lambda$lambda);
     if (query.isLoading) {
       var $receiver_0 = RDOMBuilder.Companion.invoke_f6ihu2$(div$lambda_1(null));
@@ -315,9 +318,10 @@
       return new DIV_init(attributesMapOf('class', closure$classes), it);
     };
   }
-  function fcTeacherList$lambda$lambda$lambda$lambda$lambda(closure$teacherItem, closure$teacher) {
+  function fcTeacherList$lambda$lambda$lambda$lambda$lambda(closure$teacher) {
     return function ($receiver) {
-      $receiver.attrs.to = '/teachers/' + closure$teacherItem.uuid;
+      $receiver.attrs.to = Config.Companion.workPlansURL;
+      $receiver.attrs.replace = true;
       $receiver.unaryPlus_pdl1vz$(closure$teacher.firstName + ' ' + closure$teacher.lastName + ' ' + closure$teacher.patronymic + ' ' + '\t');
       return Unit;
     };
@@ -338,7 +342,7 @@
       checkIndexOverflow((tmp$_0 = index, index = tmp$_0 + 1 | 0, tmp$_0));
       var $receiver_0_1 = RDOMBuilder.Companion.invoke_f6ihu2$(li$lambda_1(null));
       var teacher = new Teacher(item.elem.firstName, item.elem.lastName, item.elem.patronymic);
-      $receiver_0_1.invoke_qk0v40$($module$react_router_dom.Link, fcTeacherList$lambda$lambda$lambda$lambda$lambda(item, teacher));
+      $receiver_0_1.invoke_qk0v40$($module$react_router_dom.Link, fcTeacherList$lambda$lambda$lambda$lambda$lambda(teacher));
       $receiver_0_0.child_30b5ua$($receiver_0_1.create());
       tmp$_1.call(destination, Unit);
     }
@@ -361,7 +365,6 @@
   }
   function fcContainerTeacherList$lambda($receiver, f) {
     var tmp$, tmp$_0, tmp$_1;
-    var queryClient = $module$react_query.useQueryClient();
     var query = useQuery('teacherList', fcContainerTeacherList$lambda$lambda);
     if (query.isLoading) {
       var $receiver_0 = RDOMBuilder.Companion.invoke_f6ihu2$(div$lambda_2(null));
@@ -379,6 +382,126 @@
   }
   function fcContainerTeacherList() {
     return fc('QueryTeacherList', fcContainerTeacherList$lambda);
+  }
+  function td$lambda(closure$classes) {
+    return function (it) {
+      return new TD_init(attributesMapOf('class', closure$classes), it);
+    };
+  }
+  function h3$lambda_2(closure$classes) {
+    return function (it) {
+      return new H3_init(attributesMapOf('class', closure$classes), it);
+    };
+  }
+  function tr$lambda(closure$classes) {
+    return function (it) {
+      return new TR_init(attributesMapOf('class', closure$classes), it);
+    };
+  }
+  function table$lambda(closure$classes) {
+    return function (it) {
+      return new TABLE_init(attributesMapOf('class', closure$classes), it);
+    };
+  }
+  function div$lambda_3(closure$classes) {
+    return function (it) {
+      return new DIV_init(attributesMapOf('class', closure$classes), it);
+    };
+  }
+  function fcWorkPlanList$lambda$lambda$lambda$lambda$lambda$lambda(it) {
+    return it.code + ' ' + it.name + ', ' + it.formOfEducation + ';' + '\n';
+  }
+  function fcWorkPlanList$lambda($receiver, props) {
+    var $receiver_0 = RDOMBuilder.Companion.invoke_f6ihu2$(table$lambda(null));
+    var $receiver_1 = props.workPlans;
+    var destination = ArrayList_init(collectionSizeOrDefault($receiver_1, 10));
+    var tmp$, tmp$_0;
+    var index = 0;
+    tmp$ = $receiver_1.iterator();
+    while (tmp$.hasNext()) {
+      var item = tmp$.next();
+      var tmp$_1 = destination.add_11rb$;
+      var index_0 = checkIndexOverflow((tmp$_0 = index, index = tmp$_0 + 1 | 0, tmp$_0));
+      var $receiver_0_0 = RDOMBuilder.Companion.invoke_f6ihu2$(h3$lambda_2(null));
+      $receiver_0_0.unaryPlus_pdl1vz$('Work Plans');
+      $receiver_0.child_30b5ua$($receiver_0_0.create());
+      var $receiver_0_1 = RDOMBuilder.Companion.invoke_f6ihu2$(tr$lambda(null));
+      var $receiver_0_2 = RDOMBuilder.Companion.invoke_f6ihu2$(td$lambda(null));
+      $receiver_0_2.unaryPlus_pdl1vz$((index_0 + 1 | 0).toString());
+      $receiver_0_1.child_30b5ua$($receiver_0_2.create());
+      var $receiver_0_3 = RDOMBuilder.Companion.invoke_f6ihu2$(td$lambda(null));
+      $receiver_0_3.unaryPlus_pdl1vz$(item.elem.id);
+      $receiver_0_1.child_30b5ua$($receiver_0_3.create());
+      var $receiver_0_4 = RDOMBuilder.Companion.invoke_f6ihu2$(td$lambda(null));
+      $receiver_0_4.unaryPlus_pdl1vz$(item.elem.faculty);
+      $receiver_0_1.child_30b5ua$($receiver_0_4.create());
+      var $receiver_0_5 = RDOMBuilder.Companion.invoke_f6ihu2$(td$lambda(null));
+      $receiver_0_5.unaryPlus_pdl1vz$(item.elem.block);
+      $receiver_0_1.child_30b5ua$($receiver_0_5.create());
+      var $receiver_0_6 = RDOMBuilder.Companion.invoke_f6ihu2$(td$lambda(null));
+      $receiver_0_6.unaryPlus_pdl1vz$(item.elem.subject);
+      $receiver_0_1.child_30b5ua$($receiver_0_6.create());
+      var $receiver_0_7 = RDOMBuilder.Companion.invoke_f6ihu2$(td$lambda(null));
+      $receiver_0_7.unaryPlus_pdl1vz$(item.elem.semester.toString());
+      $receiver_0_1.child_30b5ua$($receiver_0_7.create());
+      var $receiver_0_8 = RDOMBuilder.Companion.invoke_f6ihu2$(td$lambda(null));
+      $receiver_0_8.unaryPlus_pdl1vz$(item.elem.teacher.firstName + ' ' + item.elem.teacher.lastName + ' ' + item.elem.teacher.patronymic);
+      $receiver_0_1.child_30b5ua$($receiver_0_8.create());
+      var $receiver_0_9 = RDOMBuilder.Companion.invoke_f6ihu2$(td$lambda(null));
+      $receiver_0_9.unaryPlus_pdl1vz$(joinToString(item.elem.groups, void 0, void 0, void 0, void 0, void 0, fcWorkPlanList$lambda$lambda$lambda$lambda$lambda$lambda));
+      $receiver_0_1.child_30b5ua$($receiver_0_9.create());
+      var $receiver_0_10 = RDOMBuilder.Companion.invoke_f6ihu2$(td$lambda(null));
+      $receiver_0_10.unaryPlus_pdl1vz$(item.elem.numberOfStudents.toString());
+      $receiver_0_1.child_30b5ua$($receiver_0_10.create());
+      var $receiver_0_11 = RDOMBuilder.Companion.invoke_f6ihu2$(td$lambda(null));
+      $receiver_0_11.unaryPlus_pdl1vz$(item.elem.typeOfLoad);
+      $receiver_0_1.child_30b5ua$($receiver_0_11.create());
+      var $receiver_0_12 = RDOMBuilder.Companion.invoke_f6ihu2$(td$lambda(null));
+      $receiver_0_12.unaryPlus_pdl1vz$(item.elem.hours.toString());
+      $receiver_0_1.child_30b5ua$($receiver_0_12.create());
+      var $receiver_0_13 = RDOMBuilder.Companion.invoke_f6ihu2$(td$lambda(null));
+      $receiver_0_13.unaryPlus_pdl1vz$(item.elem.typeOfEmployment);
+      $receiver_0_1.child_30b5ua$($receiver_0_13.create());
+      $receiver_0.child_30b5ua$($receiver_0_1.create());
+      tmp$_1.call(destination, Unit);
+    }
+    $receiver.child_30b5ua$($receiver_0.create());
+    return Unit;
+  }
+  function fcWorkPlanList() {
+    return fc('WorkPlanList', fcWorkPlanList$lambda);
+  }
+  function fcContainerWorkPlanList$lambda$lambda(it) {
+    var $receiver = {};
+    $receiver.url = Config.Companion.workPlansURL;
+    return $module$axios($receiver);
+  }
+  function fcContainerWorkPlanList$lambda$lambda_0(closure$items) {
+    return function ($receiver) {
+      $receiver.attrs.workPlans = closure$items;
+      return Unit;
+    };
+  }
+  function fcContainerWorkPlanList$lambda($receiver, f) {
+    var tmp$, tmp$_0, tmp$_1;
+    var queryClient = $module$react_query.useQueryClient();
+    var query = useQuery('workPlanList', fcContainerWorkPlanList$lambda$lambda);
+    if (query.isLoading) {
+      var $receiver_0 = RDOMBuilder.Companion.invoke_f6ihu2$(div$lambda_3(null));
+      $receiver_0.unaryPlus_pdl1vz$('Loading ..');
+      $receiver.child_30b5ua$($receiver_0.create());
+    } else if (query.isError) {
+      var $receiver_0_0 = RDOMBuilder.Companion.invoke_f6ihu2$(div$lambda_3(null));
+      $receiver_0_0.unaryPlus_pdl1vz$('Error!');
+      $receiver.child_30b5ua$($receiver_0_0.create());
+    } else {
+      var items = (tmp$_1 = (tmp$_0 = (tmp$ = query.data) != null ? tmp$.data : null) != null ? toList(tmp$_0) : null) != null ? tmp$_1 : emptyList();
+      $receiver.child_1mw94g$(fcWorkPlanList(), void 0, fcContainerWorkPlanList$lambda$lambda_0(items));
+    }
+    return Unit;
+  }
+  function fcContainerWorkPlanList() {
+    return fc('QueryWorkPlanList', fcContainerWorkPlanList$lambda);
   }
   function ReactQueryDevToolsOption(initialIsOpen) {
     if (initialIsOpen === void 0)
@@ -424,6 +547,8 @@
   package$component.fcContainerSubjectList = fcContainerSubjectList;
   package$component.fcTeacherList = fcTeacherList;
   package$component.fcContainerTeacherList = fcContainerTeacherList;
+  package$component.fcWorkPlanList = fcWorkPlanList;
+  package$component.fcContainerWorkPlanList = fcContainerWorkPlanList;
   var package$wrappers = _.wrappers || (_.wrappers = {});
   package$wrappers.ReactQueryDevToolsOption = ReactQueryDevToolsOption;
   package$wrappers.QueryError = QueryError;

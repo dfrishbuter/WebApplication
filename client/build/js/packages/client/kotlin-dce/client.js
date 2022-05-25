@@ -52,6 +52,7 @@
   var H3_init = $module$kotlin_react_dom_legacy.$$importsForInline$$['kotlinx-html-js'].kotlinx.html.H3;
   var OL_init = $module$kotlin_react_dom_legacy.$$importsForInline$$['kotlinx-html-js'].kotlinx.html.OL;
   var Teacher = $module$model.ru.altmanea.edu.server.model.Teacher;
+  var joinToString = Kotlin.kotlin.collections.joinToString_fmv235$;
   var Kind_CLASS = Kotlin.Kind.CLASS;
   var Kind_INTERFACE = Kotlin.Kind.INTERFACE;
   function div$lambda(closure$classes) {
@@ -276,7 +277,6 @@
   }
   function fcContainerSubjectList$lambda($receiver, f) {
     var tmp$, tmp$_0, tmp$_1;
-    var queryClient = $module$react_query.useQueryClient();
     var query = useQuery('subjectList', fcContainerSubjectList$lambda$lambda);
     if (query.isLoading) {
       var $receiver_0 = RDOMBuilder.Companion.invoke_f6ihu2$(div$lambda_1(null));
@@ -315,9 +315,10 @@
       return new DIV_init(attributesMapOf('class', closure$classes), it);
     };
   }
-  function fcTeacherList$lambda$lambda$lambda$lambda$lambda(closure$teacherItem, closure$teacher) {
+  function fcTeacherList$lambda$lambda$lambda$lambda$lambda(closure$teacher) {
     return function ($receiver) {
-      $receiver.attrs.to = '/teachers/' + closure$teacherItem.uuid;
+      $receiver.attrs.to = Config.Companion.workPlansURL;
+      $receiver.attrs.replace = true;
       $receiver.unaryPlus_pdl1vz$(closure$teacher.firstName + ' ' + closure$teacher.lastName + ' ' + closure$teacher.patronymic + ' ' + '\t');
       return Unit;
     };
@@ -338,7 +339,7 @@
       checkIndexOverflow((tmp$_0 = index, index = tmp$_0 + 1 | 0, tmp$_0));
       var $receiver_0_1 = RDOMBuilder.Companion.invoke_f6ihu2$(li$lambda_1(null));
       var teacher = new Teacher(item.elem.firstName, item.elem.lastName, item.elem.patronymic);
-      $receiver_0_1.invoke_qk0v40$($module$react_router_dom.Link, fcTeacherList$lambda$lambda$lambda$lambda$lambda(item, teacher));
+      $receiver_0_1.invoke_qk0v40$($module$react_router_dom.Link, fcTeacherList$lambda$lambda$lambda$lambda$lambda(teacher));
       $receiver_0_0.child_30b5ua$($receiver_0_1.create());
       tmp$_1.call(destination, Unit);
     }
@@ -361,7 +362,6 @@
   }
   function fcContainerTeacherList$lambda($receiver, f) {
     var tmp$, tmp$_0, tmp$_1;
-    var queryClient = $module$react_query.useQueryClient();
     var query = useQuery('teacherList', fcContainerTeacherList$lambda$lambda);
     if (query.isLoading) {
       var $receiver_0 = RDOMBuilder.Companion.invoke_f6ihu2$(div$lambda_2(null));

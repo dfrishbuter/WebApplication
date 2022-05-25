@@ -12,6 +12,7 @@ import ru.altmanea.edu.server.repo.*
 import ru.altmanea.edu.server.rest.group
 import ru.altmanea.edu.server.rest.subject
 import ru.altmanea.edu.server.rest.teacher
+import ru.altmanea.edu.server.rest.workPlan
 
 fun main() {
     embeddedServer(
@@ -42,6 +43,7 @@ fun Application.main(test: Boolean = true) {
         teacher()
         group() // надо объявить маршуты, поэтому прописываем здесь их
         subject()
+        workPlan()
         index()
     }
 }

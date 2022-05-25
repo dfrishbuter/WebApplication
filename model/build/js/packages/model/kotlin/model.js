@@ -20,6 +20,7 @@
   var GeneratedSerializer = $module$kotlinx_serialization_kotlinx_serialization_core_js_legacy.kotlinx.serialization.internal.GeneratedSerializer;
   var MissingFieldException_init = $module$kotlinx_serialization_kotlinx_serialization_core_js_legacy.kotlinx.serialization.MissingFieldException_init_61zpoe$;
   var Kind_INTERFACE = Kotlin.Kind.INTERFACE;
+  var ArrayListSerializer = $module$kotlinx_serialization_kotlinx_serialization_core_js_legacy.kotlinx.serialization.internal.ArrayListSerializer;
   function Config() {
     Config$Companion_getInstance();
   }
@@ -36,6 +37,8 @@
     this.groupsURL = 'http://localhost:8080/api1/groups/';
     this.subjectsPath = 'api1/subjects/';
     this.subjectsURL = 'http://localhost:8080/api1/subjects/';
+    this.workPlansPath = 'api1/work_plans/';
+    this.workPlansURL = 'http://localhost:8080/api1/work_plans/';
   }
   Config$Companion.$metadata$ = {
     kind: Kind_OBJECT,
@@ -280,6 +283,7 @@
     interfaces: []
   };
   function WorkPlan(id, faculty, block, subject, semester, teacher, groups, numberOfStudents, typeOfLoad, hours, typeOfEmployment) {
+    WorkPlan$Companion_getInstance();
     this.id = id;
     this.faculty = faculty;
     this.block = block;
@@ -291,6 +295,191 @@
     this.typeOfLoad = typeOfLoad;
     this.hours = hours;
     this.typeOfEmployment = typeOfEmployment;
+  }
+  function WorkPlan$Companion() {
+    WorkPlan$Companion_instance = this;
+  }
+  WorkPlan$Companion.prototype.serializer = function () {
+    return WorkPlan$$serializer_getInstance();
+  };
+  WorkPlan$Companion.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'Companion',
+    interfaces: []
+  };
+  var WorkPlan$Companion_instance = null;
+  function WorkPlan$Companion_getInstance() {
+    if (WorkPlan$Companion_instance === null) {
+      new WorkPlan$Companion();
+    }return WorkPlan$Companion_instance;
+  }
+  function WorkPlan$$serializer() {
+    this.descriptor_z7koqn$_0 = new PluginGeneratedSerialDescriptor('ru.altmanea.edu.server.model.WorkPlan', this, 11);
+    this.descriptor.addElement_ivxn3r$('id', false);
+    this.descriptor.addElement_ivxn3r$('faculty', false);
+    this.descriptor.addElement_ivxn3r$('block', false);
+    this.descriptor.addElement_ivxn3r$('subject', false);
+    this.descriptor.addElement_ivxn3r$('semester', false);
+    this.descriptor.addElement_ivxn3r$('teacher', false);
+    this.descriptor.addElement_ivxn3r$('groups', false);
+    this.descriptor.addElement_ivxn3r$('numberOfStudents', false);
+    this.descriptor.addElement_ivxn3r$('typeOfLoad', false);
+    this.descriptor.addElement_ivxn3r$('hours', false);
+    this.descriptor.addElement_ivxn3r$('typeOfEmployment', false);
+    WorkPlan$$serializer_instance = this;
+  }
+  Object.defineProperty(WorkPlan$$serializer.prototype, 'descriptor', {
+    configurable: true,
+    get: function () {
+      return this.descriptor_z7koqn$_0;
+    }
+  });
+  WorkPlan$$serializer.prototype.serialize_55azsf$ = function (encoder, value) {
+    var output = encoder.beginStructure_24f42q$(this.descriptor);
+    output.encodeStringElement_iij8qq$(this.descriptor, 0, value.id);
+    output.encodeStringElement_iij8qq$(this.descriptor, 1, value.faculty);
+    output.encodeStringElement_iij8qq$(this.descriptor, 2, value.block);
+    output.encodeStringElement_iij8qq$(this.descriptor, 3, value.subject);
+    output.encodeIntElement_ptg7oe$(this.descriptor, 4, value.semester);
+    output.encodeSerializableElement_r4qlx7$(this.descriptor, 5, Teacher$$serializer_getInstance(), value.teacher);
+    output.encodeSerializableElement_r4qlx7$(this.descriptor, 6, new ArrayListSerializer(Group$$serializer_getInstance()), value.groups);
+    output.encodeIntElement_ptg7oe$(this.descriptor, 7, value.numberOfStudents);
+    output.encodeStringElement_iij8qq$(this.descriptor, 8, value.typeOfLoad);
+    output.encodeFloatElement_lf6hpt$(this.descriptor, 9, value.hours);
+    output.encodeStringElement_iij8qq$(this.descriptor, 10, value.typeOfEmployment);
+    output.endStructure_24f42q$(this.descriptor);
+  };
+  WorkPlan$$serializer.prototype.deserialize_bq71mq$ = function (decoder) {
+    var index;
+    var bitMask0 = 0;
+    var local0
+    , local1
+    , local2
+    , local3
+    , local4
+    , local5
+    , local6
+    , local7
+    , local8
+    , local9
+    , local10;
+    var input = decoder.beginStructure_24f42q$(this.descriptor);
+    loopLabel: while (true) {
+      index = input.decodeElementIndex_24f42q$(this.descriptor);
+      switch (index) {
+        case 0:
+          local0 = input.decodeStringElement_szpzho$(this.descriptor, 0);
+          bitMask0 |= 1;
+          break;
+        case 1:
+          local1 = input.decodeStringElement_szpzho$(this.descriptor, 1);
+          bitMask0 |= 2;
+          break;
+        case 2:
+          local2 = input.decodeStringElement_szpzho$(this.descriptor, 2);
+          bitMask0 |= 4;
+          break;
+        case 3:
+          local3 = input.decodeStringElement_szpzho$(this.descriptor, 3);
+          bitMask0 |= 8;
+          break;
+        case 4:
+          local4 = input.decodeIntElement_szpzho$(this.descriptor, 4);
+          bitMask0 |= 16;
+          break;
+        case 5:
+          local5 = input.decodeSerializableElement_12e8id$(this.descriptor, 5, Teacher$$serializer_getInstance(), local5);
+          bitMask0 |= 32;
+          break;
+        case 6:
+          local6 = input.decodeSerializableElement_12e8id$(this.descriptor, 6, new ArrayListSerializer(Group$$serializer_getInstance()), local6);
+          bitMask0 |= 64;
+          break;
+        case 7:
+          local7 = input.decodeIntElement_szpzho$(this.descriptor, 7);
+          bitMask0 |= 128;
+          break;
+        case 8:
+          local8 = input.decodeStringElement_szpzho$(this.descriptor, 8);
+          bitMask0 |= 256;
+          break;
+        case 9:
+          local9 = input.decodeFloatElement_szpzho$(this.descriptor, 9);
+          bitMask0 |= 512;
+          break;
+        case 10:
+          local10 = input.decodeStringElement_szpzho$(this.descriptor, 10);
+          bitMask0 |= 1024;
+          break;
+        case -1:
+          break loopLabel;
+        default:throw new UnknownFieldException(index);
+      }
+    }
+    input.endStructure_24f42q$(this.descriptor);
+    return WorkPlan_init(bitMask0, local0, local1, local2, local3, local4, local5, local6, local7, local8, local9, local10, null);
+  };
+  WorkPlan$$serializer.prototype.childSerializers = function () {
+    return [internal.StringSerializer, internal.StringSerializer, internal.StringSerializer, internal.StringSerializer, internal.IntSerializer, Teacher$$serializer_getInstance(), new ArrayListSerializer(Group$$serializer_getInstance()), internal.IntSerializer, internal.StringSerializer, internal.FloatSerializer, internal.StringSerializer];
+  };
+  WorkPlan$$serializer.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: '$serializer',
+    interfaces: [GeneratedSerializer]
+  };
+  var WorkPlan$$serializer_instance = null;
+  function WorkPlan$$serializer_getInstance() {
+    if (WorkPlan$$serializer_instance === null) {
+      new WorkPlan$$serializer();
+    }return WorkPlan$$serializer_instance;
+  }
+  function WorkPlan_init(seen1, id, faculty, block, subject, semester, teacher, groups, numberOfStudents, typeOfLoad, hours, typeOfEmployment, serializationConstructorMarker) {
+    var $this = serializationConstructorMarker || Object.create(WorkPlan.prototype);
+    if ((seen1 & 1) === 0)
+      throw MissingFieldException_init('id');
+    else
+      $this.id = id;
+    if ((seen1 & 2) === 0)
+      throw MissingFieldException_init('faculty');
+    else
+      $this.faculty = faculty;
+    if ((seen1 & 4) === 0)
+      throw MissingFieldException_init('block');
+    else
+      $this.block = block;
+    if ((seen1 & 8) === 0)
+      throw MissingFieldException_init('subject');
+    else
+      $this.subject = subject;
+    if ((seen1 & 16) === 0)
+      throw MissingFieldException_init('semester');
+    else
+      $this.semester = semester;
+    if ((seen1 & 32) === 0)
+      throw MissingFieldException_init('teacher');
+    else
+      $this.teacher = teacher;
+    if ((seen1 & 64) === 0)
+      throw MissingFieldException_init('groups');
+    else
+      $this.groups = groups;
+    if ((seen1 & 128) === 0)
+      throw MissingFieldException_init('numberOfStudents');
+    else
+      $this.numberOfStudents = numberOfStudents;
+    if ((seen1 & 256) === 0)
+      throw MissingFieldException_init('typeOfLoad');
+    else
+      $this.typeOfLoad = typeOfLoad;
+    if ((seen1 & 512) === 0)
+      throw MissingFieldException_init('hours');
+    else
+      $this.hours = hours;
+    if ((seen1 & 1024) === 0)
+      throw MissingFieldException_init('typeOfEmployment');
+    else
+      $this.typeOfEmployment = typeOfEmployment;
+    return $this;
   }
   WorkPlan.$metadata$ = {
     kind: Kind_CLASS,
@@ -323,9 +512,17 @@
   });
   package$model.Teacher_init_9zxaf4$ = Teacher_init;
   package$model.Teacher = Teacher;
+  Object.defineProperty(WorkPlan, 'Companion', {
+    get: WorkPlan$Companion_getInstance
+  });
+  Object.defineProperty(WorkPlan, '$serializer', {
+    get: WorkPlan$$serializer_getInstance
+  });
+  package$model.WorkPlan_init_2j7o5y$ = WorkPlan_init;
   package$model.WorkPlan = WorkPlan;
   Group$$serializer.prototype.typeParametersSerializers = GeneratedSerializer.prototype.typeParametersSerializers;
   Teacher$$serializer.prototype.typeParametersSerializers = GeneratedSerializer.prototype.typeParametersSerializers;
+  WorkPlan$$serializer.prototype.typeParametersSerializers = GeneratedSerializer.prototype.typeParametersSerializers;
   Kotlin.defineModule('model', _);
   return _;
 }));

@@ -1,5 +1,7 @@
 package ru.altmanea.edu.server.model
 
+import kotlinx.serialization.*
+@Serializable
 class WorkPlan(
     val id: String,
     val faculty: String,
@@ -12,5 +14,4 @@ class WorkPlan(
     val typeOfLoad: String,
     val hours: Float,
     val typeOfEmployment: String
-) {
-}
+)

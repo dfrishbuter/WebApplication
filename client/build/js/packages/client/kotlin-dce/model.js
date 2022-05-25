@@ -20,6 +20,7 @@
   var GeneratedSerializer = $module$kotlinx_serialization_kotlinx_serialization_core_js_legacy.kotlinx.serialization.internal.GeneratedSerializer;
   var MissingFieldException_init = $module$kotlinx_serialization_kotlinx_serialization_core_js_legacy.kotlinx.serialization.MissingFieldException_init_61zpoe$;
   var Kind_INTERFACE = Kotlin.Kind.INTERFACE;
+  var ArrayListSerializer = $module$kotlinx_serialization_kotlinx_serialization_core_js_legacy.kotlinx.serialization.internal.ArrayListSerializer;
   function Config() {
     Config$Companion_getInstance();
   }
@@ -36,6 +37,8 @@
     this.groupsURL = 'http://localhost:8080/api1/groups/';
     this.subjectsPath = 'api1/subjects/';
     this.subjectsURL = 'http://localhost:8080/api1/subjects/';
+    this.workPlansPath = 'api1/work_plans/';
+    this.workPlansURL = 'http://localhost:8080/api1/work_plans/';
   }
   Config$Companion.$metadata$ = {kind: Kind_OBJECT, simpleName: 'Companion', interfaces: []};
   var Config$Companion_instance = null;
@@ -229,6 +232,23 @@
     return $this;
   }
   Teacher.$metadata$ = {kind: Kind_CLASS, simpleName: 'Teacher', interfaces: []};
+  var WorkPlan$Companion_instance = null;
+  function WorkPlan$$serializer() {
+    this.descriptor_z7koqn$_0 = new PluginGeneratedSerialDescriptor('ru.altmanea.edu.server.model.WorkPlan', this, 11);
+    this.descriptor.addElement_ivxn3r$('id', false);
+    this.descriptor.addElement_ivxn3r$('faculty', false);
+    this.descriptor.addElement_ivxn3r$('block', false);
+    this.descriptor.addElement_ivxn3r$('subject', false);
+    this.descriptor.addElement_ivxn3r$('semester', false);
+    this.descriptor.addElement_ivxn3r$('teacher', false);
+    this.descriptor.addElement_ivxn3r$('groups', false);
+    this.descriptor.addElement_ivxn3r$('numberOfStudents', false);
+    this.descriptor.addElement_ivxn3r$('typeOfLoad', false);
+    this.descriptor.addElement_ivxn3r$('hours', false);
+    this.descriptor.addElement_ivxn3r$('typeOfEmployment', false);
+    WorkPlan$$serializer_instance = this;
+  }
+  var WorkPlan$$serializer_instance = null;
   Object.defineProperty(Config, 'Companion', {get: Config$Companion_getInstance});
   var package$ru = _.ru || (_.ru = {});
   var package$altmanea = package$ru.altmanea || (package$ru.altmanea = {});
@@ -246,6 +266,7 @@
   package$model.Teacher = Teacher;
   Group$$serializer.prototype.typeParametersSerializers = GeneratedSerializer.prototype.typeParametersSerializers;
   Teacher$$serializer.prototype.typeParametersSerializers = GeneratedSerializer.prototype.typeParametersSerializers;
+  WorkPlan$$serializer.prototype.typeParametersSerializers = GeneratedSerializer.prototype.typeParametersSerializers;
   return _;
 }));
 

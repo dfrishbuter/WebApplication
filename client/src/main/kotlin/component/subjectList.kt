@@ -37,8 +37,6 @@ fun fcSubjectList() = fc("SubjectList") { props: SubjectListProps ->
 }
 
 fun fcContainerSubjectList() = fc("QuerySubjectList") { _: Props ->
-    val queryClient = useQueryClient()
-
     val query = useQuery<Any, QueryError, AxiosResponse<Array<Item<String>>>, Any>( // хук, предоставляющий поступ к функциям квери провайдера
         "subjectList",
         {

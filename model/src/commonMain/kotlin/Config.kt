@@ -16,5 +16,8 @@ class Config {
 
         const val subjectsPath = "${pathPrefix}subjects/"
         const val subjectsURL = "$serverUrl${subjectsPath}"
+
+        const val workPlansPath = "${pathPrefix}work_plans/"
+        const val workPlansURL = "$serverUrl${workPlansPath}"
     }
 }
