@@ -20,12 +20,51 @@
   var wrapFunction = Kotlin.wrapFunction;
   var Annotation = Kotlin.kotlin.Annotation;
   var isValidElement = $module$react.isValidElement;
+  var rawUseInsertionEffect = $module$react.useInsertionEffect;
+  var rawUseLayoutEffect = $module$react.useLayoutEffect;
   function get_react($receiver) {
     return get_js($receiver);
   }
+  function createEffectCallback$lambda(closure$effect) {
+    return function () {
+      var cleanups = [];
+      closure$effect(cleanups);
+      return buildCleanup(cleanups);
+    };
+  }
+  function createEffectCallback(effect) {
+    return createEffectCallback$lambda(effect);
+  }
+  function buildCleanup$lambda(closure$cleanups) {
+    return function () {
+      var tmp$, tmp$_0;
+      tmp$ = closure$cleanups;
+      for (tmp$_0 = 0; tmp$_0 !== tmp$.length; ++tmp$_0) {
+        var cleanup = tmp$[tmp$_0];
+        cleanup();
+      }
+      return Unit;
+    };
+  }
+  function buildCleanup(cleanups) {
+    if (cleanups.length === 0)
+      return undefined;
+    return buildCleanup$lambda(cleanups);
+  }
+  function useInsertionEffect_0(dependencies, effect) {
+    var callback = createEffectCallback(effect);
+    rawUseInsertionEffect(callback, dependencies);
+  }
+  function useLayoutEffect_0(dependencies, effect) {
+    var callback = createEffectCallback(effect);
+    rawUseLayoutEffect(callback, dependencies);
+  }
   var package$react = _.react || (_.react = {});
   package$react.get_react_2wnr96$ = get_react;
+  package$react.createEffectCallback_1ce2r7$ = createEffectCallback;
   $$importsForInline$$.react = $module$react;
+  package$react.useInsertionEffect_c147l4$ = useInsertionEffect_0;
+  package$react.useLayoutEffect_c147l4$ = useLayoutEffect_0;
   return _;
 }));
 

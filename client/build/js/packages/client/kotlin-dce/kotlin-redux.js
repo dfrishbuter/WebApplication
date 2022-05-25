@@ -21,6 +21,7 @@
   var $$importsForInline$$ = _.$$importsForInline$$ || (_.$$importsForInline$$ = {});
   var Unit = Kotlin.kotlin.Unit;
   var LinkedHashMap_init = Kotlin.kotlin.collections.LinkedHashMap_init_q3lmfv$;
+  var clone = $module$kotlin_extensions.kotlinext.js.clone_issdgt$;
   var Json = $module$kotlinx_serialization_kotlinx_serialization_json_js_legacy.kotlinx.serialization.json.Json_x26noe$;
   var defineInlineFunction = Kotlin.defineInlineFunction;
   var wrapFunction = Kotlin.wrapFunction;
@@ -32,6 +33,7 @@
     return Unit;
   }
   var defaultJson;
+  $$importsForInline$$['kotlin-extensions'] = $module$kotlin_extensions;
   $$importsForInline$$['kotlinx-serialization-kotlinx-serialization-json-js-legacy'] = $module$kotlinx_serialization_kotlinx_serialization_json_js_legacy;
   $$importsForInline$$['kotlinx-serialization-kotlinx-serialization-core-js-legacy'] = $module$kotlinx_serialization_kotlinx_serialization_core_js_legacy;
   defaultJson = Json(void 0, defaultJson$lambda);

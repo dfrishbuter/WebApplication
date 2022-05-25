@@ -35,6 +35,10 @@ fun Application.main(test: Boolean = true) {
 
         val subjects = workPlansTestData.map { it.subject }.distinct()
         subjects.forEach { subjectsRepo.create(it) }
+
+        workPlansTestData.forEach { workPlansRepo.create(it) }
+        val repo = workPlansRepo
+        println(repo)
     }
     install(ContentNegotiation) {
         json()

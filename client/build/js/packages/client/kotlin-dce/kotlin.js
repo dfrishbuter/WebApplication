@@ -1344,6 +1344,8 @@
     BufferedOutput.prototype.constructor = BufferedOutput;
     BufferedOutputToConsoleLog.prototype = Object.create(BufferedOutput.prototype);
     BufferedOutputToConsoleLog.prototype.constructor = BufferedOutputToConsoleLog;
+    asList$ObjectLiteral_4.prototype = Object.create(AbstractList.prototype);
+    asList$ObjectLiteral_4.prototype.constructor = asList$ObjectLiteral_4;
     SimpleKClassImpl.prototype = Object.create(KClassImpl.prototype);
     SimpleKClassImpl.prototype.constructor = SimpleKClassImpl;
     PrimitiveKClassImpl.prototype = Object.create(KClassImpl.prototype);
@@ -1512,6 +1514,51 @@
       }
       return list;
     }
+    function joinTo($receiver, buffer, separator, prefix, postfix, limit, truncated, transform) {
+      if (separator === void 0)
+        separator = ', ';
+      if (prefix === void 0)
+        prefix = '';
+      if (postfix === void 0)
+        postfix = '';
+      if (limit === void 0)
+        limit = -1;
+      if (truncated === void 0)
+        truncated = '...';
+      if (transform === void 0)
+        transform = null;
+      var tmp$;
+      buffer.append_gw00v9$(prefix);
+      var count = 0;
+      for (tmp$ = 0; tmp$ !== $receiver.length; ++tmp$) {
+        var element = $receiver[tmp$];
+        if ((count = count + 1 | 0, count) > 1)
+          buffer.append_gw00v9$(separator);
+        if (limit < 0 || count <= limit) {
+          appendElement_1(buffer, element, transform);
+        } else
+          break;
+      }
+      if (limit >= 0 && count > limit)
+        buffer.append_gw00v9$(truncated);
+      buffer.append_gw00v9$(postfix);
+      return buffer;
+    }
+    function joinToString($receiver, separator, prefix, postfix, limit, truncated, transform) {
+      if (separator === void 0)
+        separator = ', ';
+      if (prefix === void 0)
+        prefix = '';
+      if (postfix === void 0)
+        postfix = '';
+      if (limit === void 0)
+        limit = -1;
+      if (truncated === void 0)
+        truncated = '...';
+      if (transform === void 0)
+        transform = null;
+      return joinTo($receiver, StringBuilder_init_1(), separator, prefix, postfix, limit, truncated, transform).toString();
+    }
     function Sequence$ObjectLiteral_0(closure$iterator) {
       this.closure$iterator = closure$iterator;
     }
@@ -1543,6 +1590,19 @@
         index = index + 1 | 0;
       }
       return -1;
+    }
+    function last_17($receiver) {
+      if (Kotlin.isType($receiver, List))
+        return last_18($receiver);
+      else {
+        var iterator = $receiver.iterator();
+        if (!iterator.hasNext())
+          throw new NoSuchElementException('Collection is empty.');
+        var last = iterator.next();
+        while (iterator.hasNext())
+          last = iterator.next();
+        return last;
+      }
     }
     function last_18($receiver) {
       if ($receiver.isEmpty())
@@ -1579,6 +1639,48 @@
     }
     function singleOrNull_18($receiver) {
       return $receiver.size === 1 ? $receiver.get_za3lpa$(0) : null;
+    }
+    function drop_8($receiver, n) {
+      var tmp$, tmp$_0, tmp$_1;
+      if (!(n >= 0)) {
+        var message = 'Requested element count ' + n + ' is less than zero.';
+        throw IllegalArgumentException_init_0(message.toString());
+      }if (n === 0)
+        return toList_8($receiver);
+      var list;
+      if (Kotlin.isType($receiver, Collection)) {
+        var resultSize = $receiver.size - n | 0;
+        if (resultSize <= 0)
+          return emptyList();
+        if (resultSize === 1)
+          return listOf(last_17($receiver));
+        list = ArrayList_init_0(resultSize);
+        if (Kotlin.isType($receiver, List)) {
+          if (Kotlin.isType($receiver, RandomAccess)) {
+            tmp$ = $receiver.size;
+            for (var index = n; index < tmp$; index++)
+              list.add_11rb$($receiver.get_za3lpa$(index));
+          } else {
+            tmp$_0 = $receiver.listIterator_za3lpa$(n);
+            while (tmp$_0.hasNext()) {
+              var item = tmp$_0.next();
+              list.add_11rb$(item);
+            }
+          }
+          return list;
+        }} else {
+        list = ArrayList_init();
+      }
+      var count = 0;
+      tmp$_1 = $receiver.iterator();
+      while (tmp$_1.hasNext()) {
+        var item_0 = tmp$_1.next();
+        if (count >= n)
+          list.add_11rb$(item_0);
+        else
+          count = count + 1 | 0;
+      }
+      return optimizeReadOnlyList(list);
     }
     function toBooleanArray_0($receiver) {
       var tmp$, tmp$_0;
@@ -1643,6 +1745,18 @@
         return tmp$;
       }return optimizeReadOnlySet(toCollection_8($receiver, LinkedHashSet_init_0()));
     }
+    function count_17($receiver) {
+      var tmp$;
+      if (Kotlin.isType($receiver, Collection))
+        return $receiver.size;
+      var count = 0;
+      tmp$ = $receiver.iterator();
+      while (tmp$.hasNext()) {
+        var element = tmp$.next();
+        checkCountOverflow((count = count + 1 | 0, count));
+      }
+      return count;
+    }
     function maxOrNull_11($receiver) {
       var iterator = $receiver.iterator();
       if (!iterator.hasNext())
@@ -1666,6 +1780,18 @@
           min = e;
       }
       return min;
+    }
+    function plus_4($receiver, elements) {
+      if (Kotlin.isType(elements, Collection)) {
+        var result = ArrayList_init_0($receiver.size + elements.size | 0);
+        result.addAll_brywnq$($receiver);
+        result.addAll_brywnq$(elements);
+        return result;
+      } else {
+        var result_0 = ArrayList_init_1($receiver);
+        addAll(result_0, elements);
+        return result_0;
+      }
     }
     function joinTo_8($receiver, buffer, separator, prefix, postfix, limit, truncated, transform) {
       if (separator === void 0)
@@ -1761,6 +1887,13 @@
         return maximumValue;
       return $receiver;
     }
+    function Iterable$ObjectLiteral_0(closure$iterator) {
+      this.closure$iterator = closure$iterator;
+    }
+    Iterable$ObjectLiteral_0.prototype.iterator = function () {
+      return this.closure$iterator();
+    };
+    Iterable$ObjectLiteral_0.$metadata$ = {kind: Kind_CLASS, interfaces: [Iterable]};
     function take_9($receiver, n) {
       var tmp$;
       if (!(n >= 0)) {
@@ -1791,6 +1924,14 @@
     }
     function map_10($receiver, transform) {
       return new TransformingSequence($receiver, transform);
+    }
+    function asIterable$lambda_8(this$asIterable) {
+      return function () {
+        return this$asIterable.iterator();
+      };
+    }
+    function asIterable_10($receiver) {
+      return new Iterable$ObjectLiteral_0(asIterable$lambda_8($receiver));
     }
     function plus_13($receiver, elements) {
       var tmp$, tmp$_0;
@@ -3114,6 +3255,11 @@
         throwIndexOverflow();
       }return index;
     }
+    function checkCountOverflow(count) {
+      if (count < 0) {
+        throwCountOverflow();
+      }return count;
+    }
     function mapCapacity(expectedSize) {
       return expectedSize;
     }
@@ -4393,6 +4539,23 @@
       return Unit;
     }
     var EmptyContinuation;
+    function asList$ObjectLiteral_4(this$asList) {
+      this.this$asList = this$asList;
+      AbstractList.call(this);
+    }
+    Object.defineProperty(asList$ObjectLiteral_4.prototype, 'size', {configurable: true, get: function () {
+      return this.this$asList.length;
+    }});
+    asList$ObjectLiteral_4.prototype.get_za3lpa$ = function (index) {
+      if (index >= 0 && index <= get_lastIndex_12(this)) {
+        return this.this$asList.item(index);
+      } else
+        throw new IndexOutOfBoundsException('index ' + index + ' is not in range [0..' + get_lastIndex_12(this) + ']');
+    };
+    asList$ObjectLiteral_4.$metadata$ = {kind: Kind_CLASS, interfaces: [AbstractList]};
+    function asList_12($receiver) {
+      return new asList$ObjectLiteral_4($receiver);
+    }
     function throwNPE(message) {
       throw new NullPointerException(message);
     }
@@ -5554,6 +5717,14 @@
       return compareTo(a, b, true);
     }
     var STRING_CASE_INSENSITIVE_ORDER;
+    function startsWith($receiver, prefix, ignoreCase) {
+      if (ignoreCase === void 0)
+        ignoreCase = false;
+      if (!ignoreCase) {
+        return $receiver.startsWith(prefix, 0);
+      } else
+        return regionMatches($receiver, 0, prefix, 0, prefix.length, ignoreCase);
+    }
     function isBlank($receiver) {
       var tmp$ = $receiver.length === 0;
       if (!tmp$) {
@@ -5603,6 +5774,40 @@
         ignoreCase = false;
       return regionMatchesImpl($receiver, thisOffset, other, otherOffset, length, ignoreCase);
     }
+    function repeat($receiver, n) {
+      var tmp$;
+      if (!(n >= 0)) {
+        var message = "Count 'n' must be non-negative, but was " + n + '.';
+        throw IllegalArgumentException_init_0(message.toString());
+      }switch (n) {
+        case 0:
+          tmp$ = '';
+          break;
+        case 1:
+          tmp$ = $receiver.toString();
+          break;
+        default:var result = '';
+          if (!($receiver.length === 0)) {
+            var s = $receiver.toString();
+            var count = n;
+            while (true) {
+              if ((count & 1) === 1) {
+                result += s;
+              }count = count >>> 1;
+              if (count === 0) {
+                break;
+              }s += s;
+            }
+          }
+          return result;
+      }
+      return tmp$;
+    }
+    function replace($receiver, oldValue, newValue, ignoreCase) {
+      if (ignoreCase === void 0)
+        ignoreCase = false;
+      return $receiver.replace(new RegExp(Regex$Companion_getInstance().escape_61zpoe$(oldValue), ignoreCase ? 'gui' : 'gu'), Regex$Companion_getInstance().nativeEscapeReplacement_y4putb$(newValue));
+    }
     var MAX_BYTES_PER_CHAR;
     var REPLACEMENT_BYTE_SEQUENCE;
     var REPLACEMENT_CHAR;
@@ -5615,6 +5820,10 @@
     var DurationUnit$DAYS_instance;
     var MonotonicTimeSource_instance = null;
     var DateNowTimeSource_instance = null;
+    function appendText_0($receiver, text) {
+      $receiver.appendChild(ensureNotNull($receiver.ownerDocument).createTextNode(text));
+      return $receiver;
+    }
     var Experimental$Level$WARNING_instance;
     var Experimental$Level$ERROR_instance;
     var RequiresOptIn$Level$WARNING_instance;
@@ -6243,6 +6452,9 @@
     }
     function throwIndexOverflow() {
       throw new ArithmeticException('Index overflow has happened.');
+    }
+    function throwCountOverflow() {
+      throw new ArithmeticException('Count overflow has happened.');
     }
     function Grouping() {
     }
@@ -7446,6 +7658,27 @@
        while (false);
       return trimEnd$result.toString();
     }
+    function trim_3($receiver) {
+      var startIndex = 0;
+      var endIndex = $receiver.length - 1 | 0;
+      var startFound = false;
+      while (startIndex <= endIndex) {
+        var index = !startFound ? startIndex : endIndex;
+        var match = isWhitespace(unboxChar(toBoxedChar($receiver.charCodeAt(index))));
+        if (!startFound) {
+          if (!match)
+            startFound = true;
+          else
+            startIndex = startIndex + 1 | 0;
+        } else {
+          if (!match)
+            break;
+          else
+            endIndex = endIndex - 1 | 0;
+        }
+      }
+      return Kotlin.subSequence($receiver, startIndex, endIndex + 1 | 0);
+    }
     function iterator$ObjectLiteral(this$iterator) {
       this.this$iterator = this$iterator;
       CharIterator.call(this);
@@ -7616,6 +7849,11 @@
         ignoreCase = false;
       return ignoreCase || !(typeof $receiver === 'string') ? indexOf_15($receiver, string, startIndex, 0, ignoreCase, true) : $receiver.lastIndexOf(string, startIndex);
     }
+    function contains_53($receiver, other, ignoreCase) {
+      if (ignoreCase === void 0)
+        ignoreCase = false;
+      return typeof other === 'string' ? indexOf_17($receiver, other, void 0, ignoreCase) >= 0 : indexOf_15($receiver, other, 0, $receiver.length, ignoreCase) >= 0;
+    }
     function contains_54($receiver, char, ignoreCase) {
       if (ignoreCase === void 0)
         ignoreCase = false;
@@ -7712,6 +7950,44 @@
       if (limit === void 0)
         limit = 0;
       return map_10(rangesDelimitedBy_0($receiver, delimiters, void 0, ignoreCase, limit), splitToSequence$lambda($receiver));
+    }
+    function split($receiver, delimiters, ignoreCase, limit) {
+      if (ignoreCase === void 0)
+        ignoreCase = false;
+      if (limit === void 0)
+        limit = 0;
+      if (delimiters.length === 1) {
+        var delimiter = delimiters[0];
+        if (!(delimiter.length === 0)) {
+          return split_1($receiver, delimiter, ignoreCase, limit);
+        }}var $receiver_0 = asIterable_10(rangesDelimitedBy_0($receiver, delimiters, void 0, ignoreCase, limit));
+      var destination = ArrayList_init_0(collectionSizeOrDefault($receiver_0, 10));
+      var tmp$;
+      tmp$ = $receiver_0.iterator();
+      while (tmp$.hasNext()) {
+        var item = tmp$.next();
+        destination.add_11rb$(substring_3($receiver, item));
+      }
+      return destination;
+    }
+    function split_1($receiver, delimiter, ignoreCase, limit) {
+      requireNonNegativeLimit(limit);
+      var currentOffset = 0;
+      var nextIndex = indexOf_17($receiver, delimiter, currentOffset, ignoreCase);
+      if (nextIndex === -1 || limit === 1) {
+        return listOf($receiver.toString());
+      }var isLimited = limit > 0;
+      var result = ArrayList_init_0(isLimited ? coerceAtMost_2(limit, 10) : 10);
+      do {
+        result.add_11rb$(Kotlin.subSequence($receiver, currentOffset, nextIndex).toString());
+        currentOffset = nextIndex + delimiter.length | 0;
+        if (isLimited && result.size === (limit - 1 | 0))
+          break;
+        nextIndex = indexOf_17($receiver, delimiter, currentOffset, ignoreCase);
+      }
+       while (nextIndex !== -1);
+      result.add_11rb$(Kotlin.subSequence($receiver, currentOffset, $receiver.length).toString());
+      return result;
     }
     function lineSequence($receiver) {
       return splitToSequence($receiver, ['\r\n', '\n', '\r']);
@@ -10000,16 +10276,20 @@
     package$collections.listOf_mh5how$ = listOf;
     package$collections.zip_r9t3v7$ = zip;
     package$collections.collectionSizeOrDefault_ba2ldo$ = collectionSizeOrDefault;
+    package$collections.joinTo_aust33$ = joinTo;
+    package$collections.joinToString_cgipc5$ = joinToString;
     package$collections.contains_2ws7j4$ = contains_8;
     package$collections.get_lastIndex_55thoc$ = get_lastIndex_12;
     package$collections.first_2p1efm$ = first_18;
     package$collections.indexOf_2ws7j4$ = indexOf_8;
     package$collections.checkIndexOverflow_za3lpa$ = checkIndexOverflow;
+    package$collections.last_7wnvza$ = last_17;
     package$collections.last_2p1efm$ = last_18;
     package$collections.lastOrNull_2p1efm$ = lastOrNull_18;
     package$collections.single_7wnvza$ = single_17;
     package$collections.single_2p1efm$ = single_18;
     package$collections.singleOrNull_2p1efm$ = singleOrNull_18;
+    package$collections.drop_ba2ldo$ = drop_8;
     package$collections.toList_7wnvza$ = toList_8;
     package$collections.toBooleanArray_xmyvgf$ = toBooleanArray_0;
     package$collections.toCollection_5cfyqp$ = toCollection_8;
@@ -10018,8 +10298,11 @@
     package$collections.toMutableList_4c7yge$ = toMutableList_9;
     package$collections.toSet_7wnvza$ = toSet_8;
     package$collections.Collection = Collection;
+    package$collections.count_7wnvza$ = count_17;
+    package$collections.checkCountOverflow_za3lpa$ = checkCountOverflow;
     package$collections.maxOrNull_exjks8$ = maxOrNull_11;
     package$collections.minOrNull_exjks8$ = minOrNull_11;
+    package$collections.plus_mydzjv$ = plus_4;
     package$collections.joinTo_gcc71v$ = joinTo_8;
     package$collections.joinToString_fmv235$ = joinToString_8;
     package$collections.asSequence_7wnvza$ = asSequence_8;
@@ -10035,6 +10318,7 @@
     package$sequences.toList_veqyi0$ = toList_10;
     package$sequences.toMutableList_veqyi0$ = toMutableList_10;
     package$sequences.map_z5avom$ = map_10;
+    package$sequences.asIterable_veqyi0$ = asIterable_10;
     package$collections.plus_khz7k3$ = plus_13;
     package$text.get_lastIndex_gw00vp$ = get_lastIndex_13;
     package$text.iterator_gw00vp$ = iterator_4;
@@ -10202,6 +10486,13 @@
     package$io.BufferedOutputToConsoleLog = BufferedOutputToConsoleLog;
     package$coroutines.SafeContinuation_init_wj8d80$ = SafeContinuation_init;
     package$coroutines.SafeContinuation = SafeContinuation;
+    var package$kotlinx = _.kotlinx || (_.kotlinx = {});
+    var package$dom = package$kotlinx.dom || (package$kotlinx.dom = {});
+    var package$org = _.org || (_.org = {});
+    var package$w3c = package$org.w3c || (package$org.w3c = {});
+    var package$dom_1 = package$w3c.dom || (package$w3c.dom = {});
+    package$dom_1.asList_kt9thq$ = asList_12;
+    package$dom.appendText_46n0ku$ = appendText_0;
     _.throwNPE = throwNPE;
     _.throwCCE = throwCCE_0;
     _.throwISE = throwISE;
@@ -10260,9 +10551,12 @@
     package$text.concatToString_355ntz$ = concatToString;
     package$text.concatToString_wlitf7$ = concatToString_0;
     package$text.compareTo_7epoxm$ = compareTo;
+    package$text.startsWith_7epoxm$ = startsWith;
     package$text.isBlank_gw00vp$ = isBlank;
     package$text.equals_igcy3c$ = equals_0;
     package$text.regionMatches_h3ii2q$ = regionMatches;
+    package$text.repeat_94bcnn$ = repeat;
+    package$text.replace_680rmw$ = replace;
     package$collections.AbstractCollection = AbstractCollection;
     Object.defineProperty(AbstractList, 'Companion', {get: AbstractList$Companion_getInstance});
     package$collections.AbstractList = AbstractList;
@@ -10278,6 +10572,7 @@
     package$collections.get_indices_gzk92b$ = get_indices_12;
     package$collections.optimizeReadOnlyList_qzupvv$ = optimizeReadOnlyList;
     package$collections.throwIndexOverflow = throwIndexOverflow;
+    package$collections.throwCountOverflow = throwCountOverflow;
     package$collections.IndexedValue = IndexedValue;
     package$collections.IndexingIterable = IndexingIterable;
     package$collections.collectionSizeOrNull_7wnvza$ = collectionSizeOrNull;
@@ -10341,6 +10636,7 @@
     package$text.numberFormatError_y4putb$ = numberFormatError;
     package$text.trimStart_wqw3xr$ = trimStart_2;
     package$text.trimEnd_wqw3xr$ = trimEnd_2;
+    package$text.trim_gw00vp$ = trim_3;
     package$text.substring_i511yc$ = substring_3;
     package$text.regionMatchesImpl_4c7s8r$ = regionMatchesImpl;
     package$text.startsWith_sgbm27$ = startsWith_1;
@@ -10349,9 +10645,11 @@
     package$text.indexOf_8eortd$ = indexOf_16;
     package$text.indexOf_l5u8uk$ = indexOf_17;
     package$text.lastIndexOf_l5u8uk$ = lastIndexOf_16;
+    package$text.contains_li3zpu$ = contains_53;
     package$text.contains_sgbm27$ = contains_54;
     package$text.requireNonNegativeLimit_kcn2v3$ = requireNonNegativeLimit;
     package$text.splitToSequence_ip8yn$ = splitToSequence;
+    package$text.split_ip8yn$ = split;
     package$text.lineSequence_gw00vp$ = lineSequence;
     package$text.lines_gw00vp$ = lines;
     package$text.MatchGroupCollection = MatchGroupCollection;

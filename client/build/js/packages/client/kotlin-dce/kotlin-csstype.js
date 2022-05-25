@@ -14,6 +14,7 @@
   var Kind_INTERFACE = Kotlin.Kind.INTERFACE;
   var Kind_CLASS = Kotlin.Kind.CLASS;
   var Annotation = Kotlin.kotlin.Annotation;
+  var joinToString = Kotlin.kotlin.collections.joinToString_cgipc5$;
 }));
 
 //# sourceMappingURL=kotlin-csstype.js.map

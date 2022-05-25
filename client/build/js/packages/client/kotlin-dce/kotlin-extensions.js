@@ -15,6 +15,12 @@
   var wrapFunction = Kotlin.wrapFunction;
   var Kind_CLASS = Kotlin.Kind.CLASS;
   var Kind_INTERFACE = Kotlin.Kind.INTERFACE;
+  function clone(obj) {
+    return Object.assign({}, obj);
+  }
+  var package$kotlinext = _.kotlinext || (_.kotlinext = {});
+  var package$js = package$kotlinext.js || (package$kotlinext.js = {});
+  package$js.clone_issdgt$ = clone;
   return _;
 }));
 

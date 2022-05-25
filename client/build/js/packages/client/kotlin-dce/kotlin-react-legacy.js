@@ -18,6 +18,7 @@
   'use strict';
   var $$importsForInline$$ = _.$$importsForInline$$ || (_.$$importsForInline$$ = {});
   var Kind_CLASS = Kotlin.Kind.CLASS;
+  var clone = $module$kotlin_extensions.kotlinext.js.clone_issdgt$;
   var Unit = Kotlin.kotlin.Unit;
   var createElement = $module$react.createElement;
   var get_react = $module$kotlin_react_core.react.get_react_2wnr96$;
@@ -31,6 +32,7 @@
   var ArrayList_init = Kotlin.kotlin.collections.ArrayList_init_287e2$;
   var IllegalStateException_init = Kotlin.kotlin.IllegalStateException_init_pdl1vj$;
   var isValidElement = $module$react.isValidElement;
+  var rawForwardRef = $module$react.forwardRef;
   RElementBuilderImpl.prototype = Object.create(RBuilderImpl.prototype);
   RElementBuilderImpl.prototype.constructor = RElementBuilderImpl;
   function fc$lambda$lambda(closure$func, closure$props) {
@@ -174,7 +176,22 @@
     }
     return tmp$;
   }
+  function forwardRef$lambda$lambda(closure$handler, closure$props, closure$ref) {
+    return function ($receiver) {
+      closure$handler($receiver, closure$props, closure$ref);
+      return Unit;
+    };
+  }
+  function forwardRef$lambda(closure$handler) {
+    return function (props, ref) {
+      return createElement_0(forwardRef$lambda$lambda(closure$handler, props, ref));
+    };
+  }
+  function forwardRef(handler) {
+    return rawForwardRef(forwardRef$lambda(handler));
+  }
   var package$react = _.react || (_.react = {});
+  $$importsForInline$$['kotlin-extensions'] = $module$kotlin_extensions;
   package$react.fc_4mavxa$ = fc;
   package$react.fc_gcrbg4$ = fc_0;
   $$importsForInline$$['kotlin-react-core'] = $module$kotlin_react_core;
@@ -186,6 +203,7 @@
   package$react.RElementBuilderImpl = RElementBuilderImpl;
   package$react.createElement_zepujl$ = createElement_0;
   $$importsForInline$$.react = $module$react;
+  package$react.forwardRef_2tjgre$ = forwardRef;
   RBuilderImpl.prototype.child_30b5ua$ = RBuilder.prototype.child_30b5ua$;
   RBuilderImpl.prototype.child_1mw94g$$default = RBuilder.prototype.child_1mw94g$$default;
   RBuilderImpl.prototype.child_up9nw1$ = RBuilder.prototype.child_up9nw1$;

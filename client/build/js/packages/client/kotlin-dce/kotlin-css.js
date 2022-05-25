@@ -10,8 +10,10 @@
   }
 }(this, function (_, Kotlin) {
   'use strict';
+  var joinToString = Kotlin.kotlin.collections.joinToString_cgipc5$;
   var Unit = Kotlin.kotlin.Unit;
   var get_lastIndex = Kotlin.kotlin.collections.get_lastIndex_55thoc$;
+  var repeat = Kotlin.kotlin.text.repeat_94bcnn$;
   var getCallableRef = Kotlin.getCallableRef;
   var Regex_init = Kotlin.kotlin.text.Regex_init_61zpoe$;
   var lazy = Kotlin.kotlin.lazy_klfg04$;
@@ -27,7 +29,9 @@
   var defineInlineFunction = Kotlin.defineInlineFunction;
   var wrapFunction = Kotlin.wrapFunction;
   var LinkedHashMap_init = Kotlin.kotlin.collections.LinkedHashMap_init_q3lmfv$;
+  var plus = Kotlin.kotlin.collections.plus_mydzjv$;
   var startsWith = Kotlin.kotlin.text.startsWith_sgbm27$;
+  var startsWith_0 = Kotlin.kotlin.text.startsWith_7epoxm$;
   var Enum = Kotlin.kotlin.Enum;
   var throwISE = Kotlin.throwISE;
   var coerceIn_0 = Kotlin.kotlin.ranges.coerceIn_e4yvb3$;
@@ -36,6 +40,7 @@
   var toInt = Kotlin.kotlin.text.toInt_pdl1vz$;
   var endsWith_0 = Kotlin.kotlin.text.endsWith_sgbm27$;
   var IntRange = Kotlin.kotlin.ranges.IntRange;
+  var contains = Kotlin.kotlin.text.contains_li3zpu$;
   var JsMath = Math;
   var IllegalStateException_init = Kotlin.kotlin.IllegalStateException_init_pdl1vj$;
   var joinToString_0 = Kotlin.kotlin.collections.joinToString_fmv235$;
@@ -47,6 +52,10 @@
   var checkIndexOverflow = Kotlin.kotlin.collections.checkIndexOverflow_za3lpa$;
   var toSet = Kotlin.kotlin.collections.toSet_us0mfu$;
   var emptySet = Kotlin.kotlin.collections.emptySet_287e2$;
+  LinearDimension.prototype = Object.create(CssValue.prototype);
+  LinearDimension.prototype.constructor = LinearDimension;
+  QuotedString.prototype = Object.create(CssValue.prototype);
+  QuotedString.prototype.constructor = QuotedString;
   Animations.prototype = Object.create(StyleList.prototype);
   Animations.prototype.constructor = Animations;
   BoxShadows.prototype = Object.create(StyleList.prototype);
@@ -55,10 +64,721 @@
   Transforms.prototype.constructor = Transforms;
   Transitions.prototype = Object.create(StyleList.prototype);
   Transitions.prototype.constructor = Transitions;
+  function CssBuilder(indent, allowClasses, parent, isHolder, isStyledComponent) {
+    if (indent === void 0)
+      indent = '';
+    if (allowClasses === void 0)
+      allowClasses = true;
+    if (parent === void 0)
+      parent = null;
+    if (isHolder === void 0)
+      isHolder = false;
+    if (isStyledComponent === void 0)
+      isStyledComponent = false;
+    return new CssBuilderImpl(indent, allowClasses, parent, isHolder, isStyledComponent);
+  }
+  function CssBuilder_0() {
+    CssBuilder$Companion_getInstance();
+  }
+  CssBuilder_0.prototype.invoke_3ad21g$ = function ($receiver, block) {
+    return this.rule_1q2hwx$($receiver, false, void 0, block);
+  };
+  CssBuilder_0.prototype.invoke_x7exez$ = function ($receiver, css) {
+    return this.rule_jindqg$($receiver, false, void 0, css);
+  };
+  CssBuilder_0.prototype.invoke_3c2457$ = function ($receiver, block) {
+    return this.invoke_3ad21g$($receiver.tagName, block);
+  };
+  CssBuilder_0.prototype.active_lx8bml$ = function (block) {
+    return this.invoke_3ad21g$('&:active', block);
+  };
+  CssBuilder_0.prototype.checked_lx8bml$ = function (block) {
+    return this.invoke_3ad21g$('&:checked', block);
+  };
+  CssBuilder_0.prototype.default_lx8bml$ = function (block) {
+    return this.invoke_3ad21g$('&:default', block);
+  };
+  CssBuilder_0.prototype.defined_lx8bml$ = function (block) {
+    return this.invoke_3ad21g$('&:defined', block);
+  };
+  CssBuilder_0.prototype.disabled_lx8bml$ = function (block) {
+    return this.invoke_3ad21g$('&:disabled', block);
+  };
+  CssBuilder_0.prototype.empty_lx8bml$ = function (block) {
+    return this.invoke_3ad21g$('&:empty', block);
+  };
+  CssBuilder_0.prototype.enabled_lx8bml$ = function (block) {
+    return this.invoke_3ad21g$('&:enabled', block);
+  };
+  CssBuilder_0.prototype.firstChild_lx8bml$ = function (block) {
+    return this.invoke_3ad21g$('&:first-child', block);
+  };
+  CssBuilder_0.prototype.firstOfType_lx8bml$ = function (block) {
+    return this.invoke_3ad21g$('&:first-of-type', block);
+  };
+  CssBuilder_0.prototype.fullscreen_lx8bml$ = function (block) {
+    return this.invoke_3ad21g$('&:fullscreen', block);
+  };
+  CssBuilder_0.prototype.focus_lx8bml$ = function (block) {
+    return this.invoke_3ad21g$('&:focus', block);
+  };
+  CssBuilder_0.prototype.focusVisible_lx8bml$ = function (block) {
+    return this.invoke_3ad21g$('&:focus-visible', block);
+  };
+  CssBuilder_0.prototype.focusWithin_lx8bml$ = function (block) {
+    return this.invoke_3ad21g$('&:focus-within', block);
+  };
+  CssBuilder_0.prototype.hover_lx8bml$ = function (block) {
+    return this.invoke_3ad21g$('&:hover', block);
+  };
+  CssBuilder_0.prototype.indeterminate_lx8bml$ = function (block) {
+    return this.invoke_3ad21g$('&:indeterminate', block);
+  };
+  CssBuilder_0.prototype.inRange_lx8bml$ = function (block) {
+    return this.invoke_3ad21g$('&:in-range', block);
+  };
+  CssBuilder_0.prototype.invalid_lx8bml$ = function (block) {
+    return this.invoke_3ad21g$('&:invalid', block);
+  };
+  CssBuilder_0.prototype.lastChild_lx8bml$ = function (block) {
+    return this.invoke_3ad21g$('&:last-child', block);
+  };
+  CssBuilder_0.prototype.lastOfType_lx8bml$ = function (block) {
+    return this.invoke_3ad21g$('&:last-of-type', block);
+  };
+  CssBuilder_0.prototype.link_lx8bml$ = function (block) {
+    return this.invoke_3ad21g$('&:link', block);
+  };
+  function CssBuilder$not$lambda(it) {
+    return '&:not(' + it + ')';
+  }
+  CssBuilder_0.prototype.not_xqeqkq$ = function (selector, block) {
+    var selectorString = joinToString(selector, void 0, void 0, void 0, void 0, void 0, CssBuilder$not$lambda);
+    return this.invoke_3ad21g$(selectorString, block);
+  };
+  function CssBuilder$nthChild$lambda(it) {
+    return '&:nth-child(' + it + ')';
+  }
+  CssBuilder_0.prototype.nthChild_xqeqkq$ = function (selector, block) {
+    var selectorString = joinToString(selector, void 0, void 0, void 0, void 0, void 0, CssBuilder$nthChild$lambda);
+    return this.invoke_3ad21g$(selectorString, block);
+  };
+  function CssBuilder$nthLastChild$lambda(it) {
+    return '&:nth-last-child(' + it + ')';
+  }
+  CssBuilder_0.prototype.nthLastChild_xqeqkq$ = function (selector, block) {
+    var selectorString = joinToString(selector, void 0, void 0, void 0, void 0, void 0, CssBuilder$nthLastChild$lambda);
+    return this.invoke_3ad21g$(selectorString, block);
+  };
+  function CssBuilder$nthLastOfType$lambda(it) {
+    return '&:nth-last-of-type(' + it + ')';
+  }
+  CssBuilder_0.prototype.nthLastOfType_xqeqkq$ = function (selector, block) {
+    var selectorString = joinToString(selector, void 0, void 0, void 0, void 0, void 0, CssBuilder$nthLastOfType$lambda);
+    return this.invoke_3ad21g$(selectorString, block);
+  };
+  function CssBuilder$nthOfType$lambda(it) {
+    return '&:nth-of-type(' + it + ')';
+  }
+  CssBuilder_0.prototype.nthOfType_xqeqkq$ = function (selector, block) {
+    var selectorString = joinToString(selector, void 0, void 0, void 0, void 0, void 0, CssBuilder$nthOfType$lambda);
+    return this.invoke_3ad21g$(selectorString, block);
+  };
+  CssBuilder_0.prototype.onlyChild_lx8bml$ = function (block) {
+    return this.invoke_3ad21g$('&:only-child', block);
+  };
+  CssBuilder_0.prototype.onlyOfType_lx8bml$ = function (block) {
+    return this.invoke_3ad21g$('&:only-of-type', block);
+  };
+  CssBuilder_0.prototype.optional_lx8bml$ = function (block) {
+    return this.invoke_3ad21g$('&:optional', block);
+  };
+  CssBuilder_0.prototype.outOfRange_lx8bml$ = function (block) {
+    return this.invoke_3ad21g$('&:out-of-range', block);
+  };
+  CssBuilder_0.prototype.placeholderShown_lx8bml$ = function (block) {
+    return this.invoke_3ad21g$('&:placeholder-shown', block);
+  };
+  CssBuilder_0.prototype.readOnly_lx8bml$ = function (block) {
+    return this.invoke_3ad21g$('&:read-only', block);
+  };
+  CssBuilder_0.prototype.readWrite_lx8bml$ = function (block) {
+    return this.invoke_3ad21g$('&:read-write', block);
+  };
+  CssBuilder_0.prototype.required_lx8bml$ = function (block) {
+    return this.invoke_3ad21g$('&:required', block);
+  };
+  CssBuilder_0.prototype.valid_lx8bml$ = function (block) {
+    return this.invoke_3ad21g$('&:valid', block);
+  };
+  CssBuilder_0.prototype.visited_lx8bml$ = function (block) {
+    return this.invoke_3ad21g$('&:visited', block);
+  };
+  function CssBuilder$children$lambda(it) {
+    return '& > ' + it;
+  }
+  CssBuilder_0.prototype.children_xqeqkq$$default = function (selector, block) {
+    var selectorString = joinToString(selector, void 0, void 0, void 0, void 0, void 0, CssBuilder$children$lambda);
+    return this.invoke_3ad21g$(selectorString, block);
+  };
+  CssBuilder_0.prototype.children_xqeqkq$ = function (selector, block, callback$default) {
+    if (selector === void 0)
+      selector = ['*'];
+    return callback$default ? callback$default(selector, block) : this.children_xqeqkq$$default(selector, block);
+  };
+  function CssBuilder$descendants$lambda(it) {
+    return '& ' + it;
+  }
+  CssBuilder_0.prototype.descendants_xqeqkq$$default = function (selector, block) {
+    var selectorString = joinToString(selector, void 0, void 0, void 0, void 0, void 0, CssBuilder$descendants$lambda);
+    return this.invoke_3ad21g$(selectorString, block);
+  };
+  CssBuilder_0.prototype.descendants_xqeqkq$ = function (selector, block, callback$default) {
+    if (selector === void 0)
+      selector = ['*'];
+    return callback$default ? callback$default(selector, block) : this.descendants_xqeqkq$$default(selector, block);
+  };
+  function CssBuilder$ancestorHover$lambda(closure$selectorRef) {
+    return function (it) {
+      return it + ':hover ' + closure$selectorRef;
+    };
+  }
+  CssBuilder_0.prototype.ancestorHover_xqeqkq$ = function (selector, block) {
+    var selectorRef = this.isStyledComponent ? '&&' : '&';
+    var selectorString = joinToString(selector, void 0, void 0, void 0, void 0, void 0, CssBuilder$ancestorHover$lambda(selectorRef));
+    return this.invoke_3ad21g$(selectorString, block);
+  };
+  function CssBuilder$after$lambda(closure$block) {
+    return function ($receiver) {
+      set_content($receiver, get_quoted(''));
+      closure$block($receiver);
+      return Unit;
+    };
+  }
+  CssBuilder_0.prototype.after_lx8bml$ = function (block) {
+    return this.invoke_3ad21g$('&::after', CssBuilder$after$lambda(block));
+  };
+  function CssBuilder$before$lambda(closure$block) {
+    return function ($receiver) {
+      set_content($receiver, get_quoted(''));
+      closure$block($receiver);
+      return Unit;
+    };
+  }
+  CssBuilder_0.prototype.before_lx8bml$ = function (block) {
+    return this.invoke_3ad21g$('&::before', CssBuilder$before$lambda(block));
+  };
+  CssBuilder_0.prototype.firstLetter_lx8bml$ = function (block) {
+    return this.invoke_3ad21g$('&::first-letter', block);
+  };
+  CssBuilder_0.prototype.firstLine_lx8bml$ = function (block) {
+    return this.invoke_3ad21g$('&::first-line', block);
+  };
+  CssBuilder_0.prototype.placeholder_lx8bml$ = function (block) {
+    this.invoke_3ad21g$('&::placeholder', block);
+    this.invoke_3ad21g$('&::-webkit-input-placeholder', block);
+    this.invoke_3ad21g$('&::-moz-placeholder', block);
+    this.invoke_3ad21g$('&::-ms-input-placeholder', block);
+    this.invoke_3ad21g$('&:-moz-placeholder', block);
+  };
+  CssBuilder_0.prototype.selection_lx8bml$ = function (block) {
+    return this.invoke_3ad21g$('&::selection', block);
+  };
+  function CssBuilder$child$lambda(it) {
+    return '> ' + it;
+  }
+  CssBuilder_0.prototype.child_xqeqkq$ = function (selector, block) {
+    var selectorString = joinToString(selector, void 0, void 0, void 0, void 0, void 0, CssBuilder$child$lambda);
+    return this.invoke_3ad21g$(selectorString, block);
+  };
+  function CssBuilder$child$lambda_0(it) {
+    return '> ' + it;
+  }
+  CssBuilder_0.prototype.child_v077kx$ = function (selector, css) {
+    var selectorString = joinToString(selector, void 0, void 0, void 0, void 0, void 0, CssBuilder$child$lambda_0);
+    return this.invoke_x7exez$(selectorString, css);
+  };
+  function CssBuilder$sibling$lambda(it) {
+    return '~ ' + it;
+  }
+  CssBuilder_0.prototype.sibling_xqeqkq$ = function (selector, block) {
+    var selectorString = joinToString(selector, void 0, void 0, void 0, void 0, void 0, CssBuilder$sibling$lambda);
+    return this.invoke_3ad21g$(selectorString, block);
+  };
+  function CssBuilder$adjacentSibling$lambda(it) {
+    return '+ ' + it;
+  }
+  CssBuilder_0.prototype.adjacentSibling_xqeqkq$ = function (selector, block) {
+    var selectorString = joinToString(selector, void 0, void 0, void 0, void 0, void 0, CssBuilder$adjacentSibling$lambda);
+    return this.invoke_3ad21g$(selectorString, block);
+  };
+  CssBuilder_0.prototype.universal_lx8bml$ = function (block) {
+    return this.invoke_3ad21g$('*', block);
+  };
+  CssBuilder_0.prototype.compareTo_er05um$ = function (rule) {
+    this.rules.removeAt_za3lpa$(get_lastIndex(this.rules));
+    this.child_v077kx$([rule.selector], rule.css);
+    return 0;
+  };
+  CssBuilder_0.prototype.not_v2gpjl$ = function ($receiver) {
+    this.rules.removeAt_za3lpa$(get_lastIndex(this.rules));
+    var $receiver_0 = $receiver.selector;
+    var regex = CssBuilder$Companion_getInstance().NOT_REGEX_0;
+    var replacement = '$1:not($2)';
+    this.invoke_x7exez$(regex.replace_x2uqeu$($receiver_0, replacement), $receiver.css);
+  };
+  CssBuilder_0.prototype.unaryPlus_v2gpjl$ = function ($receiver) {
+    this.rules.removeAt_za3lpa$(get_lastIndex(this.rules));
+    this.invoke_x7exez$('&.' + $receiver.selector, $receiver.css);
+  };
+  CssBuilder_0.prototype.specific_4clrgz$$default = function (specificity, block) {
+    return this.rule_1q2hwx$(repeat('&', specificity), true, void 0, block);
+  };
+  CssBuilder_0.prototype.specific_4clrgz$ = function (specificity, block, callback$default) {
+    if (specificity === void 0)
+      specificity = 2;
+    return callback$default ? callback$default(specificity, block) : this.specific_4clrgz$$default(specificity, block);
+  };
+  function CssBuilder$prefix$lambda(closure$selectorRef) {
+    return function (it) {
+      return it + ' ' + closure$selectorRef;
+    };
+  }
+  CssBuilder_0.prototype.prefix_xqeqkq$ = function (selector, block) {
+    var selectorRef = this.isStyledComponent ? '&&' : '&';
+    var selectorString = joinToString(selector, void 0, void 0, void 0, void 0, void 0, CssBuilder$prefix$lambda(selectorRef));
+    return this.invoke_3ad21g$(selectorString, block);
+  };
+  CssBuilder_0.prototype.media_v44dnz$ = function (query, block) {
+    return this.invoke_3ad21g$('@media ' + query, block);
+  };
+  CssBuilder_0.prototype.supports_v44dnz$ = function (query, block) {
+    return this.invoke_3ad21g$('@supports ' + query, block);
+  };
+  CssBuilder_0.prototype.container_v44dnz$ = function (query, block) {
+    return this.invoke_3ad21g$('@container ' + query, block);
+  };
+  CssBuilder_0.prototype.fontFace_lx8bml$ = function (block) {
+    return this.rule_1q2hwx$('@font-face', false, true, block);
+  };
+  function CssBuilder$retina$lambda(closure$block) {
+    return function ($receiver) {
+      closure$block($receiver);
+      return Unit;
+    };
+  }
+  CssBuilder_0.prototype.retina_lx8bml$ = function (block) {
+    this.media_v44dnz$('(-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi)', CssBuilder$retina$lambda(block));
+  };
+  function CssBuilder$root$lambda(closure$block) {
+    return function ($receiver) {
+      closure$block($receiver);
+      return Unit;
+    };
+  }
+  CssBuilder_0.prototype.root_lx8bml$ = function (block) {
+    this.invoke_3ad21g$(':root', CssBuilder$root$lambda(block));
+  };
+  CssBuilder_0.prototype.setCustomProperty_lwowle$ = function (name, value) {
+    this.put_puj7f4$('--' + name, value.value);
+  };
+  CssBuilder_0.prototype.min_5utlym$ = function (v1, v2) {
+    return new LinearDimension('min(' + v1 + ', ' + v2 + ')');
+  };
+  CssBuilder_0.prototype.max_5utlym$ = function (v1, v2) {
+    return new LinearDimension('max(' + v1 + ', ' + v2 + ')');
+  };
+  CssBuilder_0.prototype.clamp_me7l17$ = function (min, preferred, max) {
+    return new LinearDimension('clamp(' + min + ', ' + preferred + ', ' + max + ')');
+  };
+  CssBuilder_0.prototype.unaryPlus_pdl1vz$ = function ($receiver) {
+    this.addClass_v4ob8x$_0($receiver);
+  };
+  CssBuilder_0.prototype.unaryPlus_a3w2bl$ = function ($receiver) {
+    var tmp$;
+    for (tmp$ = 0; tmp$ !== $receiver.length; ++tmp$) {
+      var element = $receiver[tmp$];
+      this.addClass_v4ob8x$_0(element);
+    }
+  };
+  CssBuilder_0.prototype.unaryPlus_sdeqdk$ = function ($receiver) {
+    var tmp$;
+    tmp$ = $receiver.iterator();
+    while (tmp$.hasNext()) {
+      var element = tmp$.next();
+      this.addClass_v4ob8x$_0(element);
+    }
+  };
+  CssBuilder_0.prototype.addClass_v4ob8x$_0 = function (className) {
+    var tmp$, tmp$_0;
+    if (this.allowClasses) {
+      this.classes.add_11rb$(className);
+    } else {
+      (tmp$_0 = Kotlin.isType(tmp$ = this.parent, CssBuilder_0) ? tmp$ : null) != null ? (tmp$_0.addClass_v4ob8x$_0(className), Unit) : null;
+    }
+  };
+  CssBuilder_0.prototype.append_5cyqpy$ = function (other) {
+    this.declarations.putAll_a2k3zr$(other.declarations);
+    var $receiver = other.classes;
+    var action = getCallableRef('addClass', function ($receiver, p1) {
+      return $receiver.addClass_v4ob8x$_0(p1), Unit;
+    }.bind(null, this));
+    var tmp$;
+    tmp$ = $receiver.iterator();
+    while (tmp$.hasNext()) {
+      var element = tmp$.next();
+      action(element);
+    }
+    this.styleName.addAll_brywnq$(other.styleName);
+    this.rules.addAll_brywnq$(other.rules);
+    this.multiRules.addAll_brywnq$(other.multiRules);
+  };
+  function CssBuilder$Companion() {
+    CssBuilder$Companion_instance = this;
+    this.NOT_REGEX_v10gwb$_0 = lazy(CssBuilder$Companion$NOT_REGEX$lambda);
+  }
+  Object.defineProperty(CssBuilder$Companion.prototype, 'NOT_REGEX_0', {configurable: true, get: function () {
+    return this.NOT_REGEX_v10gwb$_0.value;
+  }});
+  function CssBuilder$Companion$NOT_REGEX$lambda() {
+    return Regex_init('^(&?)(.*)$');
+  }
+  CssBuilder$Companion.$metadata$ = {kind: Kind_OBJECT, simpleName: 'Companion', interfaces: []};
   var CssBuilder$Companion_instance = null;
+  function CssBuilder$Companion_getInstance() {
+    if (CssBuilder$Companion_instance === null) {
+      new CssBuilder$Companion();
+    }return CssBuilder$Companion_instance;
+  }
+  CssBuilder_0.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'CssBuilder', interfaces: [RuleContainer, StyledElement]};
+  function CssBuilderImpl(indent, allowClasses, parent, isHolder, isStyledComponent) {
+    if (indent === void 0)
+      indent = '';
+    if (allowClasses === void 0)
+      allowClasses = true;
+    if (parent === void 0)
+      parent = null;
+    if (isHolder === void 0)
+      isHolder = false;
+    if (isStyledComponent === void 0)
+      isStyledComponent = false;
+    this.indent_5a7fkq$_0 = indent;
+    this.allowClasses_b1jqk7$_0 = allowClasses;
+    this.parent_v1zecc$_0 = parent;
+    this.isHolder_et55gw$_0 = isHolder;
+    this.isStyledComponent_ajdlma$_0 = isStyledComponent;
+    this.classes_vbm8co$_0 = ArrayList_init();
+    this.declarations_ykhz6b$_0 = new CssDeclarations();
+    this.styleName_97z50u$_0 = ArrayList_init();
+    this.memoizedHashCode_oma9nl$_0 = null;
+    this.rules_g2usq1$_0 = ArrayList_init();
+    this.multiRules_116og8$_0 = ArrayList_init();
+  }
+  Object.defineProperty(CssBuilderImpl.prototype, 'indent', {get: function () {
+    return this.indent_5a7fkq$_0;
+  }});
+  Object.defineProperty(CssBuilderImpl.prototype, 'allowClasses', {get: function () {
+    return this.allowClasses_b1jqk7$_0;
+  }});
+  Object.defineProperty(CssBuilderImpl.prototype, 'parent', {get: function () {
+    return this.parent_v1zecc$_0;
+  }, set: function (parent) {
+    this.parent_v1zecc$_0 = parent;
+  }});
+  Object.defineProperty(CssBuilderImpl.prototype, 'isHolder', {get: function () {
+    return this.isHolder_et55gw$_0;
+  }});
+  Object.defineProperty(CssBuilderImpl.prototype, 'isStyledComponent', {get: function () {
+    return this.isStyledComponent_ajdlma$_0;
+  }});
+  Object.defineProperty(CssBuilderImpl.prototype, 'classes', {configurable: true, get: function () {
+    return this.classes_vbm8co$_0;
+  }});
+  CssBuilderImpl.prototype.unaryPlus_uoyjcc$ = function ($receiver) {
+    $receiver(this);
+  };
+  Object.defineProperty(CssBuilderImpl.prototype, 'declarations', {configurable: true, get: function () {
+    return this.declarations_ykhz6b$_0;
+  }});
+  Object.defineProperty(CssBuilderImpl.prototype, 'styleName', {configurable: true, get: function () {
+    return this.styleName_97z50u$_0;
+  }});
+  CssBuilderImpl.prototype.toString = function () {
+    var $receiver = StringBuilder_init();
+    $receiver.append_s8jyv4$(this.declarations);
+    this.buildRules_s47sd7$($receiver, this.indent);
+    return $receiver.toString();
+  };
+  CssBuilderImpl.prototype.hashCode = function () {
+    var tmp$;
+    var tmp$_0;
+    if ((tmp$ = this.memoizedHashCode_oma9nl$_0) != null)
+      tmp$_0 = tmp$;
+    else {
+      var tmp$_1;
+      var sum = 0;
+      tmp$_1 = this.rules.iterator();
+      while (tmp$_1.hasNext()) {
+        var element = tmp$_1.next();
+        sum = sum + element.hashCode() | 0;
+      }
+      var tmp$_2 = sum;
+      var tmp$_3;
+      var sum_0 = 0;
+      tmp$_3 = this.multiRules.iterator();
+      while (tmp$_3.hasNext()) {
+        var element_0 = tmp$_3.next();
+        sum_0 = sum_0 + element_0.hashCode() | 0;
+      }
+      var $receiver = tmp$_2 + sum_0 + this.declarations.hashCode() | 0;
+      this.memoizedHashCode_oma9nl$_0 = $receiver;
+      tmp$_0 = $receiver;
+    }
+    return tmp$_0;
+  };
+  CssBuilderImpl.prototype.equals = function (other) {
+    var calculateEquals$result;
+    calculateEquals$break: do {
+      var tmp$, tmp$_0;
+      if (this === other) {
+        calculateEquals$result = true;
+        break calculateEquals$break;
+      }if (other == null || !((tmp$ = Kotlin.getKClassFromExpression(this)) != null ? tmp$.equals(Kotlin.getKClassFromExpression(other)) : null)) {
+        calculateEquals$result = false;
+        break calculateEquals$break;
+      }Kotlin.isType(tmp$_0 = other, CssBuilderImpl) ? tmp$_0 : throwCCE();
+      var tmp$_1 = hashCode(this) === hashCode(other);
+      if (tmp$_1) {
+        var tmp$_2;
+        tmp$_1 = (equals(this.rules, other.rules) && equals(this.multiRules, other.multiRules) && ((tmp$_2 = this.declarations) != null ? tmp$_2.equals(other.declarations) : null));
+      }calculateEquals$result = tmp$_1;
+    }
+     while (false);
+    return calculateEquals$result;
+  };
+  Object.defineProperty(CssBuilderImpl.prototype, 'rules', {configurable: true, get: function () {
+    return this.rules_g2usq1$_0;
+  }});
+  Object.defineProperty(CssBuilderImpl.prototype, 'multiRules', {configurable: true, get: function () {
+    return this.multiRules_116og8$_0;
+  }});
+  CssBuilderImpl.$metadata$ = {kind: Kind_CLASS, simpleName: 'CssBuilderImpl', interfaces: [CssBuilder_0]};
   var CAPITAL_LETTER;
+  function hyphenize$lambda(it) {
+    return '-' + it.value.toLowerCase();
+  }
+  function hyphenize($receiver) {
+    return CAPITAL_LETTER.replace_20wsma$($receiver, hyphenize$lambda);
+  }
+  function Rule(selector, passStaticClassesToParent, block, css) {
+    if (passStaticClassesToParent === void 0)
+      passStaticClassesToParent = false;
+    if (block === void 0)
+      block = Rule_init$lambda(css);
+    this.selector = selector;
+    this.passStaticClassesToParent = passStaticClassesToParent;
+    this.block = block;
+    this.css = css;
+    this.memoizedHashCode_0 = null;
+  }
+  Rule.prototype.hashCode = function () {
+    var tmp$;
+    var tmp$_0;
+    if ((tmp$ = this.memoizedHashCode_0) != null)
+      tmp$_0 = tmp$;
+    else {
+      var $receiver = hashCode(this.selector) + hashCode(this.css) | 0;
+      this.memoizedHashCode_0 = $receiver;
+      tmp$_0 = $receiver;
+    }
+    return tmp$_0;
+  };
+  Rule.prototype.equals = function (other) {
+    var calculateEquals$result;
+    calculateEquals$break: do {
+      var tmp$, tmp$_0;
+      if (this === other) {
+        calculateEquals$result = true;
+        break calculateEquals$break;
+      }if (other == null || !((tmp$ = Kotlin.getKClassFromExpression(this)) != null ? tmp$.equals(Kotlin.getKClassFromExpression(other)) : null)) {
+        calculateEquals$result = false;
+        break calculateEquals$break;
+      }Kotlin.isType(tmp$_0 = other, Rule) ? tmp$_0 : throwCCE();
+      var tmp$_1 = hashCode(this) === hashCode(other);
+      if (tmp$_1) {
+        tmp$_1 = (equals(this.selector, other.selector) && equals(this.css, other.css));
+      }calculateEquals$result = tmp$_1;
+    }
+     while (false);
+    return calculateEquals$result;
+  };
+  function Rule_init$lambda(closure$css) {
+    return function ($receiver) {
+      $receiver.append_5cyqpy$(closure$css);
+      return Unit;
+    };
+  }
+  Rule.$metadata$ = {kind: Kind_CLASS, simpleName: 'Rule', interfaces: []};
+  Rule.prototype.component1 = function () {
+    return this.selector;
+  };
+  Rule.prototype.component2 = function () {
+    return this.passStaticClassesToParent;
+  };
+  Rule.prototype.component3 = function () {
+    return this.block;
+  };
+  Rule.prototype.component4 = function () {
+    return this.css;
+  };
+  Rule.prototype.copy_1nv5j4$ = function (selector, passStaticClassesToParent, block, css) {
+    return new Rule(selector === void 0 ? this.selector : selector, passStaticClassesToParent === void 0 ? this.passStaticClassesToParent : passStaticClassesToParent, block === void 0 ? this.block : block, css === void 0 ? this.css : css);
+  };
+  Rule.prototype.toString = function () {
+    return 'Rule(selector=' + Kotlin.toString(this.selector) + (', passStaticClassesToParent=' + Kotlin.toString(this.passStaticClassesToParent)) + (', block=' + Kotlin.toString(this.block)) + (', css=' + Kotlin.toString(this.css)) + ')';
+  };
+  function RuleContainer() {
+  }
+  RuleContainer.prototype.buildRules_s47sd7$ = function ($receiver, indent) {
+    var resolvedRules = this.resolveRules_ry1ed0$(this.rules, this.multiRules);
+    var tmp$;
+    tmp$ = resolvedRules.iterator();
+    while (tmp$.hasNext()) {
+      var element = tmp$.next();
+      var value = element.selector + ' {';
+      $receiver.append_pdl1vj$(value).append_s8itvh$(10);
+      $receiver.append_s8jyv4$(element.css);
+      $receiver.append_pdl1vj$('}').append_s8itvh$(10);
+    }
+  };
+  RuleContainer.prototype.resolveRules_ry1ed0$ = function (rules, multiRules) {
+    var resolvedRules = LinkedHashMap_init();
+    var tmp$;
+    tmp$ = rules.iterator();
+    while (tmp$.hasNext()) {
+      var element = tmp$.next();
+      var foundRule = resolvedRules.get_11rb$(element.selector);
+      if (foundRule == null) {
+        var tmp$_0 = element.selector;
+        var tmp$_1 = element.selector;
+        var tmp$_2 = void 0;
+        var tmp$_3 = void 0;
+        var $receiver = CssBuilder();
+        $receiver.append_5cyqpy$(element.css);
+        var value = new Rule(tmp$_1, tmp$_2, tmp$_3, $receiver);
+        resolvedRules.put_xwzc9p$(tmp$_0, value);
+      } else {
+        foundRule.css.append_5cyqpy$(element.css);
+      }
+    }
+    return plus(multiRules, resolvedRules.values);
+  };
+  RuleContainer.prototype.rule_v44dnz$ = function (selector, block) {
+    return this.rule_1q2hwx$(selector, false, void 0, block);
+  };
+  RuleContainer.prototype.rule_1q2hwx$$default = function (selector, passStaticClassesToParent, repeatable, block) {
+    var $receiver = CssBuilder(this.indent + '  ', false, passStaticClassesToParent ? this : null);
+    block($receiver);
+    var css = $receiver;
+    return this.rule_jindqg$(selector, passStaticClassesToParent, repeatable, css);
+  };
+  RuleContainer.prototype.rule_1q2hwx$ = function (selector, passStaticClassesToParent, repeatable, block, callback$default) {
+    if (repeatable === void 0)
+      repeatable = false;
+    return callback$default ? callback$default(selector, passStaticClassesToParent, repeatable, block) : this.rule_1q2hwx$$default(selector, passStaticClassesToParent, repeatable, block);
+  };
+  RuleContainer.prototype.rule_jindqg$$default = function (selector, passStaticClassesToParent, repeatable, css) {
+    var $receiver = new Rule(selector, passStaticClassesToParent, void 0, css);
+    css.parent = passStaticClassesToParent ? this : null;
+    (repeatable ? this.multiRules : this.rules).add_11rb$($receiver);
+    return $receiver;
+  };
+  RuleContainer.prototype.rule_jindqg$ = function (selector, passStaticClassesToParent, repeatable, css, callback$default) {
+    if (repeatable === void 0)
+      repeatable = false;
+    return callback$default ? callback$default(selector, passStaticClassesToParent, repeatable, css) : this.rule_jindqg$$default(selector, passStaticClassesToParent, repeatable, css);
+  };
+  RuleContainer.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'RuleContainer', interfaces: []};
   var ZERO;
+  function LinearDimension(value) {
+    LinearDimension$Companion_getInstance();
+    CssValue.call(this, value);
+    this.value_nj4rtk$_0 = value;
+  }
+  Object.defineProperty(LinearDimension.prototype, 'value', {get: function () {
+    return this.value_nj4rtk$_0;
+  }});
+  function LinearDimension$Companion() {
+    LinearDimension$Companion_instance = this;
+    this.none = new LinearDimension('none');
+    this.auto = new LinearDimension('auto');
+    this.initial = new LinearDimension('initial');
+    this.inherit = new LinearDimension('inherit');
+    this.available = new LinearDimension('available');
+    this.fillAvailable = new LinearDimension('fill-available');
+    this.borderBox = new LinearDimension('border-box');
+    this.contentBox = new LinearDimension('content-box');
+    this.maxContent = new LinearDimension('max-content');
+    this.minContent = new LinearDimension('min-content');
+    this.fitContent = new LinearDimension('fit-content');
+  }
+  LinearDimension$Companion.$metadata$ = {kind: Kind_OBJECT, simpleName: 'Companion', interfaces: []};
   var LinearDimension$Companion_instance = null;
+  function LinearDimension$Companion_getInstance() {
+    if (LinearDimension$Companion_instance === null) {
+      new LinearDimension$Companion();
+    }return LinearDimension$Companion_instance;
+  }
+  Object.defineProperty(LinearDimension.prototype, 'valueCalcSafe_0', {configurable: true, get: function () {
+    return equals(this.value, ZERO) ? '0px' : this.value;
+  }});
+  LinearDimension.prototype.unaryMinus = function () {
+    var tmp$;
+    if (startsWith(this.value, 45)) {
+      tmp$ = this.value.substring(1);
+    } else if (startsWith_0(this.value, 'calc'))
+      tmp$ = 'calc(0px - ' + this.value + ')';
+    else if (equals(this.value, ZERO))
+      tmp$ = this.value;
+    else
+      tmp$ = '-' + this.value;
+    return new LinearDimension(tmp$);
+  };
+  LinearDimension.prototype.plus_tco10h$ = function (other) {
+    return new LinearDimension('calc(' + this.valueCalcSafe_0 + ' + ' + other.valueCalcSafe_0 + ')');
+  };
+  LinearDimension.prototype.minus_tco10h$ = function (other) {
+    return new LinearDimension('calc(' + this.valueCalcSafe_0 + ' - ' + other.valueCalcSafe_0 + ')');
+  };
+  LinearDimension.prototype.times_3p81yu$ = function (times) {
+    return new LinearDimension('calc(' + this.valueCalcSafe_0 + ' * ' + times.toString() + ')');
+  };
+  LinearDimension.prototype.div_3p81yu$ = function (times) {
+    return new LinearDimension('calc(' + this.valueCalcSafe_0 + ' / ' + times.toString() + ')');
+  };
+  LinearDimension.prototype.equals = function (other) {
+    var tmp$, tmp$_0;
+    if (this === other)
+      return true;
+    if (other == null || !((tmp$ = Kotlin.getKClassFromExpression(this)) != null ? tmp$.equals(Kotlin.getKClassFromExpression(other)) : null))
+      return false;
+    Kotlin.isType(tmp$_0 = other, LinearDimension) ? tmp$_0 : throwCCE();
+    return equals(this.value, other.value);
+  };
+  LinearDimension.prototype.hashCode = function () {
+    return hashCode(this.value);
+  };
+  LinearDimension.$metadata$ = {kind: Kind_CLASS, simpleName: 'LinearDimension', interfaces: [CssValue]};
+  function CssValue(value) {
+    this.value_tqttmh$_0 = value;
+  }
+  Object.defineProperty(CssValue.prototype, 'value', {get: function () {
+    return this.value_tqttmh$_0;
+  }});
+  CssValue.prototype.toString = function () {
+    return this.value;
+  };
+  CssValue.$metadata$ = {kind: Kind_CLASS, simpleName: 'CssValue', interfaces: []};
   var Align$initial_instance;
   var Align$inherit_instance;
   var Align$unset_instance;
@@ -229,6 +949,20 @@
   var Cursor$nwseResize_instance;
   var Cursor$zoomIn_instance;
   var Cursor$zoomOut_instance;
+  function QuotedString(value) {
+    CssValue.call(this, value);
+    this.value_eybwfw$_0 = value;
+  }
+  Object.defineProperty(QuotedString.prototype, 'value', {get: function () {
+    return this.value_eybwfw$_0;
+  }});
+  QuotedString.prototype.toString = function () {
+    return "'" + this.value + "'";
+  };
+  QuotedString.$metadata$ = {kind: Kind_CLASS, simpleName: 'QuotedString', interfaces: [CssValue]};
+  function get_quoted($receiver) {
+    return new QuotedString($receiver);
+  }
   var Direction$initial_instance;
   var Direction$inherit_instance;
   var Direction$unset_instance;
@@ -456,6 +1190,110 @@
     this.list_behuth$_0.add_11rb$(item);
   };
   StyleList.$metadata$ = {kind: Kind_CLASS, simpleName: 'StyleList', interfaces: []};
+  function CssDeclarations() {
+    this.$delegate_a29c06$_0 = LinkedHashMap_init();
+    this.stringDecl_9g0u2z$_0 = null;
+  }
+  Object.defineProperty(CssDeclarations.prototype, 'stringDecl_0', {configurable: true, get: function () {
+    var tmp$;
+    var tmp$_0;
+    if ((tmp$ = this.stringDecl_9g0u2z$_0) != null)
+      tmp$_0 = tmp$;
+    else {
+      var $receiver = StringBuilder_init();
+      var tmp$_1;
+      tmp$_1 = this.entries.iterator();
+      while (tmp$_1.hasNext()) {
+        var element = tmp$_1.next();
+        var k = element.key;
+        var v = element.value;
+        $receiver.append_pdl1vj$(hyphenize(k) + ': ' + v.toString() + ';' + '\n');
+      }
+      var $receiver_0 = $receiver.toString();
+      this.stringDecl_9g0u2z$_0 = $receiver_0;
+      tmp$_0 = $receiver_0;
+    }
+    return tmp$_0;
+  }, set: function (stringDecl) {
+    this.stringDecl_9g0u2z$_0 = stringDecl;
+  }});
+  CssDeclarations.prototype.equals = function (other) {
+    var calculateEquals$result;
+    calculateEquals$break: do {
+      var tmp$, tmp$_0;
+      if (this === other) {
+        calculateEquals$result = true;
+        break calculateEquals$break;
+      }if (other == null || !((tmp$ = Kotlin.getKClassFromExpression(this)) != null ? tmp$.equals(Kotlin.getKClassFromExpression(other)) : null)) {
+        calculateEquals$result = false;
+        break calculateEquals$break;
+      }Kotlin.isType(tmp$_0 = other, CssDeclarations) ? tmp$_0 : throwCCE();
+      var tmp$_1 = hashCode(this) === hashCode(other);
+      if (tmp$_1) {
+        tmp$_1 = equals(this.stringDecl_0, other.stringDecl_0);
+      }calculateEquals$result = tmp$_1;
+    }
+     while (false);
+    return calculateEquals$result;
+  };
+  CssDeclarations.prototype.hashCode = function () {
+    var $receiver = this.stringDecl_0;
+    var tmp$;
+    return (tmp$ = $receiver != null ? hashCode($receiver) : null) != null ? tmp$ : 0;
+  };
+  CssDeclarations.prototype.toString = function () {
+    return ensureNotNull(this.stringDecl_0);
+  };
+  CssDeclarations.prototype.set_bm4g0d$ = function (name, value) {
+    this.put_xwzc9p$(name, value);
+    this.stringDecl_0 = null;
+  };
+  Object.defineProperty(CssDeclarations.prototype, 'entries', {configurable: true, get: function () {
+    return this.$delegate_a29c06$_0.entries;
+  }});
+  Object.defineProperty(CssDeclarations.prototype, 'keys', {configurable: true, get: function () {
+    return this.$delegate_a29c06$_0.keys;
+  }});
+  Object.defineProperty(CssDeclarations.prototype, 'size', {configurable: true, get: function () {
+    return this.$delegate_a29c06$_0.size;
+  }});
+  Object.defineProperty(CssDeclarations.prototype, 'values', {configurable: true, get: function () {
+    return this.$delegate_a29c06$_0.values;
+  }});
+  CssDeclarations.prototype.clear = function () {
+    return this.$delegate_a29c06$_0.clear();
+  };
+  CssDeclarations.prototype.containsKey_11rb$ = function (key) {
+    return this.$delegate_a29c06$_0.containsKey_11rb$(key);
+  };
+  CssDeclarations.prototype.containsValue_11rc$ = function (value) {
+    return this.$delegate_a29c06$_0.containsValue_11rc$(value);
+  };
+  CssDeclarations.prototype.get_11rb$ = function (key) {
+    return this.$delegate_a29c06$_0.get_11rb$(key);
+  };
+  CssDeclarations.prototype.isEmpty = function () {
+    return this.$delegate_a29c06$_0.isEmpty();
+  };
+  CssDeclarations.prototype.put_xwzc9p$ = function (key, value) {
+    return this.$delegate_a29c06$_0.put_xwzc9p$(key, value);
+  };
+  CssDeclarations.prototype.putAll_a2k3zr$ = function (from) {
+    return this.$delegate_a29c06$_0.putAll_a2k3zr$(from);
+  };
+  CssDeclarations.prototype.remove_11rb$ = function (key) {
+    return this.$delegate_a29c06$_0.remove_11rb$(key);
+  };
+  CssDeclarations.$metadata$ = {kind: Kind_CLASS, simpleName: 'CssDeclarations', interfaces: [MutableMap]};
+  function StyledElement() {
+  }
+  StyledElement.prototype.put_puj7f4$ = function (key, value) {
+    this.declarations.set_bm4g0d$(key, value);
+  };
+  StyledElement.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'StyledElement', interfaces: []};
+  function StyledElementImpl() {
+    this.declarations_xtyr2e$_0 = new CssDeclarations();
+  }
   function CssProperty(default_0) {
     if (default_0 === void 0)
       default_0 = null;
@@ -525,6 +1363,9 @@
   var backgroundSize_metadata = new PropertyMetadata('backgroundSize');
   var border;
   var border_metadata = new PropertyMetadata('border');
+  function set_border($receiver, border_0) {
+    border.setValue_6qj5c4$($receiver, border_metadata, border_0);
+  }
   var borderTop;
   var borderTop_metadata = new PropertyMetadata('borderTop');
   var borderRight;
@@ -596,6 +1437,9 @@
   var contain_metadata = new PropertyMetadata('contain');
   var content;
   var content_metadata = new PropertyMetadata('content');
+  function set_content($receiver, content_0) {
+    content.setValue_6qj5c4$($receiver, content_metadata, content_0);
+  }
   var cursor;
   var cursor_metadata = new PropertyMetadata('cursor');
   var direction;
@@ -1095,6 +1939,95 @@
   var RadialGradientExtent$closestSide_instance;
   var RadialGradientExtent$farthestCorner_instance;
   var RadialGradientExtent$farthestSide_instance;
+  function KeyframesBuilder() {
+  }
+  KeyframesBuilder.prototype.from_lx8bml$ = function (block) {
+    return this.rule_v44dnz$('from', block);
+  };
+  KeyframesBuilder.prototype.to_lx8bml$ = function (block) {
+    return this.rule_v44dnz$('to', block);
+  };
+  KeyframesBuilder.prototype.invoke_u1vo8g$ = function ($receiver, block) {
+    return this.rule_v44dnz$($receiver.toString() + '%', block);
+  };
+  KeyframesBuilder.prototype.invoke_31divo$ = function ($receiver, block) {
+    return this.rule_v44dnz$($receiver.toString() + '%', block);
+  };
+  KeyframesBuilder.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'KeyframesBuilder', interfaces: [RuleContainer]};
+  function KeyframesBuilder_0(indent) {
+    if (indent === void 0)
+      indent = '';
+    return new KeyframesBuilderImpl(indent);
+  }
+  function KeyframesBuilderImpl(indent) {
+    if (indent === void 0)
+      indent = '';
+    this.indent_lo30wh$_0 = indent;
+    this.rules_5hpu3i$_0 = ArrayList_init();
+    this.multiRules_76a4m5$_0 = ArrayList_init();
+    this.memoizedHashCode_0 = null;
+  }
+  Object.defineProperty(KeyframesBuilderImpl.prototype, 'indent', {get: function () {
+    return this.indent_lo30wh$_0;
+  }});
+  Object.defineProperty(KeyframesBuilderImpl.prototype, 'rules', {configurable: true, get: function () {
+    return this.rules_5hpu3i$_0;
+  }});
+  Object.defineProperty(KeyframesBuilderImpl.prototype, 'multiRules', {configurable: true, get: function () {
+    return this.multiRules_76a4m5$_0;
+  }});
+  KeyframesBuilderImpl.prototype.toString = function () {
+    var $receiver = StringBuilder_init();
+    this.buildRules_s47sd7$($receiver, this.indent);
+    return $receiver.toString();
+  };
+  KeyframesBuilderImpl.prototype.hashCode = function () {
+    var tmp$;
+    var tmp$_0;
+    if ((tmp$ = this.memoizedHashCode_0) != null)
+      tmp$_0 = tmp$;
+    else {
+      var tmp$_1;
+      var sum = 0;
+      tmp$_1 = this.rules.iterator();
+      while (tmp$_1.hasNext()) {
+        var element = tmp$_1.next();
+        sum = sum + element.hashCode() | 0;
+      }
+      var tmp$_2 = sum;
+      var tmp$_3;
+      var sum_0 = 0;
+      tmp$_3 = this.multiRules.iterator();
+      while (tmp$_3.hasNext()) {
+        var element_0 = tmp$_3.next();
+        sum_0 = sum_0 + element_0.hashCode() | 0;
+      }
+      var $receiver = tmp$_2 + sum_0 | 0;
+      this.memoizedHashCode_0 = $receiver;
+      tmp$_0 = $receiver;
+    }
+    return tmp$_0;
+  };
+  KeyframesBuilderImpl.prototype.equals = function (other) {
+    var calculateEquals$result;
+    calculateEquals$break: do {
+      var tmp$, tmp$_0;
+      if (this === other) {
+        calculateEquals$result = true;
+        break calculateEquals$break;
+      }if (other == null || !((tmp$ = Kotlin.getKClassFromExpression(this)) != null ? tmp$.equals(Kotlin.getKClassFromExpression(other)) : null)) {
+        calculateEquals$result = false;
+        break calculateEquals$break;
+      }Kotlin.isType(tmp$_0 = other, KeyframesBuilderImpl) ? tmp$_0 : throwCCE();
+      var tmp$_1 = hashCode(this) === hashCode(other);
+      if (tmp$_1) {
+        tmp$_1 = (equals(this.rules, other.rules) && equals(this.multiRules, other.multiRules));
+      }calculateEquals$result = tmp$_1;
+    }
+     while (false);
+    return calculateEquals$result;
+  };
+  KeyframesBuilderImpl.$metadata$ = {kind: Kind_CLASS, simpleName: 'KeyframesBuilderImpl', interfaces: [KeyframesBuilder]};
   var LineHeight$Companion_instance = null;
   var TextDecorationLine$initial_instance;
   var TextDecorationLine$inherit_instance;
@@ -1151,17 +2084,147 @@
   Transitions.$metadata$ = {kind: Kind_CLASS, simpleName: 'Transitions', interfaces: [StyleList]};
   var package$kotlinx = _.kotlinx || (_.kotlinx = {});
   var package$css = package$kotlinx.css || (package$kotlinx.css = {});
+  package$css.CssBuilder_ld8ri9$ = CssBuilder;
+  Object.defineProperty(CssBuilder_0, 'Companion', {get: CssBuilder$Companion_getInstance});
+  package$css.CssBuilder = CssBuilder_0;
+  package$css.CssBuilderImpl = CssBuilderImpl;
+  package$css.hyphenize_pdl1vz$ = hyphenize;
+  package$css.Rule = Rule;
+  package$css.RuleContainer = RuleContainer;
+  Object.defineProperty(LinearDimension, 'Companion', {get: LinearDimension$Companion_getInstance});
+  package$css.LinearDimension = LinearDimension;
+  package$css.CssValue = CssValue;
+  package$css.QuotedString = QuotedString;
+  package$css.get_quoted_pdl1vz$ = get_quoted;
   package$css.StyleList = StyleList;
+  package$css.CssDeclarations = CssDeclarations;
+  package$css.StyledElement = StyledElement;
+  package$css.StyledElementImpl = StyledElementImpl;
+  package$css.set_border_krvuuu$ = set_border;
+  package$css.set_content_qf37ct$ = set_content;
   package$css.TagSelector = TagSelector;
   var package$properties = package$css.properties || (package$css.properties = {});
   Object.defineProperty(Animations, 'Companion', {get: Animations$Companion_getInstance});
   package$properties.Animations = Animations;
   Object.defineProperty(BoxShadows, 'Companion', {get: BoxShadows$Companion_getInstance});
   package$properties.BoxShadows = BoxShadows;
+  package$properties.KeyframesBuilder = KeyframesBuilder;
+  package$properties.KeyframesBuilder_61zpoe$ = KeyframesBuilder_0;
+  package$properties.KeyframesBuilderImpl = KeyframesBuilderImpl;
   Object.defineProperty(Transforms, 'Companion', {get: Transforms$Companion_getInstance});
   package$properties.Transforms = Transforms;
   Object.defineProperty(Transitions, 'Companion', {get: Transitions$Companion_getInstance});
   package$properties.Transitions = Transitions;
+  CssBuilder_0.prototype.put_puj7f4$ = StyledElement.prototype.put_puj7f4$;
+  CssBuilder_0.prototype.buildRules_s47sd7$ = RuleContainer.prototype.buildRules_s47sd7$;
+  CssBuilder_0.prototype.resolveRules_ry1ed0$ = RuleContainer.prototype.resolveRules_ry1ed0$;
+  CssBuilder_0.prototype.rule_v44dnz$ = RuleContainer.prototype.rule_v44dnz$;
+  CssBuilder_0.prototype.rule_1q2hwx$$default = RuleContainer.prototype.rule_1q2hwx$$default;
+  CssBuilder_0.prototype.rule_jindqg$$default = RuleContainer.prototype.rule_jindqg$$default;
+  CssBuilder_0.prototype.rule_1q2hwx$ = RuleContainer.prototype.rule_1q2hwx$;
+  CssBuilder_0.prototype.rule_jindqg$ = RuleContainer.prototype.rule_jindqg$;
+  CssBuilderImpl.prototype.unaryPlus_v2gpjl$ = CssBuilder_0.prototype.unaryPlus_v2gpjl$;
+  CssBuilderImpl.prototype.unaryPlus_pdl1vz$ = CssBuilder_0.prototype.unaryPlus_pdl1vz$;
+  CssBuilderImpl.prototype.unaryPlus_a3w2bl$ = CssBuilder_0.prototype.unaryPlus_a3w2bl$;
+  CssBuilderImpl.prototype.unaryPlus_sdeqdk$ = CssBuilder_0.prototype.unaryPlus_sdeqdk$;
+  CssBuilderImpl.prototype.invoke_3ad21g$ = CssBuilder_0.prototype.invoke_3ad21g$;
+  CssBuilderImpl.prototype.invoke_x7exez$ = CssBuilder_0.prototype.invoke_x7exez$;
+  CssBuilderImpl.prototype.invoke_3c2457$ = CssBuilder_0.prototype.invoke_3c2457$;
+  CssBuilderImpl.prototype.active_lx8bml$ = CssBuilder_0.prototype.active_lx8bml$;
+  CssBuilderImpl.prototype.checked_lx8bml$ = CssBuilder_0.prototype.checked_lx8bml$;
+  CssBuilderImpl.prototype.default_lx8bml$ = CssBuilder_0.prototype.default_lx8bml$;
+  CssBuilderImpl.prototype.defined_lx8bml$ = CssBuilder_0.prototype.defined_lx8bml$;
+  CssBuilderImpl.prototype.disabled_lx8bml$ = CssBuilder_0.prototype.disabled_lx8bml$;
+  CssBuilderImpl.prototype.empty_lx8bml$ = CssBuilder_0.prototype.empty_lx8bml$;
+  CssBuilderImpl.prototype.enabled_lx8bml$ = CssBuilder_0.prototype.enabled_lx8bml$;
+  CssBuilderImpl.prototype.firstChild_lx8bml$ = CssBuilder_0.prototype.firstChild_lx8bml$;
+  CssBuilderImpl.prototype.firstOfType_lx8bml$ = CssBuilder_0.prototype.firstOfType_lx8bml$;
+  CssBuilderImpl.prototype.fullscreen_lx8bml$ = CssBuilder_0.prototype.fullscreen_lx8bml$;
+  CssBuilderImpl.prototype.focus_lx8bml$ = CssBuilder_0.prototype.focus_lx8bml$;
+  CssBuilderImpl.prototype.focusVisible_lx8bml$ = CssBuilder_0.prototype.focusVisible_lx8bml$;
+  CssBuilderImpl.prototype.focusWithin_lx8bml$ = CssBuilder_0.prototype.focusWithin_lx8bml$;
+  CssBuilderImpl.prototype.hover_lx8bml$ = CssBuilder_0.prototype.hover_lx8bml$;
+  CssBuilderImpl.prototype.indeterminate_lx8bml$ = CssBuilder_0.prototype.indeterminate_lx8bml$;
+  CssBuilderImpl.prototype.inRange_lx8bml$ = CssBuilder_0.prototype.inRange_lx8bml$;
+  CssBuilderImpl.prototype.invalid_lx8bml$ = CssBuilder_0.prototype.invalid_lx8bml$;
+  CssBuilderImpl.prototype.lastChild_lx8bml$ = CssBuilder_0.prototype.lastChild_lx8bml$;
+  CssBuilderImpl.prototype.lastOfType_lx8bml$ = CssBuilder_0.prototype.lastOfType_lx8bml$;
+  CssBuilderImpl.prototype.link_lx8bml$ = CssBuilder_0.prototype.link_lx8bml$;
+  CssBuilderImpl.prototype.not_xqeqkq$ = CssBuilder_0.prototype.not_xqeqkq$;
+  CssBuilderImpl.prototype.not_v2gpjl$ = CssBuilder_0.prototype.not_v2gpjl$;
+  CssBuilderImpl.prototype.nthChild_xqeqkq$ = CssBuilder_0.prototype.nthChild_xqeqkq$;
+  CssBuilderImpl.prototype.nthLastChild_xqeqkq$ = CssBuilder_0.prototype.nthLastChild_xqeqkq$;
+  CssBuilderImpl.prototype.nthLastOfType_xqeqkq$ = CssBuilder_0.prototype.nthLastOfType_xqeqkq$;
+  CssBuilderImpl.prototype.nthOfType_xqeqkq$ = CssBuilder_0.prototype.nthOfType_xqeqkq$;
+  CssBuilderImpl.prototype.onlyChild_lx8bml$ = CssBuilder_0.prototype.onlyChild_lx8bml$;
+  CssBuilderImpl.prototype.onlyOfType_lx8bml$ = CssBuilder_0.prototype.onlyOfType_lx8bml$;
+  CssBuilderImpl.prototype.optional_lx8bml$ = CssBuilder_0.prototype.optional_lx8bml$;
+  CssBuilderImpl.prototype.outOfRange_lx8bml$ = CssBuilder_0.prototype.outOfRange_lx8bml$;
+  CssBuilderImpl.prototype.placeholderShown_lx8bml$ = CssBuilder_0.prototype.placeholderShown_lx8bml$;
+  CssBuilderImpl.prototype.readOnly_lx8bml$ = CssBuilder_0.prototype.readOnly_lx8bml$;
+  CssBuilderImpl.prototype.readWrite_lx8bml$ = CssBuilder_0.prototype.readWrite_lx8bml$;
+  CssBuilderImpl.prototype.required_lx8bml$ = CssBuilder_0.prototype.required_lx8bml$;
+  CssBuilderImpl.prototype.valid_lx8bml$ = CssBuilder_0.prototype.valid_lx8bml$;
+  CssBuilderImpl.prototype.visited_lx8bml$ = CssBuilder_0.prototype.visited_lx8bml$;
+  CssBuilderImpl.prototype.children_xqeqkq$$default = CssBuilder_0.prototype.children_xqeqkq$$default;
+  CssBuilderImpl.prototype.descendants_xqeqkq$$default = CssBuilder_0.prototype.descendants_xqeqkq$$default;
+  CssBuilderImpl.prototype.ancestorHover_xqeqkq$ = CssBuilder_0.prototype.ancestorHover_xqeqkq$;
+  CssBuilderImpl.prototype.after_lx8bml$ = CssBuilder_0.prototype.after_lx8bml$;
+  CssBuilderImpl.prototype.before_lx8bml$ = CssBuilder_0.prototype.before_lx8bml$;
+  CssBuilderImpl.prototype.firstLetter_lx8bml$ = CssBuilder_0.prototype.firstLetter_lx8bml$;
+  CssBuilderImpl.prototype.firstLine_lx8bml$ = CssBuilder_0.prototype.firstLine_lx8bml$;
+  CssBuilderImpl.prototype.placeholder_lx8bml$ = CssBuilder_0.prototype.placeholder_lx8bml$;
+  CssBuilderImpl.prototype.selection_lx8bml$ = CssBuilder_0.prototype.selection_lx8bml$;
+  CssBuilderImpl.prototype.child_xqeqkq$ = CssBuilder_0.prototype.child_xqeqkq$;
+  CssBuilderImpl.prototype.child_v077kx$ = CssBuilder_0.prototype.child_v077kx$;
+  CssBuilderImpl.prototype.sibling_xqeqkq$ = CssBuilder_0.prototype.sibling_xqeqkq$;
+  CssBuilderImpl.prototype.adjacentSibling_xqeqkq$ = CssBuilder_0.prototype.adjacentSibling_xqeqkq$;
+  CssBuilderImpl.prototype.universal_lx8bml$ = CssBuilder_0.prototype.universal_lx8bml$;
+  CssBuilderImpl.prototype.compareTo_er05um$ = CssBuilder_0.prototype.compareTo_er05um$;
+  CssBuilderImpl.prototype.specific_4clrgz$$default = CssBuilder_0.prototype.specific_4clrgz$$default;
+  CssBuilderImpl.prototype.prefix_xqeqkq$ = CssBuilder_0.prototype.prefix_xqeqkq$;
+  CssBuilderImpl.prototype.media_v44dnz$ = CssBuilder_0.prototype.media_v44dnz$;
+  CssBuilderImpl.prototype.supports_v44dnz$ = CssBuilder_0.prototype.supports_v44dnz$;
+  CssBuilderImpl.prototype.container_v44dnz$ = CssBuilder_0.prototype.container_v44dnz$;
+  CssBuilderImpl.prototype.fontFace_lx8bml$ = CssBuilder_0.prototype.fontFace_lx8bml$;
+  CssBuilderImpl.prototype.retina_lx8bml$ = CssBuilder_0.prototype.retina_lx8bml$;
+  CssBuilderImpl.prototype.root_lx8bml$ = CssBuilder_0.prototype.root_lx8bml$;
+  CssBuilderImpl.prototype.setCustomProperty_lwowle$ = CssBuilder_0.prototype.setCustomProperty_lwowle$;
+  CssBuilderImpl.prototype.min_5utlym$ = CssBuilder_0.prototype.min_5utlym$;
+  CssBuilderImpl.prototype.max_5utlym$ = CssBuilder_0.prototype.max_5utlym$;
+  CssBuilderImpl.prototype.clamp_me7l17$ = CssBuilder_0.prototype.clamp_me7l17$;
+  CssBuilderImpl.prototype.addClass_v4ob8x$_0 = CssBuilder_0.prototype.addClass_v4ob8x$_0;
+  CssBuilderImpl.prototype.append_5cyqpy$ = CssBuilder_0.prototype.append_5cyqpy$;
+  CssBuilderImpl.prototype.put_puj7f4$ = CssBuilder_0.prototype.put_puj7f4$;
+  CssBuilderImpl.prototype.buildRules_s47sd7$ = CssBuilder_0.prototype.buildRules_s47sd7$;
+  CssBuilderImpl.prototype.resolveRules_ry1ed0$ = CssBuilder_0.prototype.resolveRules_ry1ed0$;
+  CssBuilderImpl.prototype.rule_v44dnz$ = CssBuilder_0.prototype.rule_v44dnz$;
+  CssBuilderImpl.prototype.rule_1q2hwx$$default = CssBuilder_0.prototype.rule_1q2hwx$$default;
+  CssBuilderImpl.prototype.rule_jindqg$$default = CssBuilder_0.prototype.rule_jindqg$$default;
+  CssBuilderImpl.prototype.children_xqeqkq$ = CssBuilder_0.prototype.children_xqeqkq$;
+  CssBuilderImpl.prototype.descendants_xqeqkq$ = CssBuilder_0.prototype.descendants_xqeqkq$;
+  CssBuilderImpl.prototype.specific_4clrgz$ = CssBuilder_0.prototype.specific_4clrgz$;
+  CssBuilderImpl.prototype.rule_1q2hwx$ = CssBuilder_0.prototype.rule_1q2hwx$;
+  CssBuilderImpl.prototype.rule_jindqg$ = CssBuilder_0.prototype.rule_jindqg$;
+  StyledElementImpl.prototype.put_puj7f4$ = StyledElement.prototype.put_puj7f4$;
+  KeyframesBuilder.prototype.buildRules_s47sd7$ = RuleContainer.prototype.buildRules_s47sd7$;
+  KeyframesBuilder.prototype.resolveRules_ry1ed0$ = RuleContainer.prototype.resolveRules_ry1ed0$;
+  KeyframesBuilder.prototype.rule_v44dnz$ = RuleContainer.prototype.rule_v44dnz$;
+  KeyframesBuilder.prototype.rule_1q2hwx$$default = RuleContainer.prototype.rule_1q2hwx$$default;
+  KeyframesBuilder.prototype.rule_jindqg$$default = RuleContainer.prototype.rule_jindqg$$default;
+  KeyframesBuilder.prototype.rule_1q2hwx$ = RuleContainer.prototype.rule_1q2hwx$;
+  KeyframesBuilder.prototype.rule_jindqg$ = RuleContainer.prototype.rule_jindqg$;
+  KeyframesBuilderImpl.prototype.from_lx8bml$ = KeyframesBuilder.prototype.from_lx8bml$;
+  KeyframesBuilderImpl.prototype.to_lx8bml$ = KeyframesBuilder.prototype.to_lx8bml$;
+  KeyframesBuilderImpl.prototype.invoke_u1vo8g$ = KeyframesBuilder.prototype.invoke_u1vo8g$;
+  KeyframesBuilderImpl.prototype.invoke_31divo$ = KeyframesBuilder.prototype.invoke_31divo$;
+  KeyframesBuilderImpl.prototype.buildRules_s47sd7$ = KeyframesBuilder.prototype.buildRules_s47sd7$;
+  KeyframesBuilderImpl.prototype.resolveRules_ry1ed0$ = KeyframesBuilder.prototype.resolveRules_ry1ed0$;
+  KeyframesBuilderImpl.prototype.rule_v44dnz$ = KeyframesBuilder.prototype.rule_v44dnz$;
+  KeyframesBuilderImpl.prototype.rule_1q2hwx$$default = KeyframesBuilder.prototype.rule_1q2hwx$$default;
+  KeyframesBuilderImpl.prototype.rule_jindqg$$default = KeyframesBuilder.prototype.rule_jindqg$$default;
+  KeyframesBuilderImpl.prototype.rule_1q2hwx$ = KeyframesBuilder.prototype.rule_1q2hwx$;
+  KeyframesBuilderImpl.prototype.rule_jindqg$ = KeyframesBuilder.prototype.rule_jindqg$;
   CAPITAL_LETTER = Regex_init('[A-Z]');
   ZERO = '0';
   alignContent = new CssProperty();

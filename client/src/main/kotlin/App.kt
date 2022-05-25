@@ -3,6 +3,7 @@ import component.fcContainerGroupList
 import component.fcContainerSubjectList
 //import component.fcContainerStudent
 import component.fcContainerTeacherList
+import component.fcContainerWorkPlanList
 import kotlinx.browser.document
 import react.createElement
 import react.dom.div
@@ -55,6 +56,11 @@ fun main() {
                         attrs.path = "/subjects"
                         attrs.element =
                             createElement(fcContainerSubjectList())
+                    }
+                    Route {
+                        attrs.path = "/work_plans"
+                        attrs.element =
+                            createElement(fcContainerWorkPlanList())
                     }
                 }
                 child(cReactQueryDevtools()) {} // работает только в отладочной версии

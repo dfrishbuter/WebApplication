@@ -14,8 +14,11 @@
   }
 }(this, function (_, Kotlin, $module$react_redux, $module$kotlin_extensions) {
   'use strict';
+  var $$importsForInline$$ = _.$$importsForInline$$ || (_.$$importsForInline$$ = {});
   var Unit = Kotlin.kotlin.Unit;
   var Kind_INTERFACE = Kotlin.Kind.INTERFACE;
+  $$importsForInline$$['kotlin-extensions'] = $module$kotlin_extensions;
+  return _;
 }));
 
 //# sourceMappingURL=kotlin-react-redux.js.map

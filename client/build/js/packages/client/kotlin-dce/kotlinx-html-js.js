@@ -62,6 +62,7 @@
   var get_lastIndex = Kotlin.kotlin.collections.get_lastIndex_55thoc$;
   var toString = Kotlin.toString;
   var last = Kotlin.kotlin.collections.last_2p1efm$;
+  var asList = Kotlin.org.w3c.dom.asList_kt9thq$;
   var first = Kotlin.kotlin.collections.first_2p1efm$;
   var emptyList = Kotlin.kotlin.collections.emptyList_287e2$;
   var addAll = Kotlin.kotlin.collections.addAll_ipc267$;
@@ -118,6 +119,14 @@
   LI.prototype.constructor = LI;
   OL.prototype = Object.create(HTMLTag.prototype);
   OL.prototype.constructor = OL;
+  TABLE.prototype = Object.create(HTMLTag.prototype);
+  TABLE.prototype.constructor = TABLE;
+  TD.prototype = Object.create(HTMLTag.prototype);
+  TD.prototype.constructor = TD;
+  TH.prototype = Object.create(HTMLTag.prototype);
+  TH.prototype.constructor = TH;
+  TR.prototype = Object.create(HTMLTag.prototype);
+  TR.prototype.constructor = TR;
   function TagConsumer() {
   }
   TagConsumer.prototype.onTagError_cjwpn3$ = function (tag, exception) {
@@ -168,6 +177,20 @@
       return emptyMap_0;
     else
       return singletonMapOf(key, value);
+  }
+  function attributesMapOf_1(pairs) {
+    var tmp$;
+    var result = null;
+    tmp$ = pairs.length - 1 | 0;
+    for (var i = 0; i <= tmp$; i += 2) {
+      var k = pairs[i];
+      var v = pairs[i + 1 | 0];
+      if (k != null && v != null) {
+        if (result == null) {
+          result = LinkedHashMap_init();
+        }result.put_xwzc9p$(k, v);
+      }}
+    return result != null ? result : emptyMap_0;
   }
   function singletonMapOf(key, value) {
     return new SingletonStringMap(key, value);
@@ -341,6 +364,9 @@
     }return tmp$;
   };
   EnumEncoder.$metadata$ = {kind: Kind_CLASS, simpleName: 'EnumEncoder', interfaces: [AttributeEncoder]};
+  function enumEncode($receiver) {
+    return $receiver.realValue;
+  }
   function EnumAttribute(values) {
     Attribute.call(this, new EnumEncoder(values));
     this.values = values;
@@ -1757,6 +1783,78 @@
     attributeBooleanTicker.set_fid0sb$(this, 'reversed', newValue);
   }});
   OL.$metadata$ = {kind: Kind_CLASS, simpleName: 'OL', interfaces: [HtmlBlockTag, HTMLTag]};
+  function TABLE(initialAttributes, consumer) {
+    HTMLTag.call(this, 'table', consumer, initialAttributes, null, false, false);
+    this.consumer_gxb6a0$_0 = consumer;
+  }
+  Object.defineProperty(TABLE.prototype, 'consumer', {get: function () {
+    return this.consumer_gxb6a0$_0;
+  }});
+  Object.defineProperty(TABLE.prototype, 'summary', {configurable: true, get: function () {
+    return attributeStringString.get_txhc1s$(this, 'summary');
+  }, set: function (newValue) {
+    attributeStringString.set_fid0sb$(this, 'summary', newValue);
+  }});
+  TABLE.$metadata$ = {kind: Kind_CLASS, simpleName: 'TABLE', interfaces: [HtmlBlockTag, HTMLTag]};
+  function TD(initialAttributes, consumer) {
+    HTMLTag.call(this, 'td', consumer, initialAttributes, null, false, false);
+    this.consumer_ujuxim$_0 = consumer;
+  }
+  Object.defineProperty(TD.prototype, 'consumer', {get: function () {
+    return this.consumer_ujuxim$_0;
+  }});
+  Object.defineProperty(TD.prototype, 'headers', {configurable: true, get: function () {
+    return attributeStringString.get_txhc1s$(this, 'headers');
+  }, set: function (newValue) {
+    attributeStringString.set_fid0sb$(this, 'headers', newValue);
+  }});
+  Object.defineProperty(TD.prototype, 'rowSpan', {configurable: true, get: function () {
+    return attributeStringString.get_txhc1s$(this, 'rowspan');
+  }, set: function (newValue) {
+    attributeStringString.set_fid0sb$(this, 'rowspan', newValue);
+  }});
+  Object.defineProperty(TD.prototype, 'colSpan', {configurable: true, get: function () {
+    return attributeStringString.get_txhc1s$(this, 'colspan');
+  }, set: function (newValue) {
+    attributeStringString.set_fid0sb$(this, 'colspan', newValue);
+  }});
+  TD.$metadata$ = {kind: Kind_CLASS, simpleName: 'TD', interfaces: [HtmlBlockTag, HTMLTag]};
+  function TH(initialAttributes, consumer) {
+    HTMLTag.call(this, 'th', consumer, initialAttributes, null, false, false);
+    this.consumer_7d2fqi$_0 = consumer;
+  }
+  Object.defineProperty(TH.prototype, 'consumer', {get: function () {
+    return this.consumer_7d2fqi$_0;
+  }});
+  Object.defineProperty(TH.prototype, 'headers', {configurable: true, get: function () {
+    return attributeStringString.get_txhc1s$(this, 'headers');
+  }, set: function (newValue) {
+    attributeStringString.set_fid0sb$(this, 'headers', newValue);
+  }});
+  Object.defineProperty(TH.prototype, 'rowSpan', {configurable: true, get: function () {
+    return attributeStringString.get_txhc1s$(this, 'rowspan');
+  }, set: function (newValue) {
+    attributeStringString.set_fid0sb$(this, 'rowspan', newValue);
+  }});
+  Object.defineProperty(TH.prototype, 'colSpan', {configurable: true, get: function () {
+    return attributeStringString.get_txhc1s$(this, 'colspan');
+  }, set: function (newValue) {
+    attributeStringString.set_fid0sb$(this, 'colspan', newValue);
+  }});
+  Object.defineProperty(TH.prototype, 'scope', {configurable: true, get: function () {
+    return attributeThScopeEnumThScopeValues.get_txhc1s$(this, 'scope');
+  }, set: function (newValue) {
+    attributeThScopeEnumThScopeValues.set_fid0sb$(this, 'scope', newValue);
+  }});
+  TH.$metadata$ = {kind: Kind_CLASS, simpleName: 'TH', interfaces: [HtmlInlineTag, HTMLTag]};
+  function TR(initialAttributes, consumer) {
+    HTMLTag.call(this, 'tr', consumer, initialAttributes, null, false, false);
+    this.consumer_kf799c$_0 = consumer;
+  }
+  Object.defineProperty(TR.prototype, 'consumer', {get: function () {
+    return this.consumer_kf799c$_0;
+  }});
+  TR.$metadata$ = {kind: Kind_CLASS, simpleName: 'TR', interfaces: [CommonAttributeGroupFacade, HTMLTag]};
   function HTMLTag(tagName, consumer, initialAttributes, namespace, inlineTag, emptyTag) {
     if (namespace === void 0)
       namespace = null;
@@ -1823,7 +1921,11 @@
   package$html.Unsafe = Unsafe;
   package$html.AttributeEnum = AttributeEnum;
   package$html.attributesMapOf_jyasbz$ = attributesMapOf_0;
+  package$html.attributesMapOf_alerag$ = attributesMapOf_1;
   package$html.singletonMapOf_puj7f4$ = singletonMapOf;
+  Object.defineProperty(package$html, 'emptyMap', {get: function () {
+    return emptyMap_0;
+  }});
   package$html.DefaultUnsafe = DefaultUnsafe;
   var package$attributes = package$html.attributes || (package$html.attributes = {});
   package$attributes.AttributeEncoder = AttributeEncoder;
@@ -1836,6 +1938,7 @@
   Object.defineProperty(package$attributes, 'TickerEncoder', {get: TickerEncoder_getInstance});
   package$attributes.TickerAttribute = TickerAttribute;
   package$attributes.EnumEncoder = EnumEncoder;
+  package$attributes.enumEncode_m4whry$ = enumEncode;
   package$attributes.EnumAttribute = EnumAttribute;
   package$attributes.stringSetDecode_pdl1vj$ = stringSetDecode;
   Object.defineProperty(package$attributes, 'StringSetEncoder', {get: StringSetEncoder_getInstance});
@@ -1970,6 +2073,10 @@
   package$html.H3 = H3;
   package$html.LI = LI;
   package$html.OL = OL;
+  package$html.TABLE = TABLE;
+  package$html.TD = TD;
+  package$html.TH = TH;
+  package$html.TR = TR;
   package$html.HTMLTag = HTMLTag;
   var package$stream = package$html.stream || (package$html.stream = {});
   package$stream.HTMLStreamBuilder = HTMLStreamBuilder;

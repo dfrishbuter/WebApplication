@@ -262,6 +262,7 @@
   $$importsForInline$$['kotlin-react-core'] = $module$kotlin_react_core;
   Object.defineProperty(RDOMBuilder, 'Companion', {get: RDOMBuilder$Companion_getInstance});
   package$dom.RDOMBuilder = RDOMBuilder;
+  $$importsForInline$$['kotlin-extensions'] = $module$kotlin_extensions;
   package$dom.RDOMBuilderImpl = RDOMBuilderImpl;
   package$dom.setProp_v86kls$ = setProp;
   package$dom.fixAttributeName_61zpoe$ = fixAttributeName;

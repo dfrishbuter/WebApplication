@@ -12,8 +12,11 @@
   }
 }(this, function (_, Kotlin, $module$kotlin_extensions) {
   'use strict';
+  var $$importsForInline$$ = _.$$importsForInline$$ || (_.$$importsForInline$$ = {});
   var defineInlineFunction = Kotlin.defineInlineFunction;
   var Kind_CLASS = Kotlin.Kind.CLASS;
+  $$importsForInline$$['kotlin-extensions'] = $module$kotlin_extensions;
+  return _;
 }));
 
 //# sourceMappingURL=kotlin-react-router-dom.js.map

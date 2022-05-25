@@ -1,5 +1,15 @@
 package component
 
+import csstype.Border
+import csstype.BorderCollapse
+import csstype.BorderCollapse.Companion.collapse
+import csstype.WhiteSpace
+import csstype.px
+import kotlinx.css.border
+import react.*
+import react.dom.*
+import styled.*
+
 import kotlinext.js.jso
 import react.Props
 import react.RBuilder
@@ -10,6 +20,7 @@ import react.query.useQueryClient
 import ru.altmanea.edu.server.model.Item
 import ru.altmanea.edu.server.model.WorkPlan
 import ru.altmanea.edu.server.model.Config.Companion.workPlansURL
+import styled.styledTable
 import wrappers.AxiosResponse
 import wrappers.QueryError
 import wrappers.axios
@@ -18,22 +29,62 @@ external interface WorkPlanListProps : Props {
     var workPlans: List<Item<WorkPlan>>
 }
 
-//val id: String,
-//val faculty: String,
-//val block: String,
-//val subject: String,
-//val semester: Int,
-//val teacher: Teacher,
-//val groups: List<Group>,
-//var numberOfStudents: Int,
-//val typeOfLoad: String,
-//val hours: Float,
-//val typeOfEmployment: String
-
 fun fcWorkPlanList() = fc("WorkPlanList") { props: WorkPlanListProps ->
-    table {
+    val borderStyle = "border: 2px solid #095484;"
+    h3 { + "Work Plans" }
+
+    styledTable {
+        css {
+            descendants( "th", "td") {
+                border = "1px solid black"
+            }
+            collapse
+        }
+        tr {
+            th {
+                + "№"
+            }
+            th {
+                + "Рабочий план"
+            }
+            th {
+                + "Факультет"
+            }
+            th {
+                + "Блок"
+            }
+            th {
+                + "Дисциплина (вид учебной работы)"
+            }
+            th {
+                + "Семестр"
+            }
+            th {
+                + "Группа"
+            }
+            th {
+                + "Кол-во обучающихся"
+            }
+            th {
+                + "Вид нагрузки"
+            }
+            th {
+                + "Нагрузка, часов"
+            }
+            th {
+                + "Преподаватель"
+            }
+            th {
+                + "Вид занятости, ставка"
+            }
+            th {
+                + "Ученое звание"
+            }
+            th {
+                + "Ученая степень"
+            }
+        }
         props.workPlans.mapIndexed { index, workPlan ->
-            h3 { + "Work Plans" }
             tr {
                 td {
                     + "${index + 1}"
@@ -57,7 +108,11 @@ fun fcWorkPlanList() = fc("WorkPlanList") { props: WorkPlanListProps ->
                     + "${workPlan.elem.teacher.firstName} ${workPlan.elem.teacher.lastName} ${workPlan.elem.teacher.patronymic}"
                 }
                 td {
-                    + workPlan.elem.groups.joinToString { "${it.code} ${it.name}, ${it.formOfEducation};\n" }
+//                    var groupsString = ""
+//                    workPlan.elem.groups.forEach {
+//                        groupsString += "${it.code} ${it.name}, ${it.formOfEducation};\n"
+//                    }
+                    + workPlan.elem.groups.first().name
                 }
                 td {
                     + "${workPlan.elem.numberOfStudents}"
