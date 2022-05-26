@@ -9,7 +9,7 @@ class WorkPlan(
     val subject: String,
     val semester: Int,
     val teacher: Teacher,
-    val groups: List<Group>,
+    val groups: Array<Group>,
     var numberOfStudents: Int,
     val typeOfLoad: String,
     val hours: Float,

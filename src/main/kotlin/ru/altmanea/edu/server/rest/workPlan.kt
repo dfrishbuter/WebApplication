@@ -37,7 +37,7 @@ fun Route.workPlanByGroup() =
                 "No teacher with id $groupId",
                 status = HttpStatusCode.NotFound
             )
-            val workPlanItem = workPlansRepo.find { it -> it.groups.any { it.code == group.elem.code } }
+            val workPlanItem = workPlansRepo.find { workPlan -> workPlan.groups.any { it.code == group.elem.code } }
             call.respond(workPlanItem)
         }
     }

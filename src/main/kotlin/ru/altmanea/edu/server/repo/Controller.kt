@@ -39,7 +39,7 @@ class Controller(tableFile: XSSFWorkbook, sheetIndex: Int) {
             val groupData = groupCell.toString()
             val regex = "[0-9]{2,}-?[\\p{L}]{1,2}".toRegex()
             val groupCodes = regex.findAll(groupData).map { it.value }.toList()
-            val groups: List<Group>
+            val groups: Array<Group>
             if (groupCodes.count() > 1) {
                 val groupNames = removeOccurrences(groupCodes, groupData).trimStart { listOf(',', ' ').contains(it)}.split(",")
                 groups = groupCodes.zip(groupNames).map {
@@ -48,7 +48,7 @@ class Controller(tableFile: XSSFWorkbook, sheetIndex: Int) {
                         code = it.first,
                         formOfEducation = if (isPartTime) "Заочная" else "Очная"
                     )
-                }
+                }.toTypedArray()
             } else {
                 groups = listOf(
                     Group(
@@ -56,7 +56,7 @@ class Controller(tableFile: XSSFWorkbook, sheetIndex: Int) {
                         code = groupCodes.first(),
                         formOfEducation = if (isPartTime) "Заочная" else "Очная"
                     )
-                )
+                ).toTypedArray()
             }
 
             val workPlan = WorkPlan(

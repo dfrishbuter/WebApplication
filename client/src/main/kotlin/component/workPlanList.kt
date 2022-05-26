@@ -60,9 +60,9 @@ fun fcWorkPlanList() = fc("WorkPlanList") { props: WorkPlanListProps ->
             th {
                 + "Семестр"
             }
-//            th {
-//                + "Группа"
-//            }
+            th {
+                + "Группа"
+            }
             th {
                 + "Кол-во обучающихся"
             }
@@ -99,13 +99,12 @@ fun fcWorkPlanList() = fc("WorkPlanList") { props: WorkPlanListProps ->
                 td { // "Семестр"
                     + "${workPlan.elem.semester}"
                 }
-//                td { // "Группа"
-//                    var groupsString = ""
-//                    workPlan.elem.groups.forEach {
-//                        groupsString += "${it.code} ${it.name}, ${it.formOfEducation};\n"
-//                    }
-//                    + groupsString
-//                }
+                td { // "Группа"
+                    + workPlan.elem.groups.joinToString(
+                        separator = ";\n",
+                        transform = { "${it.code} ${it.name}, ${it.formOfEducation}" }
+                    )
+                }
                 td { // "Кол-во обучающихся"
                     + "${workPlan.elem.numberOfStudents}"
                 }

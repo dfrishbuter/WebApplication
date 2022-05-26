@@ -26,7 +26,7 @@ fun Application.main(test: Boolean = true) {
         val teachers = workPlansTestData.map { it.teacher }.distinctBy { it.firstName + it.lastName + it.patronymic }
         teachers.forEach { teachersRepo.create(it) }
 
-        val groups = workPlansTestData.map { it.groups }.flatten().distinctBy { it.code + it.formOfEducation }
+        val groups = workPlansTestData.map { it.groups.toList() }.flatten().distinctBy { it.code + it.formOfEducation }
         groups.forEach { groupsRepo.create(it) }
 
         val subjects = workPlansTestData.map { it.subject }.distinct()
