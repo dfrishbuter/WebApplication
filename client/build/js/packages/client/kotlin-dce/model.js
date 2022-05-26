@@ -47,28 +47,7 @@
       new Config$Companion();
     }return Config$Companion_instance;
   }
-  function Group(name, code, formOfEducation) {
-    Group$Companion_getInstance();
-    this.name = name;
-    this.code = code;
-    this.formOfEducation = formOfEducation;
-  }
-  Group.prototype.toString = function () {
-    return this.code + ' ' + this.name + ', ' + this.formOfEducation;
-  };
-  function Group$Companion() {
-    Group$Companion_instance = this;
-  }
-  Group$Companion.prototype.serializer = function () {
-    return Group$$serializer_getInstance();
-  };
-  Group$Companion.$metadata$ = {kind: Kind_OBJECT, simpleName: 'Companion', interfaces: []};
   var Group$Companion_instance = null;
-  function Group$Companion_getInstance() {
-    if (Group$Companion_instance === null) {
-      new Group$Companion();
-    }return Group$Companion_instance;
-  }
   function Group$$serializer() {
     this.descriptor_9wvztq$_0 = new PluginGeneratedSerialDescriptor('ru.altmanea.edu.server.model.Group', this, 3);
     this.descriptor.addElement_ivxn3r$('name', false);
@@ -76,71 +55,7 @@
     this.descriptor.addElement_ivxn3r$('formOfEducation', false);
     Group$$serializer_instance = this;
   }
-  Object.defineProperty(Group$$serializer.prototype, 'descriptor', {configurable: true, get: function () {
-    return this.descriptor_9wvztq$_0;
-  }});
-  Group$$serializer.prototype.serialize_55azsf$ = function (encoder, value) {
-    var output = encoder.beginStructure_24f42q$(this.descriptor);
-    output.encodeStringElement_iij8qq$(this.descriptor, 0, value.name);
-    output.encodeStringElement_iij8qq$(this.descriptor, 1, value.code);
-    output.encodeStringElement_iij8qq$(this.descriptor, 2, value.formOfEducation);
-    output.endStructure_24f42q$(this.descriptor);
-  };
-  Group$$serializer.prototype.deserialize_bq71mq$ = function (decoder) {
-    var index;
-    var bitMask0 = 0;
-    var local0, local1, local2;
-    var input = decoder.beginStructure_24f42q$(this.descriptor);
-    loopLabel: while (true) {
-      index = input.decodeElementIndex_24f42q$(this.descriptor);
-      switch (index) {
-        case 0:
-          local0 = input.decodeStringElement_szpzho$(this.descriptor, 0);
-          bitMask0 |= 1;
-          break;
-        case 1:
-          local1 = input.decodeStringElement_szpzho$(this.descriptor, 1);
-          bitMask0 |= 2;
-          break;
-        case 2:
-          local2 = input.decodeStringElement_szpzho$(this.descriptor, 2);
-          bitMask0 |= 4;
-          break;
-        case -1:
-          break loopLabel;
-        default:throw new UnknownFieldException(index);
-      }
-    }
-    input.endStructure_24f42q$(this.descriptor);
-    return Group_init(bitMask0, local0, local1, local2, null);
-  };
-  Group$$serializer.prototype.childSerializers = function () {
-    return [internal.StringSerializer, internal.StringSerializer, internal.StringSerializer];
-  };
-  Group$$serializer.$metadata$ = {kind: Kind_OBJECT, simpleName: '$serializer', interfaces: [GeneratedSerializer]};
   var Group$$serializer_instance = null;
-  function Group$$serializer_getInstance() {
-    if (Group$$serializer_instance === null) {
-      new Group$$serializer();
-    }return Group$$serializer_instance;
-  }
-  function Group_init(seen1, name, code, formOfEducation, serializationConstructorMarker) {
-    var $this = serializationConstructorMarker || Object.create(Group.prototype);
-    if ((seen1 & 1) === 0)
-      throw MissingFieldException_init('name');
-    else
-      $this.name = name;
-    if ((seen1 & 2) === 0)
-      throw MissingFieldException_init('code');
-    else
-      $this.code = code;
-    if ((seen1 & 4) === 0)
-      throw MissingFieldException_init('formOfEducation');
-    else
-      $this.formOfEducation = formOfEducation;
-    return $this;
-  }
-  Group.$metadata$ = {kind: Kind_CLASS, simpleName: 'Group', interfaces: []};
   function Teacher(firstName, lastName, patronymic) {
     Teacher$Companion_getInstance();
     this.firstName = firstName;
@@ -256,10 +171,6 @@
   var package$server = package$edu.server || (package$edu.server = {});
   var package$model = package$server.model || (package$server.model = {});
   package$model.Config = Config;
-  Object.defineProperty(Group, 'Companion', {get: Group$Companion_getInstance});
-  Object.defineProperty(Group, '$serializer', {get: Group$$serializer_getInstance});
-  package$model.Group_init_9zxaf4$ = Group_init;
-  package$model.Group = Group;
   Object.defineProperty(Teacher, 'Companion', {get: Teacher$Companion_getInstance});
   Object.defineProperty(Teacher, '$serializer', {get: Teacher$$serializer_getInstance});
   package$model.Teacher_init_9zxaf4$ = Teacher_init;

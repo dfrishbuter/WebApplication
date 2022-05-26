@@ -25,9 +25,7 @@ fun fcTeacherList() = fc("TeacherList") { props: TeacherListProps ->
             li {
                 val teacher = Teacher(teacherItem.elem.firstName, teacherItem.elem.lastName, teacherItem.elem.patronymic)
                 Link {
-                    attrs.to = "/work_plans"
-                    // Как отсюда правильно перейти к списку планов?
-                    // Как сформировать ссылку и отфильтровать планы по преподавателю?
+                    attrs.to = "/work_plans/by_teacher/${teacherItem.uuid}"
                     + "${teacher.firstName} ${teacher.lastName} ${teacher.patronymic} \t"
                 }
             }

@@ -17,6 +17,8 @@ import react.dom.*
 import react.fc
 import react.query.useQuery
 import react.query.useQueryClient
+import react.router.useParams
+import ru.altmanea.edu.server.model.Config.Companion.workPlansPath
 import ru.altmanea.edu.server.model.Item
 import ru.altmanea.edu.server.model.WorkPlan
 import ru.altmanea.edu.server.model.Config.Companion.workPlansURL
@@ -59,9 +61,9 @@ fun fcWorkPlanList() = fc("WorkPlanList") { props: WorkPlanListProps ->
             th {
                 + "Семестр"
             }
-            th {
-                + "Группа"
-            }
+//            th {
+//                + "Группа"
+//            }
             th {
                 + "Кол-во обучающихся"
             }
@@ -77,51 +79,46 @@ fun fcWorkPlanList() = fc("WorkPlanList") { props: WorkPlanListProps ->
             th {
                 + "Вид занятости, ставка"
             }
-            th {
-                + "Ученое звание"
-            }
-            th {
-                + "Ученая степень"
-            }
         }
         props.workPlans.mapIndexed { index, workPlan ->
             tr {
-                td {
+                td { // "№"
                     + "${index + 1}"
                 }
-                td {
+                td { // "Рабочий план"
                     +"${workPlan.elem.id}"
                 }
-                td {
+                td { // "Факультет"
                     + "${workPlan.elem.faculty}"
                 }
                 td {
-                    + "${workPlan.elem.block}"
+                    + "${workPlan.elem.block}" // "Блок"
                 }
-                td {
+                td { // "Дисциплина (вид учебной работы)"
                     + "${workPlan.elem.subject}"
                 }
-                td {
+                td { // "Семестр"
                     + "${workPlan.elem.semester}"
                 }
-                td {
-                    + "${workPlan.elem.teacher.firstName} ${workPlan.elem.teacher.lastName} ${workPlan.elem.teacher.patronymic}"
-                }
-                td {
+    //                td { // "Группа"
+    //                    val name = workPlan.elem.groups.first().name
 //                    var groupsString = ""
 //                    workPlan.elem.groups.forEach {
 //                        groupsString += "${it.code} ${it.name}, ${it.formOfEducation};\n"
 //                    }
-                    + workPlan.elem.groups.first().name
-                }
-                td {
+//                    + name
+//                }
+                td { // "Кол-во обучающихся"
                     + "${workPlan.elem.numberOfStudents}"
                 }
-                td {
+                td { // "Вид нагрузки"
                     + "${workPlan.elem.typeOfLoad}"
                 }
-                td {
+                td { // "Нагрузка, часов"
                     + "${workPlan.elem.hours}"
+                }
+                td {
+                    +"${workPlan.elem.teacher.firstName} ${workPlan.elem.teacher.lastName} ${workPlan.elem.teacher.patronymic}"
                 }
                 td {
                     + "${workPlan.elem.typeOfEmployment}"
@@ -131,14 +128,14 @@ fun fcWorkPlanList() = fc("WorkPlanList") { props: WorkPlanListProps ->
     }
 }
 
-fun fcContainerWorkPlanList() = fc("QueryWorkPlanList") { _: Props ->
+fun fcContainerWorkPlanList(lastPathComponent: String) = fc("QueryWorkPlanList") { _: Props ->
+    val workPlanParams = useParams()
     val queryClient = useQueryClient()
 
-    val query = useQuery<Any, QueryError, AxiosResponse<Array<Item<WorkPlan>>>, Any>(
-        "workPlanList",
-        {
+    val id = workPlanParams["id"] ?: "Route param error"
+    val query = useQuery<Any, QueryError, AxiosResponse<Array<Item<WorkPlan>>>, Any>(id, {
             axios<Array<WorkPlan>>(jso {
-                url = workPlansURL
+                url = workPlansURL + lastPathComponent + id
             })
         }
     )

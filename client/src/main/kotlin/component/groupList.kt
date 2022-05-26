@@ -25,12 +25,11 @@ external interface GroupListProps : Props {
 fun fcGroupList() = fc("GroupList") { props: GroupListProps ->
     h3 { + "Groups" }
     ol {
-        props.groups.mapIndexed { index, groupItem ->
+        props.groups.map { groupItem ->
             li {
-                val group = Group(groupItem.elem.name, groupItem.elem.code, groupItem.elem.formOfEducation)
                 Link {
-                    attrs.to = "/groups/${groupItem.uuid}"
-                    + "${group.toString()} \t"
+                    attrs.to = "/work_plans/by_group/${groupItem.uuid}"
+                    + "${groupItem.elem.code} ${groupItem.elem.name}, ${groupItem.elem.formOfEducation} \t"
                 }
             }
         }
@@ -38,8 +37,6 @@ fun fcGroupList() = fc("GroupList") { props: GroupListProps ->
 }
 
 fun fcContainerGroupList() = fc("QueryGroupList") { _: Props ->
-    val queryClient = useQueryClient()
-
     val query = useQuery<Any, QueryError, AxiosResponse<Array<Item<Group>>>, Any>( // хук, предоставляющий поступ к функциям квери провайдера
         "groupList",
         {

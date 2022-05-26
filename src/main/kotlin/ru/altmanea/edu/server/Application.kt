@@ -38,7 +38,10 @@ fun Application.main(test: Boolean = true) {
 
         workPlansTestData.forEach { workPlansRepo.create(it) }
         val repo = workPlansRepo
+        val workPlans = repo.findAll()
+        val name = workPlans.first().elem.groups.first().name
         println(repo)
+        println(name)
     }
     install(ContentNegotiation) {
         json()

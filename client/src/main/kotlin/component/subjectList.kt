@@ -24,12 +24,11 @@ external interface SubjectListProps : Props {
 fun fcSubjectList() = fc("SubjectList") { props: SubjectListProps ->
     h3 { + "Subjects" }
     ol {
-        props.subjects.mapIndexed { index, subjectItem ->
+        props.subjects.map { subjectItem ->
             li {
-                val subject = subjectItem.elem
                 Link {
-                    attrs.to = "/groups/${subjectItem.uuid}"
-                    + "$subject \t"
+                    attrs.to = "/work_plans/by_subject/${subjectItem.uuid}"
+                    + "${subjectItem.elem} \t"
                 }
             }
         }
