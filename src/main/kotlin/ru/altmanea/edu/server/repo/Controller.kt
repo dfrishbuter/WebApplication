@@ -74,6 +74,11 @@ class Controller(tableFile: XSSFWorkbook, sheetIndex: Int) {
             )
             workPlans.add(workPlan)
         }
+//        val flattenGroups = workPlans.map { it.groups }.flatten().distinctBy { it.code + it.formOfEducation }
+//        flattenGroups.forEach { group ->
+//            println("${group.code} ${group.name}, ${group.formOfEducation} \t")
+//        }
+//        println(flattenGroups)
         return workPlans
     }
 

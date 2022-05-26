@@ -8,12 +8,10 @@ import react.dom.li
 import react.dom.ol
 import react.fc
 import react.query.useQuery
-import react.query.useQueryClient
 import react.router.dom.Link
 import ru.altmanea.edu.server.model.Config
 import ru.altmanea.edu.server.model.Group
 import ru.altmanea.edu.server.model.Item
-import ru.altmanea.edu.server.model.Teacher
 import wrappers.AxiosResponse
 import wrappers.QueryError
 import wrappers.axios
@@ -28,7 +26,7 @@ fun fcGroupList() = fc("GroupList") { props: GroupListProps ->
         props.groups.map { groupItem ->
             li {
                 Link {
-                    attrs.to = "/work_plans/by_group/${groupItem.uuid}"
+                    attrs.to = "${Config.workPlansByGroupCommonPath}/${groupItem.uuid}"
                     + "${groupItem.elem.code} ${groupItem.elem.name}, ${groupItem.elem.formOfEducation} \t"
                 }
             }
@@ -37,9 +35,7 @@ fun fcGroupList() = fc("GroupList") { props: GroupListProps ->
 }
 
 fun fcContainerGroupList() = fc("QueryGroupList") { _: Props ->
-    val query = useQuery<Any, QueryError, AxiosResponse<Array<Item<Group>>>, Any>( // хук, предоставляющий поступ к функциям квери провайдера
-        "groupList",
-        {
+    val query = useQuery<Any, QueryError, AxiosResponse<Array<Item<Group>>>, Any>("groupList", {
             axios<Array<Group>>(jso {
                 url = Config.groupsURL
             })

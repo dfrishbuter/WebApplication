@@ -155,10 +155,6 @@
   SealedClassSerializer.prototype.constructor = SealedClassSerializer;
   SerializationException.prototype = Object.create(IllegalArgumentException.prototype);
   SerializationException.prototype.constructor = SerializationException;
-  MissingFieldException.prototype = Object.create(SerializationException.prototype);
-  MissingFieldException.prototype.constructor = MissingFieldException;
-  UnknownFieldException.prototype = Object.create(SerializationException.prototype);
-  UnknownFieldException.prototype.constructor = UnknownFieldException;
   SerialKind$ENUM.prototype = Object.create(SerialKind.prototype);
   SerialKind$ENUM.prototype.constructor = SerialKind$ENUM;
   SerialKind$CONTEXTUAL.prototype = Object.create(SerialKind.prototype);
@@ -392,27 +388,6 @@
     SerializationException.call($this);
     return $this;
   }
-  function SerializationException_init_1(message, cause, $this) {
-    $this = $this || Object.create(SerializationException.prototype);
-    IllegalArgumentException.call($this, message, cause);
-    SerializationException.call($this);
-    return $this;
-  }
-  function MissingFieldException(message, cause) {
-    SerializationException_init_1(message, cause, this);
-    this.name = 'MissingFieldException';
-  }
-  MissingFieldException.$metadata$ = {kind: Kind_CLASS, simpleName: 'MissingFieldException', interfaces: [SerializationException]};
-  function MissingFieldException_init(fieldName, $this) {
-    $this = $this || Object.create(MissingFieldException.prototype);
-    MissingFieldException.call($this, "Field '" + fieldName + "' is required, but it was missing", null);
-    return $this;
-  }
-  function UnknownFieldException(message) {
-    SerializationException_init_0(message, this);
-    this.name = 'UnknownFieldException';
-  }
-  UnknownFieldException.$metadata$ = {kind: Kind_CLASS, simpleName: 'UnknownFieldException', interfaces: [SerializationException]};
   function serializer_4($receiver) {
     return CharSerializer_getInstance();
   }
@@ -3529,11 +3504,7 @@
   package$serialization.SerialFormat = SerialFormat;
   package$serialization.StringFormat = StringFormat;
   package$serialization.SerializationException_init_pdl1vj$ = SerializationException_init_0;
-  package$serialization.SerializationException_init_wspj0f$ = SerializationException_init_1;
   package$serialization.SerializationException = SerializationException;
-  package$serialization.MissingFieldException_init_61zpoe$ = MissingFieldException_init;
-  package$serialization.MissingFieldException = MissingFieldException;
-  package$serialization.UnknownFieldException = UnknownFieldException;
   var package$internal = package$serialization.internal || (package$serialization.internal = {});
   var package$builtins = package$serialization.builtins || (package$serialization.builtins = {});
   package$builtins.serializer_n24eoe$ = serializer_4;

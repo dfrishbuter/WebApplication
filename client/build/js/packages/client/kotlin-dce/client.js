@@ -1,8 +1,8 @@
 (function (root, factory) {
   if (typeof define === 'function' && define.amd)
-    define(['exports', 'kotlin', 'react-query', 'react-router-dom', 'kotlin-react-dom-legacy', 'react-router', 'react', 'kotlin-react-legacy', 'model', 'kotlin-extensions', 'axios', 'kotlin-css', 'kotlin-styled-next', 'react-query/devtools'], factory);
+    define(['exports', 'kotlin', 'react-query', 'react-router-dom', 'kotlin-react-dom-legacy', 'react-router', 'react', 'model', 'kotlin-react-legacy', 'kotlin-extensions', 'axios', 'kotlin-css', 'kotlin-styled-next', 'react-query/devtools'], factory);
   else if (typeof exports === 'object')
-    factory(module.exports, require('kotlin'), require('react-query'), require('react-router-dom'), require('kotlin-react-dom-legacy'), require('react-router'), require('react'), require('kotlin-react-legacy'), require('model'), require('kotlin-extensions'), require('axios'), require('kotlin-css'), require('kotlin-styled-next'), require('react-query/devtools'));
+    factory(module.exports, require('kotlin'), require('react-query'), require('react-router-dom'), require('kotlin-react-dom-legacy'), require('react-router'), require('react'), require('model'), require('kotlin-react-legacy'), require('kotlin-extensions'), require('axios'), require('kotlin-css'), require('kotlin-styled-next'), require('react-query/devtools'));
   else {
     if (typeof kotlin === 'undefined') {
       throw new Error("Error loading module 'client'. Its dependency 'kotlin' was not found. Please, check whether 'kotlin' is loaded prior to 'client'.");
@@ -16,10 +16,10 @@
       throw new Error("Error loading module 'client'. Its dependency 'react-router' was not found. Please, check whether 'react-router' is loaded prior to 'client'.");
     }if (typeof react === 'undefined') {
       throw new Error("Error loading module 'client'. Its dependency 'react' was not found. Please, check whether 'react' is loaded prior to 'client'.");
-    }if (typeof this['kotlin-react-legacy'] === 'undefined') {
-      throw new Error("Error loading module 'client'. Its dependency 'kotlin-react-legacy' was not found. Please, check whether 'kotlin-react-legacy' is loaded prior to 'client'.");
     }if (typeof model === 'undefined') {
       throw new Error("Error loading module 'client'. Its dependency 'model' was not found. Please, check whether 'model' is loaded prior to 'client'.");
+    }if (typeof this['kotlin-react-legacy'] === 'undefined') {
+      throw new Error("Error loading module 'client'. Its dependency 'kotlin-react-legacy' was not found. Please, check whether 'kotlin-react-legacy' is loaded prior to 'client'.");
     }if (typeof this['kotlin-extensions'] === 'undefined') {
       throw new Error("Error loading module 'client'. Its dependency 'kotlin-extensions' was not found. Please, check whether 'kotlin-extensions' is loaded prior to 'client'.");
     }if (typeof axios === 'undefined') {
@@ -30,21 +30,21 @@
       throw new Error("Error loading module 'client'. Its dependency 'kotlin-styled-next' was not found. Please, check whether 'kotlin-styled-next' is loaded prior to 'client'.");
     }if (typeof ReactQueryDevtools === 'undefined') {
       throw new Error("Error loading module 'client'. Its dependency 'react-query/devtools' was not found. Please, check whether 'react-query/devtools' is loaded prior to 'client'.");
-    }root.client = factory(typeof client === 'undefined' ? {} : client, kotlin, this['react-query'], this['react-router-dom'], this['kotlin-react-dom-legacy'], this['react-router'], react, this['kotlin-react-legacy'], model, this['kotlin-extensions'], axios, this['kotlin-css'], this['kotlin-styled-next'], ReactQueryDevtools);
+    }root.client = factory(typeof client === 'undefined' ? {} : client, kotlin, this['react-query'], this['react-router-dom'], this['kotlin-react-dom-legacy'], this['react-router'], react, model, this['kotlin-react-legacy'], this['kotlin-extensions'], axios, this['kotlin-css'], this['kotlin-styled-next'], ReactQueryDevtools);
   }
-}(this, function (_, Kotlin, $module$react_query, $module$react_router_dom, $module$kotlin_react_dom_legacy, $module$react_router, $module$react, $module$kotlin_react_legacy, $module$model, $module$kotlin_extensions, $module$axios, $module$kotlin_css, $module$kotlin_styled_next, $module$react_query_devtools) {
+}(this, function (_, Kotlin, $module$react_query, $module$react_router_dom, $module$kotlin_react_dom_legacy, $module$react_router, $module$react, $module$model, $module$kotlin_react_legacy, $module$kotlin_extensions, $module$axios, $module$kotlin_css, $module$kotlin_styled_next, $module$react_query_devtools) {
   'use strict';
   var $$importsForInline$$ = _.$$importsForInline$$ || (_.$$importsForInline$$ = {});
   var QueryClient = $module$react_query.QueryClient;
   var ensureNotNull = Kotlin.ensureNotNull;
   var Unit = Kotlin.kotlin.Unit;
   var createElement = $module$react.createElement;
+  var Config = $module$model.ru.altmanea.edu.server.model.Config;
   var render = $module$kotlin_react_dom_legacy.react.dom.render_9jwdg9$;
   var attributesMapOf = $module$kotlin_react_dom_legacy.$$importsForInline$$['kotlinx-html-js'].kotlinx.html.attributesMapOf_jyasbz$;
   var DIV_init = $module$kotlin_react_dom_legacy.$$importsForInline$$['kotlinx-html-js'].kotlinx.html.DIV;
   var RDOMBuilder = $module$kotlin_react_dom_legacy.react.dom.RDOMBuilder;
   var fc = $module$kotlin_react_legacy.react.fc_gcrbg4$;
-  var Config = $module$model.ru.altmanea.edu.server.model.Config;
   var useQuery = $module$react_query.useQuery;
   var toList = Kotlin.kotlin.collections.toList_us0mfu$;
   var emptyList = Kotlin.kotlin.collections.emptyList_287e2$;
@@ -53,8 +53,6 @@
   var ArrayList_init = Kotlin.kotlin.collections.ArrayList_init_ww73n8$;
   var H3_init = $module$kotlin_react_dom_legacy.$$importsForInline$$['kotlinx-html-js'].kotlinx.html.H3;
   var OL_init = $module$kotlin_react_dom_legacy.$$importsForInline$$['kotlinx-html-js'].kotlinx.html.OL;
-  var Teacher = $module$model.ru.altmanea.edu.server.model.Teacher;
-  var checkIndexOverflow = Kotlin.kotlin.collections.checkIndexOverflow_za3lpa$;
   var set_border = $module$kotlin_css.kotlinx.css.set_border_krvuuu$;
   var useParams = $module$react_router.useParams;
   var enumEncode = $module$kotlin_react_dom_legacy.$$importsForInline$$['kotlinx-html-js'].kotlinx.html.attributes.enumEncode_m4whry$;
@@ -62,6 +60,7 @@
   var TH_init = $module$kotlin_react_dom_legacy.$$importsForInline$$['kotlinx-html-js'].kotlinx.html.TH;
   var TD_init = $module$kotlin_react_dom_legacy.$$importsForInline$$['kotlinx-html-js'].kotlinx.html.TD;
   var TR_init = $module$kotlin_react_dom_legacy.$$importsForInline$$['kotlinx-html-js'].kotlinx.html.TR;
+  var checkIndexOverflow = Kotlin.kotlin.collections.checkIndexOverflow_za3lpa$;
   var html = $module$kotlin_styled_next.$$importsForInline$$['kotlinx-html-js'].kotlinx.html;
   var TABLE_init = $module$kotlin_styled_next.$$importsForInline$$['kotlinx-html-js'].kotlinx.html.TABLE;
   var StyledDOMBuilder = $module$kotlin_styled_next.styled.StyledDOMBuilder;
@@ -104,17 +103,17 @@
     return Unit;
   }
   function main$lambda$lambda$lambda$lambda$lambda_5($receiver) {
-    $receiver.attrs.path = '/work_plans/by_teacher';
+    $receiver.attrs.path = Config.Companion.workPlansByTeacherCommonPath;
     $receiver.attrs.element = createElement(fcContainerWorkPlanList('/by_teacher'));
     return Unit;
   }
   function main$lambda$lambda$lambda$lambda$lambda_6($receiver) {
-    $receiver.attrs.path = '/work_plans/by_group';
+    $receiver.attrs.path = Config.Companion.workPlansByGroupCommonPath;
     $receiver.attrs.element = createElement(fcContainerWorkPlanList('/by_group'));
     return Unit;
   }
   function main$lambda$lambda$lambda$lambda$lambda_7($receiver) {
-    $receiver.attrs.path = '/work_plans/by_subject';
+    $receiver.attrs.path = Config.Companion.workPlansBySubjectCommonPath;
     $receiver.attrs.element = createElement(fcContainerWorkPlanList('/by_subject'));
     return Unit;
   }
@@ -178,7 +177,7 @@
   }
   function fcGroupList$lambda$lambda$lambda$lambda$lambda(closure$groupItem) {
     return function ($receiver) {
-      $receiver.attrs.to = '/work_plans/by_group/' + closure$groupItem.uuid;
+      $receiver.attrs.to = Config.Companion.workPlansByGroupCommonPath + '/' + closure$groupItem.uuid;
       $receiver.unaryPlus_pdl1vz$(closure$groupItem.elem.code + ' ' + closure$groupItem.elem.name + ', ' + closure$groupItem.elem.formOfEducation + ' ' + '\t');
       return Unit;
     };
@@ -259,7 +258,7 @@
   }
   function fcSubjectList$lambda$lambda$lambda$lambda$lambda(closure$subjectItem) {
     return function ($receiver) {
-      $receiver.attrs.to = '/work_plans/by_subject/' + closure$subjectItem.uuid;
+      $receiver.attrs.to = Config.Companion.workPlansBySubjectCommonPath + '/' + closure$subjectItem.uuid;
       $receiver.unaryPlus_pdl1vz$(closure$subjectItem.elem + ' ' + '\t');
       return Unit;
     };
@@ -338,10 +337,10 @@
       return new DIV_init(attributesMapOf('class', closure$classes), it);
     };
   }
-  function fcTeacherList$lambda$lambda$lambda$lambda$lambda(closure$teacherItem, closure$teacher) {
+  function fcTeacherList$lambda$lambda$lambda$lambda$lambda(closure$teacherItem) {
     return function ($receiver) {
-      $receiver.attrs.to = '/work_plans/by_teacher/' + closure$teacherItem.uuid;
-      $receiver.unaryPlus_pdl1vz$(closure$teacher.firstName + ' ' + closure$teacher.lastName + ' ' + closure$teacher.patronymic + ' ' + '\t');
+      $receiver.attrs.to = Config.Companion.workPlansByTeacherCommonPath + '/' + closure$teacherItem.uuid;
+      $receiver.unaryPlus_pdl1vz$(closure$teacherItem.elem.firstName + ' ' + closure$teacherItem.elem.lastName + ' ' + closure$teacherItem.elem.patronymic + ' ' + '\t');
       return Unit;
     };
   }
@@ -352,18 +351,15 @@
     var $receiver_0_0 = RDOMBuilder.Companion.invoke_f6ihu2$(ol$lambda_1(null));
     var $receiver_1 = props.teachers;
     var destination = ArrayList_init(collectionSizeOrDefault($receiver_1, 10));
-    var tmp$, tmp$_0;
-    var index = 0;
+    var tmp$;
     tmp$ = $receiver_1.iterator();
     while (tmp$.hasNext()) {
       var item = tmp$.next();
-      var tmp$_1 = destination.add_11rb$;
-      checkIndexOverflow((tmp$_0 = index, index = tmp$_0 + 1 | 0, tmp$_0));
+      var tmp$_0 = destination.add_11rb$;
       var $receiver_0_1 = RDOMBuilder.Companion.invoke_f6ihu2$(li$lambda_1(null));
-      var teacher = new Teacher(item.elem.firstName, item.elem.lastName, item.elem.patronymic);
-      $receiver_0_1.invoke_qk0v40$($module$react_router_dom.Link, fcTeacherList$lambda$lambda$lambda$lambda$lambda(item, teacher));
+      $receiver_0_1.invoke_qk0v40$($module$react_router_dom.Link, fcTeacherList$lambda$lambda$lambda$lambda$lambda(item));
       $receiver_0_0.child_30b5ua$($receiver_0_1.create());
-      tmp$_1.call(destination, Unit);
+      tmp$_0.call(destination, Unit);
     }
     $receiver.child_30b5ua$($receiver_0_0.create());
     return Unit;
@@ -534,7 +530,7 @@
       var $receiver = {};
       var closure$lastPathComponent_0 = closure$lastPathComponent;
       var closure$id_0 = closure$id;
-      $receiver.url = Config.Companion.workPlansURL + closure$lastPathComponent_0 + closure$id_0;
+      $receiver.url = Config.Companion.workPlansBaseURL + closure$lastPathComponent_0 + closure$id_0;
       return $module$axios($receiver);
     };
   }
@@ -548,7 +544,6 @@
     return function ($receiver, f) {
       var tmp$, tmp$_0, tmp$_1, tmp$_2;
       var workPlanParams = useParams();
-      var queryClient = $module$react_query.useQueryClient();
       var id = (tmp$ = workPlanParams['id']) != null ? tmp$ : 'Route param error';
       var query = useQuery(id, fcContainerWorkPlanList$lambda$lambda(closure$lastPathComponent, id));
       if (query.isLoading) {

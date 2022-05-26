@@ -27,7 +27,7 @@ fun fcSubjectList() = fc("SubjectList") { props: SubjectListProps ->
         props.subjects.map { subjectItem ->
             li {
                 Link {
-                    attrs.to = "/work_plans/by_subject/${subjectItem.uuid}"
+                    attrs.to = "${Config.workPlansBySubjectCommonPath}/${subjectItem.uuid}"
                     + "${subjectItem.elem} \t"
                 }
             }
@@ -36,9 +36,7 @@ fun fcSubjectList() = fc("SubjectList") { props: SubjectListProps ->
 }
 
 fun fcContainerSubjectList() = fc("QuerySubjectList") { _: Props ->
-    val query = useQuery<Any, QueryError, AxiosResponse<Array<Item<String>>>, Any>( // хук, предоставляющий поступ к функциям квери провайдера
-        "subjectList",
-        {
+    val query = useQuery<Any, QueryError, AxiosResponse<Array<Item<String>>>, Any>("subjectList", {
             axios<Array<String>>(jso {
                 url = Config.subjectsURL
             })

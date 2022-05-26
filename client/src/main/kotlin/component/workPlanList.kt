@@ -18,10 +18,9 @@ import react.fc
 import react.query.useQuery
 import react.query.useQueryClient
 import react.router.useParams
-import ru.altmanea.edu.server.model.Config.Companion.workPlansPath
+import ru.altmanea.edu.server.model.Config
 import ru.altmanea.edu.server.model.Item
 import ru.altmanea.edu.server.model.WorkPlan
-import ru.altmanea.edu.server.model.Config.Companion.workPlansURL
 import styled.styledTable
 import wrappers.AxiosResponse
 import wrappers.QueryError
@@ -130,12 +129,11 @@ fun fcWorkPlanList() = fc("WorkPlanList") { props: WorkPlanListProps ->
 
 fun fcContainerWorkPlanList(lastPathComponent: String) = fc("QueryWorkPlanList") { _: Props ->
     val workPlanParams = useParams()
-    val queryClient = useQueryClient()
 
     val id = workPlanParams["id"] ?: "Route param error"
     val query = useQuery<Any, QueryError, AxiosResponse<Array<Item<WorkPlan>>>, Any>(id, {
             axios<Array<WorkPlan>>(jso {
-                url = workPlansURL + lastPathComponent + id
+                url = Config.workPlansBaseURL + lastPathComponent + id
             })
         }
     )

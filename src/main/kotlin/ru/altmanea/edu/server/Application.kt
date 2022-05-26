@@ -7,12 +7,8 @@ import io.ktor.serialization.*
 import io.ktor.server.engine.*
 import io.ktor.server.netty.*
 import ru.altmanea.edu.server.model.Config
-import ru.altmanea.edu.server.model.Group
 import ru.altmanea.edu.server.repo.*
-import ru.altmanea.edu.server.rest.group
-import ru.altmanea.edu.server.rest.subject
-import ru.altmanea.edu.server.rest.teacher
-import ru.altmanea.edu.server.rest.workPlan
+import ru.altmanea.edu.server.rest.*
 
 fun main() {
     embeddedServer(
@@ -33,15 +29,14 @@ fun Application.main(test: Boolean = true) {
         val groups = workPlansTestData.map { it.groups }.flatten().distinctBy { it.code + it.formOfEducation }
         groups.forEach { groupsRepo.create(it) }
 
+//        groupsRepo.findAll().forEach { groupItem ->
+//            println("${groupItem.elem.code} ${groupItem.elem.name}, ${groupItem.elem.formOfEducation} \t")
+//        }
+
         val subjects = workPlansTestData.map { it.subject }.distinct()
         subjects.forEach { subjectsRepo.create(it) }
 
         workPlansTestData.forEach { workPlansRepo.create(it) }
-        val repo = workPlansRepo
-        val workPlans = repo.findAll()
-        val name = workPlans.first().elem.groups.first().name
-        println(repo)
-        println(name)
     }
     install(ContentNegotiation) {
         json()
@@ -50,7 +45,9 @@ fun Application.main(test: Boolean = true) {
         teacher()
         group() // надо объявить маршуты, поэтому прописываем здесь их
         subject()
-        workPlan()
+        workPlanByTeacher()
+        workPlanByGroup()
+        workPlanBySubject()
         index()
     }
 }

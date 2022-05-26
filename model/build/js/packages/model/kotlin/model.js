@@ -37,8 +37,16 @@
     this.groupsURL = 'http://localhost:8080/api1/groups/';
     this.subjectsPath = 'api1/subjects/';
     this.subjectsURL = 'http://localhost:8080/api1/subjects/';
-    this.workPlansPath = 'api1/work_plans/';
-    this.workPlansURL = 'http://localhost:8080/api1/work_plans/';
+    this.workPlansByTeacherCommonPath = 'work_plans/by_teacher';
+    this.workPlansByTeacherPath = 'api1/work_plans/by_teacher';
+    this.workPlansByTeacherURL = 'http://localhost:8080/api1/work_plans/by_teacher';
+    this.workPlansByGroupCommonPath = 'work_plans/by_group';
+    this.workPlansByGroupPath = 'api1/work_plans/by_group';
+    this.workPlansByGroupURL = 'http://localhost:8080/api1/work_plans/by_group';
+    this.workPlansBySubjectCommonPath = 'work_plans/by_subject';
+    this.workPlansBySubjectPath = 'api1/work_plans/by_subject';
+    this.workPlansBySubjectURL = 'http://localhost:8080/api1/work_plans/by_subject';
+    this.workPlansBaseURL = 'http://localhost:8080/api1//work_plans';
   }
   Config$Companion.$metadata$ = {
     kind: Kind_OBJECT,
@@ -62,9 +70,6 @@
     this.code = code;
     this.formOfEducation = formOfEducation;
   }
-  Group.prototype.toString = function () {
-    return this.code + ' ' + this.name + ', ' + this.formOfEducation;
-  };
   function Group$Companion() {
     Group$Companion_instance = this;
   }

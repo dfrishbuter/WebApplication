@@ -4,11 +4,11 @@ import io.ktor.application.*
 import io.ktor.http.*
 import io.ktor.response.*
 import io.ktor.routing.*
-import ru.altmanea.edu.server.model.Config.Companion.subjectsPath
+import ru.altmanea.edu.server.model.Config
 import ru.altmanea.edu.server.repo.subjectsRepo
 
 fun Route.subject() =
-    route(subjectsPath) {
+    route(Config.subjectsPath) {
         get {
             if (!subjectsRepo.isEmpty()) {
                 call.respond(subjectsRepo.findAll())

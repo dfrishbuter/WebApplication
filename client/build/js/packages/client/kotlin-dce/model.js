@@ -15,10 +15,8 @@
   var Kind_OBJECT = Kotlin.Kind.OBJECT;
   var Kind_CLASS = Kotlin.Kind.CLASS;
   var PluginGeneratedSerialDescriptor = $module$kotlinx_serialization_kotlinx_serialization_core_js_legacy.kotlinx.serialization.internal.PluginGeneratedSerialDescriptor;
-  var UnknownFieldException = $module$kotlinx_serialization_kotlinx_serialization_core_js_legacy.kotlinx.serialization.UnknownFieldException;
   var internal = $module$kotlinx_serialization_kotlinx_serialization_core_js_legacy.kotlinx.serialization.internal;
   var GeneratedSerializer = $module$kotlinx_serialization_kotlinx_serialization_core_js_legacy.kotlinx.serialization.internal.GeneratedSerializer;
-  var MissingFieldException_init = $module$kotlinx_serialization_kotlinx_serialization_core_js_legacy.kotlinx.serialization.MissingFieldException_init_61zpoe$;
   var Kind_INTERFACE = Kotlin.Kind.INTERFACE;
   var ArrayListSerializer = $module$kotlinx_serialization_kotlinx_serialization_core_js_legacy.kotlinx.serialization.internal.ArrayListSerializer;
   function Config() {
@@ -37,8 +35,16 @@
     this.groupsURL = 'http://localhost:8080/api1/groups/';
     this.subjectsPath = 'api1/subjects/';
     this.subjectsURL = 'http://localhost:8080/api1/subjects/';
-    this.workPlansPath = 'api1/work_plans/';
-    this.workPlansURL = 'http://localhost:8080/api1/work_plans/';
+    this.workPlansByTeacherCommonPath = 'work_plans/by_teacher';
+    this.workPlansByTeacherPath = 'api1/work_plans/by_teacher';
+    this.workPlansByTeacherURL = 'http://localhost:8080/api1/work_plans/by_teacher';
+    this.workPlansByGroupCommonPath = 'work_plans/by_group';
+    this.workPlansByGroupPath = 'api1/work_plans/by_group';
+    this.workPlansByGroupURL = 'http://localhost:8080/api1/work_plans/by_group';
+    this.workPlansBySubjectCommonPath = 'work_plans/by_subject';
+    this.workPlansBySubjectPath = 'api1/work_plans/by_subject';
+    this.workPlansBySubjectURL = 'http://localhost:8080/api1/work_plans/by_subject';
+    this.workPlansBaseURL = 'http://localhost:8080/api1//work_plans';
   }
   Config$Companion.$metadata$ = {kind: Kind_OBJECT, simpleName: 'Companion', interfaces: []};
   var Config$Companion_instance = null;
@@ -56,25 +62,7 @@
     Group$$serializer_instance = this;
   }
   var Group$$serializer_instance = null;
-  function Teacher(firstName, lastName, patronymic) {
-    Teacher$Companion_getInstance();
-    this.firstName = firstName;
-    this.lastName = lastName;
-    this.patronymic = patronymic;
-  }
-  function Teacher$Companion() {
-    Teacher$Companion_instance = this;
-  }
-  Teacher$Companion.prototype.serializer = function () {
-    return Teacher$$serializer_getInstance();
-  };
-  Teacher$Companion.$metadata$ = {kind: Kind_OBJECT, simpleName: 'Companion', interfaces: []};
   var Teacher$Companion_instance = null;
-  function Teacher$Companion_getInstance() {
-    if (Teacher$Companion_instance === null) {
-      new Teacher$Companion();
-    }return Teacher$Companion_instance;
-  }
   function Teacher$$serializer() {
     this.descriptor_zaedhh$_0 = new PluginGeneratedSerialDescriptor('ru.altmanea.edu.server.model.Teacher', this, 3);
     this.descriptor.addElement_ivxn3r$('firstName', false);
@@ -82,71 +70,7 @@
     this.descriptor.addElement_ivxn3r$('patronymic', false);
     Teacher$$serializer_instance = this;
   }
-  Object.defineProperty(Teacher$$serializer.prototype, 'descriptor', {configurable: true, get: function () {
-    return this.descriptor_zaedhh$_0;
-  }});
-  Teacher$$serializer.prototype.serialize_55azsf$ = function (encoder, value) {
-    var output = encoder.beginStructure_24f42q$(this.descriptor);
-    output.encodeStringElement_iij8qq$(this.descriptor, 0, value.firstName);
-    output.encodeStringElement_iij8qq$(this.descriptor, 1, value.lastName);
-    output.encodeStringElement_iij8qq$(this.descriptor, 2, value.patronymic);
-    output.endStructure_24f42q$(this.descriptor);
-  };
-  Teacher$$serializer.prototype.deserialize_bq71mq$ = function (decoder) {
-    var index;
-    var bitMask0 = 0;
-    var local0, local1, local2;
-    var input = decoder.beginStructure_24f42q$(this.descriptor);
-    loopLabel: while (true) {
-      index = input.decodeElementIndex_24f42q$(this.descriptor);
-      switch (index) {
-        case 0:
-          local0 = input.decodeStringElement_szpzho$(this.descriptor, 0);
-          bitMask0 |= 1;
-          break;
-        case 1:
-          local1 = input.decodeStringElement_szpzho$(this.descriptor, 1);
-          bitMask0 |= 2;
-          break;
-        case 2:
-          local2 = input.decodeStringElement_szpzho$(this.descriptor, 2);
-          bitMask0 |= 4;
-          break;
-        case -1:
-          break loopLabel;
-        default:throw new UnknownFieldException(index);
-      }
-    }
-    input.endStructure_24f42q$(this.descriptor);
-    return Teacher_init(bitMask0, local0, local1, local2, null);
-  };
-  Teacher$$serializer.prototype.childSerializers = function () {
-    return [internal.StringSerializer, internal.StringSerializer, internal.StringSerializer];
-  };
-  Teacher$$serializer.$metadata$ = {kind: Kind_OBJECT, simpleName: '$serializer', interfaces: [GeneratedSerializer]};
   var Teacher$$serializer_instance = null;
-  function Teacher$$serializer_getInstance() {
-    if (Teacher$$serializer_instance === null) {
-      new Teacher$$serializer();
-    }return Teacher$$serializer_instance;
-  }
-  function Teacher_init(seen1, firstName, lastName, patronymic, serializationConstructorMarker) {
-    var $this = serializationConstructorMarker || Object.create(Teacher.prototype);
-    if ((seen1 & 1) === 0)
-      throw MissingFieldException_init('firstName');
-    else
-      $this.firstName = firstName;
-    if ((seen1 & 2) === 0)
-      throw MissingFieldException_init('lastName');
-    else
-      $this.lastName = lastName;
-    if ((seen1 & 4) === 0)
-      throw MissingFieldException_init('patronymic');
-    else
-      $this.patronymic = patronymic;
-    return $this;
-  }
-  Teacher.$metadata$ = {kind: Kind_CLASS, simpleName: 'Teacher', interfaces: []};
   var WorkPlan$Companion_instance = null;
   function WorkPlan$$serializer() {
     this.descriptor_z7koqn$_0 = new PluginGeneratedSerialDescriptor('ru.altmanea.edu.server.model.WorkPlan', this, 11);
@@ -171,10 +95,6 @@
   var package$server = package$edu.server || (package$edu.server = {});
   var package$model = package$server.model || (package$server.model = {});
   package$model.Config = Config;
-  Object.defineProperty(Teacher, 'Companion', {get: Teacher$Companion_getInstance});
-  Object.defineProperty(Teacher, '$serializer', {get: Teacher$$serializer_getInstance});
-  package$model.Teacher_init_9zxaf4$ = Teacher_init;
-  package$model.Teacher = Teacher;
   Group$$serializer.prototype.typeParametersSerializers = GeneratedSerializer.prototype.typeParametersSerializers;
   Teacher$$serializer.prototype.typeParametersSerializers = GeneratedSerializer.prototype.typeParametersSerializers;
   WorkPlan$$serializer.prototype.typeParametersSerializers = GeneratedSerializer.prototype.typeParametersSerializers;

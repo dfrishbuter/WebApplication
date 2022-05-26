@@ -14,6 +14,7 @@ import react.router.Route
 import react.router.Routes
 import react.router.dom.HashRouter
 import react.router.dom.Link
+import ru.altmanea.edu.server.model.Config
 import wrappers.cReactQueryDevtools
 
 val queryClient = QueryClient()
@@ -58,17 +59,17 @@ fun main() {
                             createElement(fcContainerSubjectList())
                     }
                     Route {
-                        attrs.path = "/work_plans/by_teacher"
+                        attrs.path = Config.workPlansByTeacherCommonPath
                         attrs.element =
                             createElement(fcContainerWorkPlanList("/by_teacher"))
                     }
                     Route {
-                        attrs.path = "/work_plans/by_group"
+                        attrs.path = Config.workPlansByGroupCommonPath
                         attrs.element =
                             createElement(fcContainerWorkPlanList("/by_group"))
                     }
                     Route {
-                        attrs.path = "/work_plans/by_subject"
+                        attrs.path = Config.workPlansBySubjectCommonPath
                         attrs.element =
                             createElement(fcContainerWorkPlanList("/by_subject"))
                     }
