@@ -525,12 +525,11 @@
   function fcWorkPlanList() {
     return fc('WorkPlanList', fcWorkPlanList$lambda);
   }
-  function fcContainerWorkPlanList$lambda$lambda(closure$lastPathComponent, closure$id) {
+  function fcContainerWorkPlanList$lambda$lambda(closure$lastPathComponent) {
     return function (it) {
       var $receiver = {};
       var closure$lastPathComponent_0 = closure$lastPathComponent;
-      var closure$id_0 = closure$id;
-      $receiver.url = Config.Companion.workPlansBaseURL + closure$lastPathComponent_0 + closure$id_0;
+      $receiver.url = Config.Companion.workPlansBaseURL + closure$lastPathComponent_0;
       return $module$axios($receiver);
     };
   }
@@ -545,7 +544,7 @@
       var tmp$, tmp$_0, tmp$_1, tmp$_2;
       var workPlanParams = useParams();
       var id = (tmp$ = workPlanParams['id']) != null ? tmp$ : 'Route param error';
-      var query = useQuery(id, fcContainerWorkPlanList$lambda$lambda(closure$lastPathComponent, id));
+      var query = useQuery(id, fcContainerWorkPlanList$lambda$lambda(closure$lastPathComponent));
       if (query.isLoading) {
         var $receiver_0 = RDOMBuilder.Companion.invoke_f6ihu2$(div$lambda_3(null));
         $receiver_0.unaryPlus_pdl1vz$('Loading ..');
