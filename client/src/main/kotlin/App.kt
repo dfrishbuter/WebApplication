@@ -59,17 +59,17 @@ fun main() {
                             createElement(fcContainerSubjectList())
                     }
                     Route {
-                        attrs.path = Config.workPlansByTeacherCommonPath
+                        attrs.path = "/teachers/work_plans/by_teacher/:id"
                         attrs.element =
                             createElement(fcContainerWorkPlanList("/by_teacher"))
                     }
                     Route {
-                        attrs.path = Config.workPlansByGroupCommonPath
+                        attrs.path = "/groups/work_plans/by_group/:id"
                         attrs.element =
                             createElement(fcContainerWorkPlanList("/by_group"))
                     }
                     Route {
-                        attrs.path = Config.workPlansBySubjectCommonPath
+                        attrs.path = "/subjects/work_plans/by_subject/:id"
                         attrs.element =
                             createElement(fcContainerWorkPlanList("/by_subject"))
                     }

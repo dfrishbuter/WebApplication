@@ -6,6 +6,7 @@ import io.ktor.response.*
 import io.ktor.routing.*
 import ru.altmanea.edu.server.model.Config
 import ru.altmanea.edu.server.repo.teachersRepo
+import ru.altmanea.edu.server.repo.urlByUUID
 import ru.altmanea.edu.server.repo.workPlansRepo
 
 fun Route.workPlanByTeacher() =
@@ -22,18 +23,11 @@ fun Route.workPlanByTeacher() =
                 "Missing or malformed id",
                 status = HttpStatusCode.BadRequest
             )
-            println(teacherId)
-            val teacher = teachersRepo[teacherId]  ?: return@get call.respondText(
+            val teacher = teachersRepo[teacherId] ?: return@get call.respondText(
                 "No teacher with id $teacherId",
                 status = HttpStatusCode.NotFound
             )
-            println(teacher)
-            val workPlanItem =
-                workPlansRepo.find { it.teacher == teacher!!.elem } ?: return@get call.respondText(
-                    "No work plan for teacher id $teacherId found",
-                    status = HttpStatusCode.NotFound
-                )
-            println(workPlanItem)
+            val workPlanItem = workPlansRepo.find { it.teacher.lastName == teacher.elem.lastName }
             call.respond(workPlanItem)
         }
     }

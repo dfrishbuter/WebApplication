@@ -60,9 +60,9 @@ fun fcWorkPlanList() = fc("WorkPlanList") { props: WorkPlanListProps ->
             th {
                 + "Семестр"
             }
-//            th {
-//                + "Группа"
-//            }
+            th {
+                + "Группа"
+            }
             th {
                 + "Кол-во обучающихся"
             }
@@ -99,14 +99,13 @@ fun fcWorkPlanList() = fc("WorkPlanList") { props: WorkPlanListProps ->
                 td { // "Семестр"
                     + "${workPlan.elem.semester}"
                 }
-    //                td { // "Группа"
-    //                    val name = workPlan.elem.groups.first().name
-//                    var groupsString = ""
-//                    workPlan.elem.groups.forEach {
-//                        groupsString += "${it.code} ${it.name}, ${it.formOfEducation};\n"
-//                    }
-//                    + name
-//                }
+                td { // "Группа"
+                    var groupsString = ""
+                    workPlan.elem.groups.forEach {
+                        groupsString += "${it.code} ${it.name}, ${it.formOfEducation};\n"
+                    }
+                    + groupsString
+                }
                 td { // "Кол-во обучающихся"
                     + "${workPlan.elem.numberOfStudents}"
                 }
@@ -116,10 +115,10 @@ fun fcWorkPlanList() = fc("WorkPlanList") { props: WorkPlanListProps ->
                 td { // "Нагрузка, часов"
                     + "${workPlan.elem.hours}"
                 }
-                td {
+                td { // "Преподаватель"
                     +"${workPlan.elem.teacher.firstName} ${workPlan.elem.teacher.lastName} ${workPlan.elem.teacher.patronymic}"
                 }
-                td {
+                td { // "Вид занятости, ставка"
                     + "${workPlan.elem.typeOfEmployment}"
                 }
             }
@@ -133,7 +132,7 @@ fun fcContainerWorkPlanList(lastPathComponent: String) = fc("QueryWorkPlanList")
     val id = workPlanParams["id"] ?: "Route param error"
     val query = useQuery<Any, QueryError, AxiosResponse<Array<Item<WorkPlan>>>, Any>(id, {
             axios<Array<WorkPlan>>(jso {
-                url = Config.workPlansBaseURL + lastPathComponent + id
+                url = "${Config.workPlansBaseURL}$lastPathComponent/$id"
             })
         }
     )
