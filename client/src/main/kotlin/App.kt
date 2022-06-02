@@ -1,9 +1,6 @@
 //import component.fcContainerGroup
-import component.fcContainerGroupList
-import component.fcContainerSubjectList
+import component.*
 //import component.fcContainerStudent
-import component.fcContainerTeacherList
-import component.fcContainerWorkPlanList
 import kotlinx.browser.document
 import react.createElement
 import react.dom.div
@@ -24,6 +21,9 @@ fun main() {
         HashRouter {
             QueryClientProvider {
                 attrs.client = queryClient
+                div {
+                    child(fcContainerSourceFile())
+                }
                 div {
                     Link {
                         attrs.to = "/teachers"
