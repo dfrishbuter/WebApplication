@@ -1,13 +1,16 @@
 package ru.altmanea.edu.server.repo
 
+import org.apache.poi.ss.usermodel.Cell
 import org.apache.poi.xssf.usermodel.*
 import org.apache.poi.ss.usermodel.CellType
+import org.apache.poi.ss.usermodel.Row
+import org.apache.poi.ss.usermodel.Workbook
 
 import ru.altmanea.edu.server.model.Teacher
 import ru.altmanea.edu.server.model.Group
 import ru.altmanea.edu.server.model.WorkPlan
 
-class Controller(tableFile: XSSFWorkbook, sheetIndex: Int) {
+class Controller(tableFile: Workbook, sheetIndex: Int) {
     private val table = tableFile.getSheetAt(sheetIndex)
 
     fun getWorkPlans(): MutableList<WorkPlan> {
@@ -77,7 +80,7 @@ class Controller(tableFile: XSSFWorkbook, sheetIndex: Int) {
         return workPlans
     }
 
-    private fun getCell(row: XSSFRow, cellnum: Int): XSSFCell? {
+    private fun getCell(row: Row, cellnum: Int): Cell? {
         val cell = row.getCell(cellnum) ?: return null
         if (cell.cellType == CellType.BLANK) {
             return null

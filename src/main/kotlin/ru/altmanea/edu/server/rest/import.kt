@@ -7,11 +7,10 @@ import io.ktor.response.*
 import io.ktor.routing.*
 import ru.altmanea.edu.server.model.Config
 
-fun Route.import() =
-    route(Config.importURL) {
+fun Route.import(completion: (String) -> Unit) =
+    route(Config.importPath) {
         post {
-            val url = call.receive<String>()
-            Config.sourceFileURL = url
+            completion(call.receive<String>().replace("\"", ""))
             call.respondText("Source file url saved successfully", status = HttpStatusCode.Created)
         }
     }

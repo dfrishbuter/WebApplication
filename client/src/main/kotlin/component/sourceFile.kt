@@ -48,18 +48,13 @@ fun fcContainerSourceFile() = fc("QuerySourceFile") { _: Props ->
     val addUrlMutation = useMutation<Any, Any, String, Any>(
         { fileUrl: String ->
             axios<String>(jso {
-                url = Config.importURL
+                url = Config.importPath
                 method = "Post"
                 headers = json(
                     "Content-Type" to "application/json"
                 )
                 data = Json.encodeToString(fileUrl)
             })
-        },
-        options = jso {
-            onSuccess = { _: Any, _: Any, _: Any? ->
-                queryClient.invalidateQueries<Any>("sourceFile")
-            }
         }
     )
 
