@@ -43,18 +43,16 @@ fun fcSourceFile() = fc("SourceFile") { props: SourceFileProps ->
 }
 
 fun fcContainerSourceFile() = fc("QuerySourceFile") { _: Props ->
-    val queryClient = useQueryClient()
-
     // запрос на добавление пути к импортируемому файлу
     val addUrlMutation = useMutation<Any, Any, String, Any>(
         { fileUrl: String ->
             axios<String>(jso {
-                url = Config.importPath
-                method = "Post"
+                url = Config.importPath // Куда делаем запрос (чтобы передать туда полученный путь к файлу)
+                method = "Post"         // Какой метод
                 headers = json(
-                    "Content-Type" to "application/json"
+                    "Content-Type" to "application/json"  // В каком виде передаем контент
                 )
-                data = Json.encodeToString(fileUrl)
+                data = Json.encodeToString(fileUrl) // Упаковываем наш путь к файлу в формат json (совпадает с Content-Type)
             })
         }
     )

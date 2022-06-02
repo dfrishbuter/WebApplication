@@ -10,7 +10,8 @@ import ru.altmanea.edu.server.model.Config
 fun Route.import(completion: (String) -> Unit) =
     route(Config.importPath) {
         post {
-            completion(call.receive<String>().replace("\"", ""))
+            val fileUrl = call.receive<String>().replace("\"", "")
+            completion(fileUrl)
             call.respondText("Source file url saved successfully", status = HttpStatusCode.Created)
         }
     }

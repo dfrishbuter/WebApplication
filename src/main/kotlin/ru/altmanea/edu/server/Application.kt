@@ -14,6 +14,7 @@ import ru.altmanea.edu.server.model.WorkPlan
 import ru.altmanea.edu.server.repo.*
 import ru.altmanea.edu.server.rest.*
 import java.io.FileInputStream
+import java.io.InputStream
 
 fun main() {
     embeddedServer(
@@ -31,11 +32,11 @@ fun Application.main(test: Boolean = true) {
         json()
     }
     routing {
-        import { fileUrl ->
+        import { fileUrl -> // Как только отработает post-запрос со ссылкой на файл, вызовется эта лямбда-функция, и заполнит репозитории данными
             val stream = FileInputStream(fileUrl)
-            val workbook = WorkbookFactory.create(stream)
+            val workbook = WorkbookFactory.create(stream) // Создаем Workbook из стрима
             val controller = Controller(workbook, 0)
-            val workPlansTestData = controller.getWorkPlans()
+            val workPlansTestData = controller.getWorkPlans() // Создали контроллер, используя полученный Workbook, и получили извлеченные им данные
 
             createRepo()
             fillRepo(workPlansTestData)
