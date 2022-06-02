@@ -24,24 +24,6 @@ fun main() {
                 div {
                     child(fcContainerSourceFile())
                 }
-                div {
-                    Link {
-                        attrs.to = "/teachers"
-                        + "Teachers"
-                    }
-                }
-                div {
-                    Link {
-                        attrs.to = "/groups"
-                        + "Groups"
-                    }
-                }
-                div {
-                    Link {
-                        attrs.to = "/subjects"
-                        + "Subjects"
-                    }
-                }
                 Routes {
                     Route {
                         attrs.path = "/teachers"

@@ -14,6 +14,7 @@ import ru.altmanea.edu.server.model.Config
 import wrappers.axios
 import kotlin.js.json
 import kotlinx.serialization.json.Json
+import react.router.dom.Link
 
 external interface SourceFileProps : Props {
     var fileURL: String
@@ -66,4 +67,24 @@ fun fcContainerSourceFile() = fc("QuerySourceFile") { _: Props ->
 
     if (addUrlMutation.isLoading) div { + "Loading .." }
     else if (addUrlMutation.isError) div { + "${addUrlMutation.error}" }
+    else if (addUrlMutation.isSuccess) {
+        div {
+            Link {
+                attrs.to = "/teachers"
+                + "Teachers"
+            }
+        }
+        div {
+            Link {
+                attrs.to = "/groups"
+                + "Groups"
+            }
+        }
+        div {
+            Link {
+                attrs.to = "/subjects"
+                + "Subjects"
+            }
+        }
+    }
 }

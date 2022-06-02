@@ -8,6 +8,9 @@ import io.ktor.server.engine.*
 import io.ktor.server.netty.*
 import org.apache.poi.ss.usermodel.WorkbookFactory
 import ru.altmanea.edu.server.model.Config
+import ru.altmanea.edu.server.model.Group
+import ru.altmanea.edu.server.model.Teacher
+import ru.altmanea.edu.server.model.WorkPlan
 import ru.altmanea.edu.server.repo.*
 import ru.altmanea.edu.server.rest.*
 import java.io.FileInputStream
@@ -34,16 +37,8 @@ fun Application.main(test: Boolean = true) {
             val controller = Controller(workbook, 0)
             val workPlansTestData = controller.getWorkPlans()
 
-            val teachers = workPlansTestData.map { it.teacher }.distinctBy { it.firstName + it.lastName + it.patronymic }
-            teachers.forEach { teachersRepo.create(it) }
-
-            val groups = workPlansTestData.map { it.groups.toList() }.flatten().distinctBy { it.code + it.formOfEducation }
-            groups.forEach { groupsRepo.create(it) }
-
-            val subjects = workPlansTestData.map { it.subject }.distinct()
-            subjects.forEach { subjectsRepo.create(it) }
-
-            workPlansTestData.forEach { workPlansRepo.create(it) }
+            createRepo()
+            fillRepo(workPlansTestData)
         }
         teacher()
         group() // надо объявить маршуты, поэтому прописываем здесь их
@@ -54,3 +49,25 @@ fun Application.main(test: Boolean = true) {
         index()
     }
 }
+
+fun createRepo() {
+    teachersRepo = ListRepo<Teacher>()
+    groupsRepo = ListRepo<Group>()
+    subjectsRepo = ListRepo<String>()
+    workPlansRepo = ListRepo<WorkPlan>()
+}
+
+fun fillRepo(data: List<WorkPlan>) {
+    val teachers = data.map { it.teacher }.distinctBy { it.firstName + it.lastName + it.patronymic }
+    teachers.forEach { teachersRepo.create(it) }
+
+    val groups = data.map { it.groups.toList() }.flatten().distinctBy { it.code + it.formOfEducation }
+    groups.forEach { groupsRepo.create(it) }
+
+    val subjects = data.map { it.subject }.distinct()
+    subjects.forEach { subjectsRepo.create(it) }
+
+    data.forEach { workPlansRepo.create(it) }
+}
+
+
