@@ -33,7 +33,7 @@ fun Application.main(test: Boolean = true) {
     routing {
         import { fileUrl ->
             val stream = FileInputStream(fileUrl)
-            var workbook = WorkbookFactory.create(stream)
+            val workbook = WorkbookFactory.create(stream)
             val controller = Controller(workbook, 0)
             val workPlansTestData = controller.getWorkPlans()
 

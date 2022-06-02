@@ -20,7 +20,8 @@
   var GeneratedSerializer = $module$kotlinx_serialization_kotlinx_serialization_core_js_legacy.kotlinx.serialization.internal.GeneratedSerializer;
   var MissingFieldException_init = $module$kotlinx_serialization_kotlinx_serialization_core_js_legacy.kotlinx.serialization.MissingFieldException_init_61zpoe$;
   var Kind_INTERFACE = Kotlin.Kind.INTERFACE;
-  var ArrayListSerializer = $module$kotlinx_serialization_kotlinx_serialization_core_js_legacy.kotlinx.serialization.internal.ArrayListSerializer;
+  var getKClass = Kotlin.getKClass;
+  var ReferenceArraySerializer = $module$kotlinx_serialization_kotlinx_serialization_core_js_legacy.kotlinx.serialization.internal.ReferenceArraySerializer;
   function Config() {
     Config$Companion_getInstance();
   }
@@ -47,6 +48,8 @@
     this.workPlansBySubjectPath = 'api1/work_plans/by_subject';
     this.workPlansBySubjectURL = 'http://localhost:8080/api1/work_plans/by_subject';
     this.workPlansBaseURL = 'http://localhost:8080/api1//work_plans';
+    this.importPath = '{api1/}source_file';
+    this.importURL = 'http://localhost:8080/{api1/}source_file';
   }
   Config$Companion.$metadata$ = {
     kind: Kind_OBJECT,
@@ -347,7 +350,7 @@
     output.encodeStringElement_iij8qq$(this.descriptor, 3, value.subject);
     output.encodeIntElement_ptg7oe$(this.descriptor, 4, value.semester);
     output.encodeSerializableElement_r4qlx7$(this.descriptor, 5, Teacher$$serializer_getInstance(), value.teacher);
-    output.encodeSerializableElement_r4qlx7$(this.descriptor, 6, new ArrayListSerializer(Group$$serializer_getInstance()), value.groups);
+    output.encodeSerializableElement_r4qlx7$(this.descriptor, 6, new ReferenceArraySerializer(getKClass(Group), Group$$serializer_getInstance()), value.groups);
     output.encodeIntElement_ptg7oe$(this.descriptor, 7, value.numberOfStudents);
     output.encodeStringElement_iij8qq$(this.descriptor, 8, value.typeOfLoad);
     output.encodeFloatElement_lf6hpt$(this.descriptor, 9, value.hours);
@@ -397,7 +400,7 @@
           bitMask0 |= 32;
           break;
         case 6:
-          local6 = input.decodeSerializableElement_12e8id$(this.descriptor, 6, new ArrayListSerializer(Group$$serializer_getInstance()), local6);
+          local6 = input.decodeSerializableElement_12e8id$(this.descriptor, 6, new ReferenceArraySerializer(getKClass(Group), Group$$serializer_getInstance()), local6);
           bitMask0 |= 64;
           break;
         case 7:
@@ -425,7 +428,7 @@
     return WorkPlan_init(bitMask0, local0, local1, local2, local3, local4, local5, local6, local7, local8, local9, local10, null);
   };
   WorkPlan$$serializer.prototype.childSerializers = function () {
-    return [internal.StringSerializer, internal.StringSerializer, internal.StringSerializer, internal.StringSerializer, internal.IntSerializer, Teacher$$serializer_getInstance(), new ArrayListSerializer(Group$$serializer_getInstance()), internal.IntSerializer, internal.StringSerializer, internal.FloatSerializer, internal.StringSerializer];
+    return [internal.StringSerializer, internal.StringSerializer, internal.StringSerializer, internal.StringSerializer, internal.IntSerializer, Teacher$$serializer_getInstance(), new ReferenceArraySerializer(getKClass(Group), Group$$serializer_getInstance()), internal.IntSerializer, internal.StringSerializer, internal.FloatSerializer, internal.StringSerializer];
   };
   WorkPlan$$serializer.$metadata$ = {
     kind: Kind_OBJECT,
@@ -523,7 +526,7 @@
   Object.defineProperty(WorkPlan, '$serializer', {
     get: WorkPlan$$serializer_getInstance
   });
-  package$model.WorkPlan_init_2j7o5y$ = WorkPlan_init;
+  package$model.WorkPlan_init_t4zd89$ = WorkPlan_init;
   package$model.WorkPlan = WorkPlan;
   Group$$serializer.prototype.typeParametersSerializers = GeneratedSerializer.prototype.typeParametersSerializers;
   Teacher$$serializer.prototype.typeParametersSerializers = GeneratedSerializer.prototype.typeParametersSerializers;

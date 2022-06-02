@@ -18,7 +18,8 @@
   var internal = $module$kotlinx_serialization_kotlinx_serialization_core_js_legacy.kotlinx.serialization.internal;
   var GeneratedSerializer = $module$kotlinx_serialization_kotlinx_serialization_core_js_legacy.kotlinx.serialization.internal.GeneratedSerializer;
   var Kind_INTERFACE = Kotlin.Kind.INTERFACE;
-  var ArrayListSerializer = $module$kotlinx_serialization_kotlinx_serialization_core_js_legacy.kotlinx.serialization.internal.ArrayListSerializer;
+  var getKClass = Kotlin.getKClass;
+  var ReferenceArraySerializer = $module$kotlinx_serialization_kotlinx_serialization_core_js_legacy.kotlinx.serialization.internal.ReferenceArraySerializer;
   function Config() {
     Config$Companion_getInstance();
   }
@@ -45,6 +46,8 @@
     this.workPlansBySubjectPath = 'api1/work_plans/by_subject';
     this.workPlansBySubjectURL = 'http://localhost:8080/api1/work_plans/by_subject';
     this.workPlansBaseURL = 'http://localhost:8080/api1//work_plans';
+    this.importPath = '{api1/}source_file';
+    this.importURL = 'http://localhost:8080/{api1/}source_file';
   }
   Config$Companion.$metadata$ = {kind: Kind_OBJECT, simpleName: 'Companion', interfaces: []};
   var Config$Companion_instance = null;

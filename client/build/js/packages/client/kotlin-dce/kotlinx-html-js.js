@@ -111,14 +111,22 @@
   TextAreaWrap.prototype.constructor = TextAreaWrap;
   ThScope.prototype = Object.create(Enum.prototype);
   ThScope.prototype.constructor = ThScope;
+  BUTTON.prototype = Object.create(HTMLTag.prototype);
+  BUTTON.prototype.constructor = BUTTON;
   DIV.prototype = Object.create(HTMLTag.prototype);
   DIV.prototype.constructor = DIV;
   H3.prototype = Object.create(HTMLTag.prototype);
   H3.prototype.constructor = H3;
+  INPUT.prototype = Object.create(HTMLTag.prototype);
+  INPUT.prototype.constructor = INPUT;
   LI.prototype = Object.create(HTMLTag.prototype);
   LI.prototype.constructor = LI;
   OL.prototype = Object.create(HTMLTag.prototype);
   OL.prototype.constructor = OL;
+  P.prototype = Object.create(HTMLTag.prototype);
+  P.prototype.constructor = P;
+  SPAN.prototype = Object.create(HTMLTag.prototype);
+  SPAN.prototype.constructor = SPAN;
   TABLE.prototype = Object.create(HTMLTag.prototype);
   TABLE.prototype.constructor = TABLE;
   TD.prototype = Object.create(HTMLTag.prototype);
@@ -1668,8 +1676,10 @@
   CommonAttributeGroupFacadeFlowHeadingPhrasingContent.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'CommonAttributeGroupFacadeFlowHeadingPhrasingContent', interfaces: [HtmlBlockInlineTag, HtmlInlineTag, FlowPhrasingContent, CommonAttributeGroupFacadeFlowHeadingContent, HtmlBlockTag, CommonAttributeGroupFacade]};
   function CommonAttributeGroupFacadeFlowInteractiveContent() {
   }
+  CommonAttributeGroupFacadeFlowInteractiveContent.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'CommonAttributeGroupFacadeFlowInteractiveContent', interfaces: [HtmlBlockTag, FlowInteractiveContent, CommonAttributeGroupFacade]};
   function CommonAttributeGroupFacadeFlowInteractivePhrasingContent() {
   }
+  CommonAttributeGroupFacadeFlowInteractivePhrasingContent.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'CommonAttributeGroupFacadeFlowInteractivePhrasingContent', interfaces: [HtmlBlockInlineTag, HtmlInlineTag, FlowInteractivePhrasingContent, FlowPhrasingContent, CommonAttributeGroupFacadeFlowInteractiveContent, HtmlBlockTag, FlowInteractiveContent, CommonAttributeGroupFacade]};
   function CommonAttributeGroupFacadeFlowMetaDataContent() {
   }
   function CommonAttributeGroupFacadeFlowMetaDataPhrasingContent() {
@@ -1683,8 +1693,10 @@
   }
   function FlowInteractiveContent() {
   }
+  FlowInteractiveContent.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'FlowInteractiveContent', interfaces: [InteractiveContent, FlowContent]};
   function FlowInteractivePhrasingContent() {
   }
+  FlowInteractivePhrasingContent.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'FlowInteractivePhrasingContent', interfaces: [FlowPhrasingContent, FlowInteractiveContent]};
   function FlowMetaDataContent() {
   }
   function FlowMetaDataPhrasingContent() {
@@ -1708,6 +1720,7 @@
   HeadingContent.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'HeadingContent', interfaces: [FlowOrHeadingContent, Tag]};
   function InteractiveContent() {
   }
+  InteractiveContent.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'InteractiveContent', interfaces: [FlowOrInteractiveContent, FlowOrInteractiveOrPhrasingContent, Tag]};
   function MetaDataContent() {
   }
   function PhrasingContent() {
@@ -1736,6 +1749,69 @@
   function FlowOrInteractiveOrPhrasingContent() {
   }
   FlowOrInteractiveOrPhrasingContent.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'FlowOrInteractiveOrPhrasingContent', interfaces: [Tag]};
+  function BUTTON(initialAttributes, consumer) {
+    HTMLTag.call(this, 'button', consumer, initialAttributes, null, true, false);
+    this.consumer_a8eqy4$_0 = consumer;
+  }
+  Object.defineProperty(BUTTON.prototype, 'consumer', {get: function () {
+    return this.consumer_a8eqy4$_0;
+  }});
+  Object.defineProperty(BUTTON.prototype, 'autoFocus', {configurable: true, get: function () {
+    return attributeBooleanTicker.get_txhc1s$(this, 'autofocus');
+  }, set: function (newValue) {
+    attributeBooleanTicker.set_fid0sb$(this, 'autofocus', newValue);
+  }});
+  Object.defineProperty(BUTTON.prototype, 'disabled', {configurable: true, get: function () {
+    return attributeBooleanTicker.get_txhc1s$(this, 'disabled');
+  }, set: function (newValue) {
+    attributeBooleanTicker.set_fid0sb$(this, 'disabled', newValue);
+  }});
+  Object.defineProperty(BUTTON.prototype, 'form', {configurable: true, get: function () {
+    return attributeStringString.get_txhc1s$(this, 'form');
+  }, set: function (newValue) {
+    attributeStringString.set_fid0sb$(this, 'form', newValue);
+  }});
+  Object.defineProperty(BUTTON.prototype, 'formAction', {configurable: true, get: function () {
+    return attributeStringString.get_txhc1s$(this, 'formaction');
+  }, set: function (newValue) {
+    attributeStringString.set_fid0sb$(this, 'formaction', newValue);
+  }});
+  Object.defineProperty(BUTTON.prototype, 'formEncType', {configurable: true, get: function () {
+    return attributeButtonFormEncTypeEnumButtonFormEncTypeValues.get_txhc1s$(this, 'formenctype');
+  }, set: function (newValue) {
+    attributeButtonFormEncTypeEnumButtonFormEncTypeValues.set_fid0sb$(this, 'formenctype', newValue);
+  }});
+  Object.defineProperty(BUTTON.prototype, 'formMethod', {configurable: true, get: function () {
+    return attributeButtonFormMethodEnumButtonFormMethodValues.get_txhc1s$(this, 'formmethod');
+  }, set: function (newValue) {
+    attributeButtonFormMethodEnumButtonFormMethodValues.set_fid0sb$(this, 'formmethod', newValue);
+  }});
+  Object.defineProperty(BUTTON.prototype, 'formNovalidate', {configurable: true, get: function () {
+    return attributeBooleanTicker.get_txhc1s$(this, 'formnovalidate');
+  }, set: function (newValue) {
+    attributeBooleanTicker.set_fid0sb$(this, 'formnovalidate', newValue);
+  }});
+  Object.defineProperty(BUTTON.prototype, 'formTarget', {configurable: true, get: function () {
+    return attributeStringString.get_txhc1s$(this, 'formtarget');
+  }, set: function (newValue) {
+    attributeStringString.set_fid0sb$(this, 'formtarget', newValue);
+  }});
+  Object.defineProperty(BUTTON.prototype, 'name', {configurable: true, get: function () {
+    return attributeStringString.get_txhc1s$(this, 'name');
+  }, set: function (newValue) {
+    attributeStringString.set_fid0sb$(this, 'name', newValue);
+  }});
+  Object.defineProperty(BUTTON.prototype, 'value', {configurable: true, get: function () {
+    return attributeStringString.get_txhc1s$(this, 'value');
+  }, set: function (newValue) {
+    attributeStringString.set_fid0sb$(this, 'value', newValue);
+  }});
+  Object.defineProperty(BUTTON.prototype, 'type', {configurable: true, get: function () {
+    return attributeButtonTypeEnumButtonTypeValues.get_txhc1s$(this, 'type');
+  }, set: function (newValue) {
+    attributeButtonTypeEnumButtonTypeValues.set_fid0sb$(this, 'type', newValue);
+  }});
+  BUTTON.$metadata$ = {kind: Kind_CLASS, simpleName: 'BUTTON', interfaces: [CommonAttributeGroupFacadeFlowInteractivePhrasingContent, HTMLTag]};
   function DIV(initialAttributes, consumer) {
     HTMLTag.call(this, 'div', consumer, initialAttributes, null, false, false);
     this.consumer_q3hbv$_0 = consumer;
@@ -1752,6 +1828,169 @@
     return this.consumer_mutthp$_0;
   }});
   H3.$metadata$ = {kind: Kind_CLASS, simpleName: 'H3', interfaces: [CommonAttributeGroupFacadeFlowHeadingPhrasingContent, HTMLTag]};
+  function INPUT(initialAttributes, consumer) {
+    HTMLTag.call(this, 'input', consumer, initialAttributes, null, true, true);
+    this.consumer_t1a1kk$_0 = consumer;
+  }
+  Object.defineProperty(INPUT.prototype, 'consumer', {get: function () {
+    return this.consumer_t1a1kk$_0;
+  }});
+  Object.defineProperty(INPUT.prototype, 'type', {configurable: true, get: function () {
+    return attributeInputTypeEnumInputTypeValues.get_txhc1s$(this, 'type');
+  }, set: function (newValue) {
+    attributeInputTypeEnumInputTypeValues.set_fid0sb$(this, 'type', newValue);
+  }});
+  Object.defineProperty(INPUT.prototype, 'accept', {configurable: true, get: function () {
+    return attributeStringString.get_txhc1s$(this, 'accept');
+  }, set: function (newValue) {
+    attributeStringString.set_fid0sb$(this, 'accept', newValue);
+  }});
+  Object.defineProperty(INPUT.prototype, 'alt', {configurable: true, get: function () {
+    return attributeStringString.get_txhc1s$(this, 'alt');
+  }, set: function (newValue) {
+    attributeStringString.set_fid0sb$(this, 'alt', newValue);
+  }});
+  Object.defineProperty(INPUT.prototype, 'autoFocus', {configurable: true, get: function () {
+    return attributeBooleanTicker.get_txhc1s$(this, 'autofocus');
+  }, set: function (newValue) {
+    attributeBooleanTicker.set_fid0sb$(this, 'autofocus', newValue);
+  }});
+  Object.defineProperty(INPUT.prototype, 'autoComplete', {configurable: true, get: function () {
+    return attributeBooleanBooleanOnOff.get_txhc1s$(this, 'autocomplete');
+  }, set: function (newValue) {
+    attributeBooleanBooleanOnOff.set_fid0sb$(this, 'autocomplete', newValue);
+  }});
+  Object.defineProperty(INPUT.prototype, 'checked', {configurable: true, get: function () {
+    return attributeBooleanTicker.get_txhc1s$(this, 'checked');
+  }, set: function (newValue) {
+    attributeBooleanTicker.set_fid0sb$(this, 'checked', newValue);
+  }});
+  Object.defineProperty(INPUT.prototype, 'disabled', {configurable: true, get: function () {
+    return attributeBooleanTicker.get_txhc1s$(this, 'disabled');
+  }, set: function (newValue) {
+    attributeBooleanTicker.set_fid0sb$(this, 'disabled', newValue);
+  }});
+  Object.defineProperty(INPUT.prototype, 'form', {configurable: true, get: function () {
+    return attributeStringString.get_txhc1s$(this, 'form');
+  }, set: function (newValue) {
+    attributeStringString.set_fid0sb$(this, 'form', newValue);
+  }});
+  Object.defineProperty(INPUT.prototype, 'formAction', {configurable: true, get: function () {
+    return attributeStringString.get_txhc1s$(this, 'formaction');
+  }, set: function (newValue) {
+    attributeStringString.set_fid0sb$(this, 'formaction', newValue);
+  }});
+  Object.defineProperty(INPUT.prototype, 'formEncType', {configurable: true, get: function () {
+    return attributeInputFormEncTypeEnumInputFormEncTypeValues.get_txhc1s$(this, 'formenctype');
+  }, set: function (newValue) {
+    attributeInputFormEncTypeEnumInputFormEncTypeValues.set_fid0sb$(this, 'formenctype', newValue);
+  }});
+  Object.defineProperty(INPUT.prototype, 'formMethod', {configurable: true, get: function () {
+    return attributeInputFormMethodEnumInputFormMethodValues.get_txhc1s$(this, 'formmethod');
+  }, set: function (newValue) {
+    attributeInputFormMethodEnumInputFormMethodValues.set_fid0sb$(this, 'formmethod', newValue);
+  }});
+  Object.defineProperty(INPUT.prototype, 'formNovalidate', {configurable: true, get: function () {
+    return attributeBooleanTicker.get_txhc1s$(this, 'formnovalidate');
+  }, set: function (newValue) {
+    attributeBooleanTicker.set_fid0sb$(this, 'formnovalidate', newValue);
+  }});
+  Object.defineProperty(INPUT.prototype, 'formTarget', {configurable: true, get: function () {
+    return attributeStringString.get_txhc1s$(this, 'formtarget');
+  }, set: function (newValue) {
+    attributeStringString.set_fid0sb$(this, 'formtarget', newValue);
+  }});
+  Object.defineProperty(INPUT.prototype, 'height', {configurable: true, get: function () {
+    return attributeStringString.get_txhc1s$(this, 'height');
+  }, set: function (newValue) {
+    attributeStringString.set_fid0sb$(this, 'height', newValue);
+  }});
+  Object.defineProperty(INPUT.prototype, 'list', {configurable: true, get: function () {
+    return attributeStringString.get_txhc1s$(this, 'list');
+  }, set: function (newValue) {
+    attributeStringString.set_fid0sb$(this, 'list', newValue);
+  }});
+  Object.defineProperty(INPUT.prototype, 'max', {configurable: true, get: function () {
+    return attributeStringString.get_txhc1s$(this, 'max');
+  }, set: function (newValue) {
+    attributeStringString.set_fid0sb$(this, 'max', newValue);
+  }});
+  Object.defineProperty(INPUT.prototype, 'maxLength', {configurable: true, get: function () {
+    return attributeStringString.get_txhc1s$(this, 'maxlength');
+  }, set: function (newValue) {
+    attributeStringString.set_fid0sb$(this, 'maxlength', newValue);
+  }});
+  Object.defineProperty(INPUT.prototype, 'minLength', {configurable: true, get: function () {
+    return attributeStringString.get_txhc1s$(this, 'minlength');
+  }, set: function (newValue) {
+    attributeStringString.set_fid0sb$(this, 'minlength', newValue);
+  }});
+  Object.defineProperty(INPUT.prototype, 'min', {configurable: true, get: function () {
+    return attributeStringString.get_txhc1s$(this, 'min');
+  }, set: function (newValue) {
+    attributeStringString.set_fid0sb$(this, 'min', newValue);
+  }});
+  Object.defineProperty(INPUT.prototype, 'multiple', {configurable: true, get: function () {
+    return attributeBooleanTicker.get_txhc1s$(this, 'multiple');
+  }, set: function (newValue) {
+    attributeBooleanTicker.set_fid0sb$(this, 'multiple', newValue);
+  }});
+  Object.defineProperty(INPUT.prototype, 'pattern', {configurable: true, get: function () {
+    return attributeStringString.get_txhc1s$(this, 'pattern');
+  }, set: function (newValue) {
+    attributeStringString.set_fid0sb$(this, 'pattern', newValue);
+  }});
+  Object.defineProperty(INPUT.prototype, 'placeholder', {configurable: true, get: function () {
+    return attributeStringString.get_txhc1s$(this, 'placeholder');
+  }, set: function (newValue) {
+    attributeStringString.set_fid0sb$(this, 'placeholder', newValue);
+  }});
+  Object.defineProperty(INPUT.prototype, 'readonly', {configurable: true, get: function () {
+    return attributeBooleanTicker.get_txhc1s$(this, 'readonly');
+  }, set: function (newValue) {
+    attributeBooleanTicker.set_fid0sb$(this, 'readonly', newValue);
+  }});
+  Object.defineProperty(INPUT.prototype, 'required', {configurable: true, get: function () {
+    return attributeBooleanTicker.get_txhc1s$(this, 'required');
+  }, set: function (newValue) {
+    attributeBooleanTicker.set_fid0sb$(this, 'required', newValue);
+  }});
+  Object.defineProperty(INPUT.prototype, 'size', {configurable: true, get: function () {
+    return attributeStringString.get_txhc1s$(this, 'size');
+  }, set: function (newValue) {
+    attributeStringString.set_fid0sb$(this, 'size', newValue);
+  }});
+  Object.defineProperty(INPUT.prototype, 'src', {configurable: true, get: function () {
+    return attributeStringString.get_txhc1s$(this, 'src');
+  }, set: function (newValue) {
+    attributeStringString.set_fid0sb$(this, 'src', newValue);
+  }});
+  Object.defineProperty(INPUT.prototype, 'step', {configurable: true, get: function () {
+    return attributeStringString.get_txhc1s$(this, 'step');
+  }, set: function (newValue) {
+    attributeStringString.set_fid0sb$(this, 'step', newValue);
+  }});
+  Object.defineProperty(INPUT.prototype, 'width', {configurable: true, get: function () {
+    return attributeStringString.get_txhc1s$(this, 'width');
+  }, set: function (newValue) {
+    attributeStringString.set_fid0sb$(this, 'width', newValue);
+  }});
+  Object.defineProperty(INPUT.prototype, 'files', {configurable: true, get: function () {
+    return attributeStringString.get_txhc1s$(this, 'files');
+  }, set: function (newValue) {
+    attributeStringString.set_fid0sb$(this, 'files', newValue);
+  }});
+  Object.defineProperty(INPUT.prototype, 'value', {configurable: true, get: function () {
+    return attributeStringString.get_txhc1s$(this, 'value');
+  }, set: function (newValue) {
+    attributeStringString.set_fid0sb$(this, 'value', newValue);
+  }});
+  Object.defineProperty(INPUT.prototype, 'name', {configurable: true, get: function () {
+    return attributeStringString.get_txhc1s$(this, 'name');
+  }, set: function (newValue) {
+    attributeStringString.set_fid0sb$(this, 'name', newValue);
+  }});
+  INPUT.$metadata$ = {kind: Kind_CLASS, simpleName: 'INPUT', interfaces: [CommonAttributeGroupFacadeFlowInteractivePhrasingContent, HTMLTag]};
   function LI(initialAttributes, consumer) {
     HTMLTag.call(this, 'li', consumer, initialAttributes, null, false, false);
     this.consumer_gvd6sf$_0 = consumer;
@@ -1783,6 +2022,22 @@
     attributeBooleanTicker.set_fid0sb$(this, 'reversed', newValue);
   }});
   OL.$metadata$ = {kind: Kind_CLASS, simpleName: 'OL', interfaces: [HtmlBlockTag, HTMLTag]};
+  function P(initialAttributes, consumer) {
+    HTMLTag.call(this, 'p', consumer, initialAttributes, null, false, false);
+    this.consumer_pmd17q$_0 = consumer;
+  }
+  Object.defineProperty(P.prototype, 'consumer', {get: function () {
+    return this.consumer_pmd17q$_0;
+  }});
+  P.$metadata$ = {kind: Kind_CLASS, simpleName: 'P', interfaces: [HtmlBlockInlineTag, HTMLTag]};
+  function SPAN(initialAttributes, consumer) {
+    HTMLTag.call(this, 'span', consumer, initialAttributes, null, true, false);
+    this.consumer_7vq504$_0 = consumer;
+  }
+  Object.defineProperty(SPAN.prototype, 'consumer', {get: function () {
+    return this.consumer_7vq504$_0;
+  }});
+  SPAN.$metadata$ = {kind: Kind_CLASS, simpleName: 'SPAN', interfaces: [HtmlBlockInlineTag, HTMLTag]};
   function TABLE(initialAttributes, consumer) {
     HTMLTag.call(this, 'table', consumer, initialAttributes, null, false, false);
     this.consumer_gxb6a0$_0 = consumer;
@@ -1912,6 +2167,9 @@
     this.document = document;
     this.path_0 = ArrayList_init();
     this.lastLeaved_0 = null;
+  }
+  function set_onClickFunction($receiver, newValue) {
+    $receiver.consumer.onTagEvent_azi6uv$($receiver, 'onclick', newValue);
   }
   var InjectRoot_instance = null;
   var package$kotlinx = _.kotlinx || (_.kotlinx = {});
@@ -2069,10 +2327,14 @@
   package$html.FlowOrPhrasingContent = FlowOrPhrasingContent;
   package$html.SectioningOrFlowContent = SectioningOrFlowContent;
   package$html.FlowOrInteractiveOrPhrasingContent = FlowOrInteractiveOrPhrasingContent;
+  package$html.BUTTON = BUTTON;
   package$html.DIV = DIV;
   package$html.H3 = H3;
+  package$html.INPUT = INPUT;
   package$html.LI = LI;
   package$html.OL = OL;
+  package$html.P = P;
+  package$html.SPAN = SPAN;
   package$html.TABLE = TABLE;
   package$html.TD = TD;
   package$html.TH = TH;
@@ -2080,8 +2342,10 @@
   package$html.HTMLTag = HTMLTag;
   var package$stream = package$html.stream || (package$html.stream = {});
   package$stream.HTMLStreamBuilder = HTMLStreamBuilder;
+  var package$js = package$html.js || (package$html.js = {});
   var package$dom = package$html.dom || (package$html.dom = {});
   package$dom.JSDOMBuilder = JSDOMBuilder;
+  package$js.set_onClickFunction_pszlq2$ = set_onClickFunction;
   DefaultUnsafe.prototype.unaryPlus_lvwjq6$ = Unsafe.prototype.unaryPlus_lvwjq6$;
   DefaultUnsafe.prototype.raw_61zpoe$ = Unsafe.prototype.raw_61zpoe$;
   DefaultUnsafe.prototype.raw_ws8or7$ = Unsafe.prototype.raw_ws8or7$;

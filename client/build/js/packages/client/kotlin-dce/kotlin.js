@@ -2969,6 +2969,9 @@
         }
       }return result;
     }
+    function findAssociatedObject($receiver, annotationClass) {
+      return null;
+    }
     function toString_0($receiver, radix) {
       return $receiver.toString(checkRadix(radix));
     }
@@ -3959,6 +3962,12 @@
       HashMap_init_1(initialCapacity, 0.0, $this);
       return $this;
     }
+    function HashMap_init_3(original, $this) {
+      $this = $this || Object.create(HashMap.prototype);
+      HashMap_init_0($this);
+      $this.putAll_a2k3zr$(original);
+      return $this;
+    }
     function HashSet() {
       this.map_8be2vx$ = null;
     }
@@ -3990,6 +3999,14 @@
       AbstractMutableSet.call($this);
       HashSet.call($this);
       $this.map_8be2vx$ = HashMap_init_0();
+      return $this;
+    }
+    function HashSet_init_0(elements, $this) {
+      $this = $this || Object.create(HashSet.prototype);
+      AbstractMutableSet.call($this);
+      HashSet.call($this);
+      $this.map_8be2vx$ = HashMap_init_2(elements.size);
+      $this.addAll_brywnq$(elements);
       return $this;
     }
     function HashSet_init_1(initialCapacity, loadFactor, $this) {
@@ -4420,6 +4437,13 @@
       LinkedHashSet.call($this);
       return $this;
     }
+    function LinkedHashSet_init_1(elements, $this) {
+      $this = $this || Object.create(LinkedHashSet.prototype);
+      HashSet_init_3(LinkedHashMap_init(), $this);
+      LinkedHashSet.call($this);
+      $this.addAll_brywnq$(elements);
+      return $this;
+    }
     function LinkedHashSet_init_2(initialCapacity, loadFactor, $this) {
       $this = $this || Object.create(LinkedHashSet.prototype);
       HashSet_init_3(LinkedHashMap_init_1(initialCapacity, loadFactor), $this);
@@ -4571,6 +4595,16 @@
     function Serializable() {
     }
     Serializable.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'Serializable', interfaces: []};
+    function json(pairs) {
+      var tmp$;
+      var res = {};
+      for (tmp$ = 0; tmp$ !== pairs.length; ++tmp$) {
+        var tmp$_0 = pairs[tmp$];
+        var name = tmp$_0.component1(), value = tmp$_0.component2();
+        res[name] = value;
+      }
+      return res;
+    }
     function isNaN_0($receiver) {
       return $receiver !== $receiver;
     }
@@ -4724,7 +4758,69 @@
     function KMutableProperty1() {
     }
     KMutableProperty1.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'KMutableProperty1', interfaces: [KMutableProperty, KProperty1]};
+    function KType() {
+    }
+    KType.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'KType', interfaces: []};
+    function createKType(classifier, arguments_0, isMarkedNullable) {
+      return new KTypeImpl(classifier, asList(arguments_0), isMarkedNullable);
+    }
+    function KTypeImpl(classifier, arguments_0, isMarkedNullable) {
+      this.classifier_50lv52$_0 = classifier;
+      this.arguments_lev63t$_0 = arguments_0;
+      this.isMarkedNullable_748rxs$_0 = isMarkedNullable;
+    }
+    Object.defineProperty(KTypeImpl.prototype, 'classifier', {get: function () {
+      return this.classifier_50lv52$_0;
+    }});
+    Object.defineProperty(KTypeImpl.prototype, 'arguments', {get: function () {
+      return this.arguments_lev63t$_0;
+    }});
+    Object.defineProperty(KTypeImpl.prototype, 'isMarkedNullable', {get: function () {
+      return this.isMarkedNullable_748rxs$_0;
+    }});
+    KTypeImpl.prototype.equals = function (other) {
+      return Kotlin.isType(other, KTypeImpl) && equals(this.classifier, other.classifier) && equals(this.arguments, other.arguments) && this.isMarkedNullable === other.isMarkedNullable;
+    };
+    KTypeImpl.prototype.hashCode = function () {
+      return (((hashCode(this.classifier) * 31 | 0) + hashCode(this.arguments) | 0) * 31 | 0) + hashCode(this.isMarkedNullable) | 0;
+    };
+    function KTypeImpl$toString$lambda(this$KTypeImpl) {
+      return function (it) {
+        return this$KTypeImpl.asString_0(it);
+      };
+    }
+    KTypeImpl.prototype.toString = function () {
+      var tmp$, tmp$_0;
+      var kClass = Kotlin.isType(tmp$ = this.classifier, KClass) ? tmp$ : null;
+      if (kClass == null)
+        tmp$_0 = this.classifier.toString();
+      else if (kClass.simpleName != null)
+        tmp$_0 = kClass.simpleName;
+      else
+        tmp$_0 = '(non-denotable type)';
+      var classifierName = tmp$_0;
+      var args = this.arguments.isEmpty() ? '' : joinToString_8(this.arguments, ', ', '<', '>', void 0, void 0, KTypeImpl$toString$lambda(this));
+      var nullable = this.isMarkedNullable ? '?' : '';
+      return classifierName + args + nullable;
+    };
+    KTypeImpl.prototype.asString_0 = function ($receiver) {
+      if ($receiver.variance == null)
+        return '*';
+      return prefixString($receiver.variance) + toString($receiver.type);
+    };
+    KTypeImpl.$metadata$ = {kind: Kind_CLASS, simpleName: 'KTypeImpl', interfaces: [KType]};
     var DynamicKType_instance = null;
+    function prefixString($receiver) {
+      switch ($receiver.name) {
+        case 'INVARIANT':
+          return '';
+        case 'IN':
+          return 'in ';
+        case 'OUT':
+          return 'out ';
+        default:return Kotlin.noWhenBranchMatched();
+      }
+    }
     function PrimitiveClasses() {
       PrimitiveClasses_instance = this;
       this.anyClass = new PrimitiveKClassImpl(Object, 'Any', PrimitiveClasses$anyClass$lambda);
@@ -8381,6 +8477,37 @@
     function to($receiver, that) {
       return new Pair($receiver, that);
     }
+    function Triple(first, second, third) {
+      this.first = first;
+      this.second = second;
+      this.third = third;
+    }
+    Triple.prototype.toString = function () {
+      return '(' + this.first + ', ' + this.second + ', ' + this.third + ')';
+    };
+    Triple.$metadata$ = {kind: Kind_CLASS, simpleName: 'Triple', interfaces: [Serializable]};
+    Triple.prototype.component1 = function () {
+      return this.first;
+    };
+    Triple.prototype.component2 = function () {
+      return this.second;
+    };
+    Triple.prototype.component3 = function () {
+      return this.third;
+    };
+    Triple.prototype.copy_1llc0w$ = function (first, second, third) {
+      return new Triple(first === void 0 ? this.first : first, second === void 0 ? this.second : second, third === void 0 ? this.third : third);
+    };
+    Triple.prototype.hashCode = function () {
+      var result = 0;
+      result = result * 31 + Kotlin.hashCode(this.first) | 0;
+      result = result * 31 + Kotlin.hashCode(this.second) | 0;
+      result = result * 31 + Kotlin.hashCode(this.third) | 0;
+      return result;
+    };
+    Triple.prototype.equals = function (other) {
+      return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.first, other.first) && Kotlin.equals(this.second, other.second) && Kotlin.equals(this.third, other.third)))));
+    };
     function UByte(data) {
       UByte$Companion_getInstance();
       this.data = data;
@@ -10427,6 +10554,7 @@
     package$kotlin.lazy_kls4a0$ = lazy_0;
     package$kotlin.fillFrom_dgzutr$ = fillFrom;
     package$kotlin.arrayCopyResize_xao4iu$ = arrayCopyResize;
+    _.findAssociatedObject_yjf3nl$ = findAssociatedObject;
     package$text.toString_if0zpk$ = toString_0;
     package$collections.asList_us0mfu$ = asList;
     package$collections.arrayCopy = arrayCopy;
@@ -10466,7 +10594,9 @@
     package$collections.HashMap_init_q3lmfv$ = HashMap_init_0;
     package$collections.HashMap_init_xf5xz2$ = HashMap_init_1;
     package$collections.HashMap_init_bwtc7$ = HashMap_init_2;
+    package$collections.HashMap_init_73mtqc$ = HashMap_init_3;
     package$collections.HashMap = HashMap;
+    package$collections.HashSet_init_mqih57$ = HashSet_init_0;
     package$collections.HashSet_init_2wofer$ = HashSet_init_1;
     package$collections.HashSet_init_ww73n8$ = HashSet_init_2;
     package$collections.HashSet_init_nn01ho$ = HashSet_init_3;
@@ -10477,6 +10607,7 @@
     package$collections.LinkedHashMap_init_xf5xz2$ = LinkedHashMap_init_1;
     package$collections.LinkedHashMap_init_73mtqc$ = LinkedHashMap_init_3;
     package$collections.LinkedHashMap = LinkedHashMap;
+    package$collections.LinkedHashSet_init_mqih57$ = LinkedHashSet_init_1;
     package$collections.LinkedHashSet_init_2wofer$ = LinkedHashSet_init_2;
     package$collections.LinkedHashSet = LinkedHashSet;
     package$collections.RandomAccess = RandomAccess;
@@ -10498,6 +10629,7 @@
     _.throwISE = throwISE;
     _.throwUPAE = throwUPAE;
     package$io.Serializable = Serializable;
+    package$js.json_pyyo18$ = json;
     package$kotlin.isNaN_yrwdxr$ = isNaN_0;
     package$kotlin.isNaN_81szk$ = isNaN_1;
     package$kotlin.isInfinite_yrwdxr$ = isInfinite;
@@ -10523,6 +10655,10 @@
     package$reflect.KMutableProperty0 = KMutableProperty0;
     package$reflect.KProperty1 = KProperty1;
     package$reflect.KMutableProperty1 = KMutableProperty1;
+    package$reflect.KType = KType;
+    _.createKType = createKType;
+    package$internal_1.KTypeImpl = KTypeImpl;
+    package$internal_1.prefixString_knho38$ = prefixString;
     Object.defineProperty(package$internal_1, 'PrimitiveClasses', {get: PrimitiveClasses_getInstance});
     _.getKClass = getKClass;
     _.getKClassM = getKClassM;
@@ -10673,6 +10809,7 @@
     package$kotlin.NotImplementedError = NotImplementedError;
     package$kotlin.Pair = Pair;
     package$kotlin.to_ujzrz7$ = to;
+    package$kotlin.Triple = Triple;
     Object.defineProperty(UByte, 'Companion', {get: UByte$Companion_getInstance});
     Object.defineProperty(UInt, 'Companion', {get: UInt$Companion_getInstance});
     package$kotlin.uintCompare_vux9f0$ = uintCompare;

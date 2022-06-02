@@ -25,6 +25,7 @@
   var iterator = Kotlin.kotlin.text.iterator_gw00vp$;
   var toBoxedChar = Kotlin.toBoxedChar;
   var Annotation = Kotlin.kotlin.Annotation;
+  var serializerOrNull = $module$kotlinx_serialization_kotlinx_serialization_core_js_legacy.kotlinx.serialization.serializerOrNull_1yb8b7$;
   var KSerializer = $module$kotlinx_serialization_kotlinx_serialization_core_js_legacy.kotlinx.serialization.KSerializer;
   var throwCCE = Kotlin.throwCCE;
   var toString = Kotlin.toString;

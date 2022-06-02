@@ -52,6 +52,7 @@
   var LinkedHashMap = Kotlin.kotlin.collections.LinkedHashMap;
   var Map$Entry = Kotlin.kotlin.collections.Map.Entry;
   var Pair = Kotlin.kotlin.Pair;
+  var Triple = Kotlin.kotlin.Triple;
   var KClass = Kotlin.kotlin.reflect.KClass;
   var collectionSizeOrDefault = Kotlin.kotlin.collections.collectionSizeOrDefault_ba2ldo$;
   var ArrayList_init = Kotlin.kotlin.collections.ArrayList_init_ww73n8$;
@@ -80,8 +81,11 @@
   var toIntOrNull = Kotlin.kotlin.text.toIntOrNull_pdl1vz$;
   var getValue = Kotlin.kotlin.collections.getValue_t9ocha$;
   var ArrayList_init_1 = Kotlin.kotlin.collections.ArrayList_init_mqih57$;
+  var LinkedHashSet_init = Kotlin.kotlin.collections.LinkedHashSet_init_mqih57$;
+  var HashSet_init_0 = Kotlin.kotlin.collections.HashSet_init_mqih57$;
   var LinkedHashMap_init_1 = Kotlin.kotlin.collections.LinkedHashMap_init_73mtqc$;
   var HashMap_init = Kotlin.kotlin.collections.HashMap_init_q3lmfv$;
+  var HashMap_init_0 = Kotlin.kotlin.collections.HashMap_init_73mtqc$;
   var LinkedHashSet_init_0 = Kotlin.kotlin.collections.LinkedHashSet_init_287e2$;
   var L1 = Kotlin.Long.ONE;
   var L_1 = Kotlin.Long.NEG_ONE;
@@ -151,6 +155,9 @@
   var get_indices_0 = Kotlin.kotlin.collections.get_indices_l1lu5t$;
   var get_js = Kotlin.kotlin.js.get_js_1yb8b7$;
   var PrimitiveClasses$arrayClass = Kotlin.kotlin.reflect.js.internal.PrimitiveClasses.arrayClass;
+  var findAssociatedObject = Kotlin.findAssociatedObject_yjf3nl$;
+  PolymorphicSerializer.prototype = Object.create(AbstractPolymorphicSerializer.prototype);
+  PolymorphicSerializer.prototype.constructor = PolymorphicSerializer;
   SealedClassSerializer.prototype = Object.create(AbstractPolymorphicSerializer.prototype);
   SealedClassSerializer.prototype.constructor = SealedClassSerializer;
   SerializationException.prototype = Object.create(IllegalArgumentException.prototype);
@@ -197,20 +204,36 @@
   PolymorphicKind$OPEN.prototype.constructor = PolymorphicKind$OPEN;
   PrimitiveArrayDescriptor.prototype = Object.create(ListLikeDescriptor.prototype);
   PrimitiveArrayDescriptor.prototype.constructor = PrimitiveArrayDescriptor;
+  ArrayClassDesc.prototype = Object.create(ListLikeDescriptor.prototype);
+  ArrayClassDesc.prototype.constructor = ArrayClassDesc;
   ArrayListClassDesc.prototype = Object.create(ListLikeDescriptor.prototype);
   ArrayListClassDesc.prototype.constructor = ArrayListClassDesc;
+  LinkedHashSetClassDesc.prototype = Object.create(ListLikeDescriptor.prototype);
+  LinkedHashSetClassDesc.prototype.constructor = LinkedHashSetClassDesc;
+  HashSetClassDesc.prototype = Object.create(ListLikeDescriptor.prototype);
+  HashSetClassDesc.prototype.constructor = HashSetClassDesc;
   LinkedHashMapClassDesc.prototype = Object.create(MapLikeDescriptor.prototype);
   LinkedHashMapClassDesc.prototype.constructor = LinkedHashMapClassDesc;
+  HashMapClassDesc.prototype = Object.create(MapLikeDescriptor.prototype);
+  HashMapClassDesc.prototype.constructor = HashMapClassDesc;
   ListLikeSerializer.prototype = Object.create(AbstractCollectionSerializer.prototype);
   ListLikeSerializer.prototype.constructor = ListLikeSerializer;
   MapLikeSerializer.prototype = Object.create(AbstractCollectionSerializer.prototype);
   MapLikeSerializer.prototype.constructor = MapLikeSerializer;
   PrimitiveArraySerializer.prototype = Object.create(ListLikeSerializer.prototype);
   PrimitiveArraySerializer.prototype.constructor = PrimitiveArraySerializer;
+  ReferenceArraySerializer.prototype = Object.create(ListLikeSerializer.prototype);
+  ReferenceArraySerializer.prototype.constructor = ReferenceArraySerializer;
   ArrayListSerializer.prototype = Object.create(ListLikeSerializer.prototype);
   ArrayListSerializer.prototype.constructor = ArrayListSerializer;
+  LinkedHashSetSerializer.prototype = Object.create(ListLikeSerializer.prototype);
+  LinkedHashSetSerializer.prototype.constructor = LinkedHashSetSerializer;
+  HashSetSerializer.prototype = Object.create(ListLikeSerializer.prototype);
+  HashSetSerializer.prototype.constructor = HashSetSerializer;
   LinkedHashMapSerializer.prototype = Object.create(MapLikeSerializer.prototype);
   LinkedHashMapSerializer.prototype.constructor = LinkedHashMapSerializer;
+  HashMapSerializer.prototype = Object.create(MapLikeSerializer.prototype);
+  HashMapSerializer.prototype.constructor = HashMapSerializer;
   InlineClassDescriptor.prototype = Object.create(PluginGeneratedSerialDescriptor.prototype);
   InlineClassDescriptor.prototype.constructor = InlineClassDescriptor;
   NoOpEncoder.prototype = Object.create(AbstractEncoder.prototype);
@@ -251,6 +274,10 @@
   NamedValueEncoder.prototype.constructor = NamedValueEncoder;
   NamedValueDecoder.prototype = Object.create(TaggedDecoder.prototype);
   NamedValueDecoder.prototype.constructor = NamedValueDecoder;
+  MapEntrySerializer_0.prototype = Object.create(KeyValueSerializer.prototype);
+  MapEntrySerializer_0.prototype.constructor = MapEntrySerializer_0;
+  PairSerializer_0.prototype = Object.create(KeyValueSerializer.prototype);
+  PairSerializer_0.prototype.constructor = PairSerializer_0;
   SerialModuleImpl.prototype = Object.create(SerializersModule.prototype);
   SerialModuleImpl.prototype.constructor = SerialModuleImpl;
   ContextualProvider$Argless.prototype = Object.create(ContextualProvider.prototype);
@@ -268,6 +295,35 @@
   function DeserializationStrategy() {
   }
   DeserializationStrategy.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'DeserializationStrategy', interfaces: []};
+  function PolymorphicSerializer(baseClass) {
+    AbstractPolymorphicSerializer.call(this);
+    this.baseClass_x5jvam$_0 = baseClass;
+    this._annotations_0 = emptyList();
+    this.descriptor_nog3ww$_0 = lazy(LazyThreadSafetyMode.PUBLICATION, PolymorphicSerializer$descriptor$lambda(this));
+  }
+  Object.defineProperty(PolymorphicSerializer.prototype, 'baseClass', {get: function () {
+    return this.baseClass_x5jvam$_0;
+  }});
+  Object.defineProperty(PolymorphicSerializer.prototype, 'descriptor', {configurable: true, get: function () {
+    return this.descriptor_nog3ww$_0.value;
+  }});
+  PolymorphicSerializer.prototype.toString = function () {
+    return 'kotlinx.serialization.PolymorphicSerializer(baseClass: ' + this.baseClass + ')';
+  };
+  function PolymorphicSerializer$descriptor$lambda$lambda(this$PolymorphicSerializer) {
+    return function ($receiver) {
+      $receiver.element_vxrguq$('type', serializer_13(kotlin_js_internal_StringCompanionObject).descriptor);
+      $receiver.element_vxrguq$('value', buildSerialDescriptor('kotlinx.serialization.Polymorphic<' + toString(this$PolymorphicSerializer.baseClass.simpleName) + '>', SerialKind$CONTEXTUAL_getInstance(), []));
+      $receiver.annotations = this$PolymorphicSerializer._annotations_0;
+      return Unit;
+    };
+  }
+  function PolymorphicSerializer$descriptor$lambda(this$PolymorphicSerializer) {
+    return function () {
+      return withContext(buildSerialDescriptor('kotlinx.serialization.Polymorphic', PolymorphicKind$OPEN_getInstance(), [], PolymorphicSerializer$descriptor$lambda$lambda(this$PolymorphicSerializer)), this$PolymorphicSerializer.baseClass);
+    };
+  }
+  PolymorphicSerializer.$metadata$ = {kind: Kind_CLASS, simpleName: 'PolymorphicSerializer', interfaces: [AbstractPolymorphicSerializer]};
   function findPolymorphicSerializer($receiver, decoder, klassName) {
     var tmp$;
     return (tmp$ = $receiver.findPolymorphicSerializerOrNull_ca6uye$(decoder, klassName)) != null ? tmp$ : throwSubtypeNotRegistered(klassName, $receiver.baseClass);
@@ -388,6 +444,130 @@
     SerializationException.call($this);
     return $this;
   }
+  function serializer_2($receiver, type) {
+    var tmp$;
+    return (tmp$ = serializerByKTypeImpl($receiver, type, true)) != null ? tmp$ : platformSpecificSerializerNotRegistered(kclass(type));
+  }
+  function serializerOrNull_0($receiver, type) {
+    return serializerByKTypeImpl($receiver, type, false);
+  }
+  function serializerByKTypeImpl($receiver, type, failOnMissingTypeArgSerializer) {
+    var tmp$, tmp$_0;
+    var rootClass = kclass(type);
+    var isNullable = type.isMarkedNullable;
+    var $receiver_0 = type.arguments;
+    var destination = ArrayList_init(collectionSizeOrDefault($receiver_0, 10));
+    var tmp$_1;
+    tmp$_1 = $receiver_0.iterator();
+    while (tmp$_1.hasNext()) {
+      var item = tmp$_1.next();
+      var tmp$_2 = destination.add_11rb$;
+      var value = item.type;
+      var requireNotNull$result;
+      if (value == null) {
+        var message = 'Star projections in type arguments are not allowed, but had ' + type;
+        throw IllegalArgumentException_init(message.toString());
+      } else {
+        requireNotNull$result = value;
+      }
+      tmp$_2.call(destination, requireNotNull$result);
+    }
+    var typeArguments = destination;
+    if (typeArguments.isEmpty())
+      tmp$_0 = (tmp$ = serializerOrNull_1(rootClass)) != null ? tmp$ : $receiver.getContextual_2n2k9f$(rootClass);
+    else
+      tmp$_0 = builtinSerializer($receiver, typeArguments, rootClass, failOnMissingTypeArgSerializer);
+    var tmp$_3;
+    if (tmp$_0 != null) {
+      var tmp$_4;
+      tmp$_3 = Kotlin.isType(tmp$_4 = tmp$_0, KSerializer) ? tmp$_4 : throwCCE();
+    } else
+      tmp$_3 = null;
+    var result = tmp$_3;
+    return result != null ? nullable(result, isNullable) : null;
+  }
+  function builtinSerializer($receiver, typeArguments, rootClass, failOnMissingTypeArgSerializer) {
+    var tmp$, tmp$_0, tmp$_1, tmp$_2;
+    if (failOnMissingTypeArgSerializer) {
+      var transform = getCallableRef('serializer', function ($receiver, p1) {
+        return serializer_2($receiver, p1);
+      }.bind(null, $receiver));
+      var destination = ArrayList_init(collectionSizeOrDefault(typeArguments, 10));
+      var tmp$_3;
+      tmp$_3 = typeArguments.iterator();
+      while (tmp$_3.hasNext()) {
+        var item = tmp$_3.next();
+        destination.add_11rb$(transform(item));
+      }
+      tmp$ = destination;
+    } else {
+      var destination_0 = ArrayList_init(collectionSizeOrDefault(typeArguments, 10));
+      var tmp$_4;
+      tmp$_4 = typeArguments.iterator();
+      while (tmp$_4.hasNext()) {
+        var item_0 = tmp$_4.next();
+        var tmp$_5 = destination_0.add_11rb$;
+        var tmp$_6;
+        tmp$_6 = serializerOrNull_0($receiver, item_0);
+        if (tmp$_6 == null) {
+          return null;
+        }tmp$_5.call(destination_0, tmp$_6);
+      }
+      tmp$ = destination_0;
+    }
+    var serializers = tmp$;
+    if (equals(rootClass, getKClass(Collection)) || equals(rootClass, getKClass(List)) || equals(rootClass, getKClass(MutableList)) || equals(rootClass, getKClass(ArrayList)))
+      tmp$_2 = new ArrayListSerializer(serializers.get_za3lpa$(0));
+    else if (equals(rootClass, getKClass(HashSet)))
+      tmp$_2 = new HashSetSerializer(serializers.get_za3lpa$(0));
+    else if (equals(rootClass, getKClass(Set)) || equals(rootClass, getKClass(MutableSet)) || equals(rootClass, getKClass(LinkedHashSet)))
+      tmp$_2 = new LinkedHashSetSerializer(serializers.get_za3lpa$(0));
+    else if (equals(rootClass, getKClass(HashMap)))
+      tmp$_2 = new HashMapSerializer(serializers.get_za3lpa$(0), serializers.get_za3lpa$(1));
+    else if (equals(rootClass, getKClass(Map)) || equals(rootClass, getKClass(MutableMap)) || equals(rootClass, getKClass(LinkedHashMap)))
+      tmp$_2 = new LinkedHashMapSerializer(serializers.get_za3lpa$(0), serializers.get_za3lpa$(1));
+    else if (equals(rootClass, getKClass(Map$Entry)))
+      tmp$_2 = MapEntrySerializer(serializers.get_za3lpa$(0), serializers.get_za3lpa$(1));
+    else if (equals(rootClass, getKClass(Pair)))
+      tmp$_2 = PairSerializer(serializers.get_za3lpa$(0), serializers.get_za3lpa$(1));
+    else if (equals(rootClass, getKClass(Triple)))
+      tmp$_2 = TripleSerializer(serializers.get_za3lpa$(0), serializers.get_za3lpa$(1), serializers.get_za3lpa$(2));
+    else {
+      if (isReferenceArray(rootClass)) {
+        var tmp$_7;
+        return Kotlin.isType(tmp$_7 = ArraySerializer_0(Kotlin.isType(tmp$_0 = typeArguments.get_za3lpa$(0).classifier, KClass) ? tmp$_0 : throwCCE(), serializers.get_za3lpa$(0)), KSerializer) ? tmp$_7 : throwCCE();
+      }var args = copyToArray(serializers);
+      tmp$_2 = (tmp$_1 = constructSerializerForGivenTypeArgs(rootClass, args.slice())) != null ? tmp$_1 : reflectiveOrContextual($receiver, rootClass, serializers);
+    }
+    return tmp$_2;
+  }
+  function reflectiveOrContextual($receiver, kClass, typeArgumentsSerializers) {
+    var tmp$;
+    return (tmp$ = serializerOrNull_1(kClass)) != null ? tmp$ : $receiver.getContextual_2n2k9f$(kClass, typeArgumentsSerializers);
+  }
+  function serializerOrNull_1($receiver) {
+    var tmp$;
+    return (tmp$ = compiledSerializerImpl($receiver)) != null ? tmp$ : builtinSerializerOrNull($receiver);
+  }
+  function nullable($receiver, shouldBeNullable) {
+    var tmp$;
+    if (shouldBeNullable)
+      return get_nullable($receiver);
+    return Kotlin.isType(tmp$ = $receiver, KSerializer) ? tmp$ : throwCCE();
+  }
+  function get_nullable($receiver) {
+    var tmp$;
+    return $receiver.descriptor.isNullable ? Kotlin.isType(tmp$ = $receiver, KSerializer) ? tmp$ : throwCCE() : new NullableSerializer($receiver);
+  }
+  function PairSerializer(keySerializer, valueSerializer) {
+    return new PairSerializer_0(keySerializer, valueSerializer);
+  }
+  function MapEntrySerializer(keySerializer, valueSerializer) {
+    return new MapEntrySerializer_0(keySerializer, valueSerializer);
+  }
+  function TripleSerializer(aSerializer, bSerializer, cSerializer) {
+    return new TripleSerializer_0(aSerializer, bSerializer, cSerializer);
+  }
   function serializer_4($receiver) {
     return CharSerializer_getInstance();
   }
@@ -442,6 +622,9 @@
   function serializer_13($receiver) {
     return StringSerializer_getInstance();
   }
+  function ArraySerializer_0(kClass, elementSerializer) {
+    return new ReferenceArraySerializer(kClass, elementSerializer);
+  }
   function ListSerializer(elementSerializer) {
     return new ArrayListSerializer(elementSerializer);
   }
@@ -478,6 +661,9 @@
     } else
       tmp$_0 = null;
     return tmp$_0;
+  }
+  function withContext($receiver, context) {
+    return new ContextDescriptor($receiver, context);
   }
   function ContextDescriptor(original, kClass) {
     this.original_0 = original;
@@ -574,6 +760,19 @@
   }
   function get_elementDescriptors($receiver) {
     return new Iterable$ObjectLiteral(get_elementDescriptors$lambda($receiver));
+  }
+  function buildClassSerialDescriptor$lambda($receiver) {
+    return Unit;
+  }
+  function buildClassSerialDescriptor(serialName, typeParameters, builderAction) {
+    if (builderAction === void 0)
+      builderAction = buildClassSerialDescriptor$lambda;
+    if (!!isBlank(serialName)) {
+      var message = 'Blank serial names are prohibited';
+      throw IllegalArgumentException_init(message.toString());
+    }var sdBuilder = new ClassSerialDescriptorBuilder(serialName);
+    builderAction(sdBuilder);
+    return new SerialDescriptorImpl(serialName, StructureKind$CLASS_getInstance(), sdBuilder.elementNames_8be2vx$.size, toList(typeParameters), sdBuilder);
   }
   function PrimitiveSerialDescriptor(serialName, kind) {
     if (!!isBlank(serialName)) {
@@ -1457,6 +1656,13 @@
     return this.serialName_reprdi$_0;
   }});
   PrimitiveArrayDescriptor.$metadata$ = {kind: Kind_CLASS, simpleName: 'PrimitiveArrayDescriptor', interfaces: [ListLikeDescriptor]};
+  function ArrayClassDesc(elementDesc) {
+    ListLikeDescriptor.call(this, elementDesc);
+  }
+  Object.defineProperty(ArrayClassDesc.prototype, 'serialName', {configurable: true, get: function () {
+    return ARRAY_NAME;
+  }});
+  ArrayClassDesc.$metadata$ = {kind: Kind_CLASS, simpleName: 'ArrayClassDesc', interfaces: [ListLikeDescriptor]};
   function ArrayListClassDesc(elementDesc) {
     ListLikeDescriptor.call(this, elementDesc);
   }
@@ -1464,10 +1670,28 @@
     return ARRAY_LIST_NAME;
   }});
   ArrayListClassDesc.$metadata$ = {kind: Kind_CLASS, simpleName: 'ArrayListClassDesc', interfaces: [ListLikeDescriptor]};
+  function LinkedHashSetClassDesc(elementDesc) {
+    ListLikeDescriptor.call(this, elementDesc);
+  }
+  Object.defineProperty(LinkedHashSetClassDesc.prototype, 'serialName', {configurable: true, get: function () {
+    return LINKED_HASH_SET_NAME;
+  }});
+  LinkedHashSetClassDesc.$metadata$ = {kind: Kind_CLASS, simpleName: 'LinkedHashSetClassDesc', interfaces: [ListLikeDescriptor]};
+  function HashSetClassDesc(elementDesc) {
+    ListLikeDescriptor.call(this, elementDesc);
+  }
+  Object.defineProperty(HashSetClassDesc.prototype, 'serialName', {configurable: true, get: function () {
+    return HASH_SET_NAME;
+  }});
+  HashSetClassDesc.$metadata$ = {kind: Kind_CLASS, simpleName: 'HashSetClassDesc', interfaces: [ListLikeDescriptor]};
   function LinkedHashMapClassDesc(keyDesc, valueDesc) {
     MapLikeDescriptor.call(this, LINKED_HASH_MAP_NAME, keyDesc, valueDesc);
   }
   LinkedHashMapClassDesc.$metadata$ = {kind: Kind_CLASS, simpleName: 'LinkedHashMapClassDesc', interfaces: [MapLikeDescriptor]};
+  function HashMapClassDesc(keyDesc, valueDesc) {
+    MapLikeDescriptor.call(this, HASH_MAP_NAME, keyDesc, valueDesc);
+  }
+  HashMapClassDesc.$metadata$ = {kind: Kind_CLASS, simpleName: 'HashMapClassDesc', interfaces: [MapLikeDescriptor]};
   function AbstractCollectionSerializer() {
   }
   AbstractCollectionSerializer.prototype.merge_h7kg3q$ = function (decoder, previous) {
@@ -1643,6 +1867,39 @@
     return this.merge_h7kg3q$(decoder, null);
   };
   PrimitiveArraySerializer.$metadata$ = {kind: Kind_CLASS, simpleName: 'PrimitiveArraySerializer', interfaces: [ListLikeSerializer]};
+  function ReferenceArraySerializer(kClass, eSerializer) {
+    ListLikeSerializer.call(this, eSerializer);
+    this.kClass_0 = kClass;
+    this.descriptor_8482jr$_0 = new ArrayClassDesc(eSerializer.descriptor);
+  }
+  Object.defineProperty(ReferenceArraySerializer.prototype, 'descriptor', {configurable: true, get: function () {
+    return this.descriptor_8482jr$_0;
+  }});
+  ReferenceArraySerializer.prototype.collectionSize_wikn$ = function ($receiver) {
+    return $receiver.length;
+  };
+  ReferenceArraySerializer.prototype.collectionIterator_wikn$ = function ($receiver) {
+    return Kotlin.arrayIterator($receiver);
+  };
+  ReferenceArraySerializer.prototype.builder = function () {
+    return ArrayList_init_0();
+  };
+  ReferenceArraySerializer.prototype.builderSize_wili$ = function ($receiver) {
+    return $receiver.size;
+  };
+  ReferenceArraySerializer.prototype.toResult_wili$ = function ($receiver) {
+    return toNativeArrayImpl($receiver, this.kClass_0);
+  };
+  ReferenceArraySerializer.prototype.toBuilder_wikn$ = function ($receiver) {
+    return ArrayList_init_1(asList($receiver));
+  };
+  ReferenceArraySerializer.prototype.checkCapacity_rk7bw8$ = function ($receiver, size) {
+    $receiver.ensureCapacity_za3lpa$(size);
+  };
+  ReferenceArraySerializer.prototype.insert_p422l$ = function ($receiver, index, element) {
+    $receiver.add_wxm5ur$(index, element);
+  };
+  ReferenceArraySerializer.$metadata$ = {kind: Kind_CLASS, simpleName: 'ReferenceArraySerializer', interfaces: [ListLikeSerializer]};
   function ArrayListSerializer(element) {
     ListLikeSerializer.call(this, element);
     this.descriptor_7uwoa2$_0 = new ArrayListClassDesc(element.descriptor);
@@ -1676,6 +1933,70 @@
     $receiver.add_wxm5ur$(index, element);
   };
   ArrayListSerializer.$metadata$ = {kind: Kind_CLASS, simpleName: 'ArrayListSerializer', interfaces: [ListLikeSerializer]};
+  function LinkedHashSetSerializer(eSerializer) {
+    ListLikeSerializer.call(this, eSerializer);
+    this.descriptor_vnfc7m$_0 = new LinkedHashSetClassDesc(eSerializer.descriptor);
+  }
+  Object.defineProperty(LinkedHashSetSerializer.prototype, 'descriptor', {configurable: true, get: function () {
+    return this.descriptor_vnfc7m$_0;
+  }});
+  LinkedHashSetSerializer.prototype.collectionSize_wikn$ = function ($receiver) {
+    return $receiver.size;
+  };
+  LinkedHashSetSerializer.prototype.collectionIterator_wikn$ = function ($receiver) {
+    return $receiver.iterator();
+  };
+  LinkedHashSetSerializer.prototype.builder = function () {
+    return LinkedHashSet_init_0();
+  };
+  LinkedHashSetSerializer.prototype.builderSize_wili$ = function ($receiver) {
+    return $receiver.size;
+  };
+  LinkedHashSetSerializer.prototype.toResult_wili$ = function ($receiver) {
+    return $receiver;
+  };
+  LinkedHashSetSerializer.prototype.toBuilder_wikn$ = function ($receiver) {
+    var tmp$, tmp$_0;
+    return (tmp$_0 = Kotlin.isType(tmp$ = $receiver, LinkedHashSet) ? tmp$ : null) != null ? tmp$_0 : LinkedHashSet_init($receiver);
+  };
+  LinkedHashSetSerializer.prototype.checkCapacity_rk7bw8$ = function ($receiver, size) {
+  };
+  LinkedHashSetSerializer.prototype.insert_p422l$ = function ($receiver, index, element) {
+    $receiver.add_11rb$(element);
+  };
+  LinkedHashSetSerializer.$metadata$ = {kind: Kind_CLASS, simpleName: 'LinkedHashSetSerializer', interfaces: [ListLikeSerializer]};
+  function HashSetSerializer(eSerializer) {
+    ListLikeSerializer.call(this, eSerializer);
+    this.descriptor_yqpz47$_0 = new HashSetClassDesc(eSerializer.descriptor);
+  }
+  Object.defineProperty(HashSetSerializer.prototype, 'descriptor', {configurable: true, get: function () {
+    return this.descriptor_yqpz47$_0;
+  }});
+  HashSetSerializer.prototype.collectionSize_wikn$ = function ($receiver) {
+    return $receiver.size;
+  };
+  HashSetSerializer.prototype.collectionIterator_wikn$ = function ($receiver) {
+    return $receiver.iterator();
+  };
+  HashSetSerializer.prototype.builder = function () {
+    return HashSet_init();
+  };
+  HashSetSerializer.prototype.builderSize_wili$ = function ($receiver) {
+    return $receiver.size;
+  };
+  HashSetSerializer.prototype.toResult_wili$ = function ($receiver) {
+    return $receiver;
+  };
+  HashSetSerializer.prototype.toBuilder_wikn$ = function ($receiver) {
+    var tmp$, tmp$_0;
+    return (tmp$_0 = Kotlin.isType(tmp$ = $receiver, HashSet) ? tmp$ : null) != null ? tmp$_0 : HashSet_init_0($receiver);
+  };
+  HashSetSerializer.prototype.checkCapacity_rk7bw8$ = function ($receiver, size) {
+  };
+  HashSetSerializer.prototype.insert_p422l$ = function ($receiver, index, element) {
+    $receiver.add_11rb$(element);
+  };
+  HashSetSerializer.$metadata$ = {kind: Kind_CLASS, simpleName: 'HashSetSerializer', interfaces: [ListLikeSerializer]};
   function LinkedHashMapSerializer(kSerializer, vSerializer) {
     MapLikeSerializer.call(this, kSerializer, vSerializer);
     this.descriptor_pixp0o$_0 = new LinkedHashMapClassDesc(kSerializer.descriptor, vSerializer.descriptor);
@@ -1708,6 +2029,38 @@
     $receiver.put_xwzc9p$(key, value);
   };
   LinkedHashMapSerializer.$metadata$ = {kind: Kind_CLASS, simpleName: 'LinkedHashMapSerializer', interfaces: [MapLikeSerializer]};
+  function HashMapSerializer(kSerializer, vSerializer) {
+    MapLikeSerializer.call(this, kSerializer, vSerializer);
+    this.descriptor_kvyydd$_0 = new HashMapClassDesc(kSerializer.descriptor, vSerializer.descriptor);
+  }
+  Object.defineProperty(HashMapSerializer.prototype, 'descriptor', {configurable: true, get: function () {
+    return this.descriptor_kvyydd$_0;
+  }});
+  HashMapSerializer.prototype.collectionSize_wikn$ = function ($receiver) {
+    return $receiver.size;
+  };
+  HashMapSerializer.prototype.collectionIterator_wikn$ = function ($receiver) {
+    return $receiver.entries.iterator();
+  };
+  HashMapSerializer.prototype.builder = function () {
+    return HashMap_init();
+  };
+  HashMapSerializer.prototype.builderSize_wili$ = function ($receiver) {
+    return $receiver.size * 2 | 0;
+  };
+  HashMapSerializer.prototype.toResult_wili$ = function ($receiver) {
+    return $receiver;
+  };
+  HashMapSerializer.prototype.toBuilder_wikn$ = function ($receiver) {
+    var tmp$, tmp$_0;
+    return (tmp$_0 = Kotlin.isType(tmp$ = $receiver, HashMap) ? tmp$ : null) != null ? tmp$_0 : HashMap_init_0($receiver);
+  };
+  HashMapSerializer.prototype.checkCapacity_rk7bw8$ = function ($receiver, size) {
+  };
+  HashMapSerializer.prototype.insertKeyValuePair_fbr58l$ = function ($receiver, index, key, value) {
+    $receiver.put_xwzc9p$(key, value);
+  };
+  HashMapSerializer.$metadata$ = {kind: Kind_CLASS, simpleName: 'HashMapSerializer', interfaces: [MapLikeSerializer]};
   function ElementMarker(descriptor, readIfAbsent) {
     ElementMarker$Companion_getInstance();
     this.descriptor_0 = descriptor;
@@ -1976,6 +2329,39 @@
       new NoOpEncoder();
     }return NoOpEncoder_instance;
   }
+  function NullableSerializer(serializer) {
+    this.serializer_0 = serializer;
+    this.descriptor_kbvl2k$_0 = new SerialDescriptorForNullable(this.serializer_0.descriptor);
+  }
+  Object.defineProperty(NullableSerializer.prototype, 'descriptor', {configurable: true, get: function () {
+    return this.descriptor_kbvl2k$_0;
+  }});
+  NullableSerializer.prototype.serialize_55azsf$ = function (encoder, value) {
+    if (value != null) {
+      encoder.encodeNotNullMark();
+      encoder.encodeSerializableValue_tf03ej$(this.serializer_0, value);
+    } else {
+      encoder.encodeNull();
+    }
+  };
+  NullableSerializer.prototype.deserialize_bq71mq$ = function (decoder) {
+    return decoder.decodeNotNullMark() ? decoder.decodeSerializableValue_w63s0f$(this.serializer_0) : decoder.decodeNull();
+  };
+  NullableSerializer.prototype.equals = function (other) {
+    var tmp$, tmp$_0;
+    if (this === other)
+      return true;
+    if (other == null || !((tmp$ = Kotlin.getKClassFromExpression(this)) != null ? tmp$.equals(Kotlin.getKClassFromExpression(other)) : null))
+      return false;
+    Kotlin.isType(tmp$_0 = other, NullableSerializer) ? tmp$_0 : throwCCE();
+    if (!equals(this.serializer_0, other.serializer_0))
+      return false;
+    return true;
+  };
+  NullableSerializer.prototype.hashCode = function () {
+    return hashCode(this.serializer_0);
+  };
+  NullableSerializer.$metadata$ = {kind: Kind_CLASS, simpleName: 'NullableSerializer', interfaces: [KSerializer]};
   function SerialDescriptorForNullable(original) {
     this.original_8be2vx$ = original;
     this.serialName_szvoqg$_0 = this.original_8be2vx$.serialName + '?';
@@ -2077,6 +2463,16 @@
   function compactArray($receiver) {
     var tmp$, tmp$_0;
     return (tmp$_0 = (tmp$ = !($receiver == null || $receiver.isEmpty()) ? $receiver : null) != null ? copyToArray(tmp$) : null) != null ? tmp$_0 : EMPTY_DESCRIPTOR_ARRAY;
+  }
+  function kclass($receiver) {
+    var tmp$, tmp$_0;
+    var t = $receiver.classifier;
+    if (Kotlin.isType(t, KClass))
+      tmp$ = t;
+    else {
+      throw IllegalStateException_init(('Only KClass supported as classifier, got ' + toString(t)).toString());
+    }
+    return Kotlin.isType(tmp$_0 = tmp$, KClass) ? tmp$_0 : throwCCE();
   }
   function PluginGeneratedSerialDescriptor(serialName, generatedSerializer, elementsCount) {
     if (generatedSerializer === void 0)
@@ -2762,6 +3158,10 @@
       tmp$ = $receiver;
     return tmp$;
   }
+  function builtinSerializerOrNull($receiver) {
+    var tmp$;
+    return (tmp$ = BUILTIN_SERIALIZERS.get_11rb$($receiver)) == null || Kotlin.isType(tmp$, KSerializer) ? tmp$ : throwCCE();
+  }
   function UnitSerializer() {
     UnitSerializer_instance = this;
     this.$delegate_t0wm8i$_0 = new ObjectSerializer('kotlin.Unit', Unit);
@@ -3335,6 +3735,196 @@
   NamedValueDecoder.$metadata$ = {kind: Kind_CLASS, simpleName: 'NamedValueDecoder', interfaces: [TaggedDecoder]};
   var NULL;
   var deprecationMessage;
+  function KeyValueSerializer(keySerializer, valueSerializer) {
+    this.keySerializer_0 = keySerializer;
+    this.valueSerializer_0 = valueSerializer;
+  }
+  KeyValueSerializer.prototype.serialize_55azsf$ = function (encoder, value) {
+    var structuredEncoder = encoder.beginStructure_24f42q$(this.descriptor);
+    structuredEncoder.encodeSerializableElement_r4qlx7$(this.descriptor, 0, this.keySerializer_0, this.get_key_wili$(value));
+    structuredEncoder.encodeSerializableElement_r4qlx7$(this.descriptor, 1, this.valueSerializer_0, this.get_value_wili$(value));
+    structuredEncoder.endStructure_24f42q$(this.descriptor);
+  };
+  KeyValueSerializer.prototype.deserialize_bq71mq$ = function (decoder) {
+    var tmp$, tmp$_0;
+    var composite = decoder.beginStructure_24f42q$(this.descriptor);
+    if (composite.decodeSequentially()) {
+      var key = composite.decodeSerializableElement_12e8id$(this.descriptor, 0, this.keySerializer_0);
+      var value = composite.decodeSerializableElement_12e8id$(this.descriptor, 1, this.valueSerializer_0);
+      return this.toResult_xwzc9p$(key, value);
+    }var key_0 = NULL;
+    var value_0 = NULL;
+    mainLoop: while (true) {
+      var idx = composite.decodeElementIndex_24f42q$(this.descriptor);
+      switch (idx) {
+        case -1:
+          break mainLoop;
+        case 0:
+          key_0 = composite.decodeSerializableElement_12e8id$(this.descriptor, 0, this.keySerializer_0);
+          break;
+        case 1:
+          value_0 = composite.decodeSerializableElement_12e8id$(this.descriptor, 1, this.valueSerializer_0);
+          break;
+        default:throw SerializationException_init_0('Invalid index: ' + idx);
+      }
+    }
+    composite.endStructure_24f42q$(this.descriptor);
+    if (key_0 === NULL)
+      throw SerializationException_init_0("Element 'key' is missing");
+    if (value_0 === NULL)
+      throw SerializationException_init_0("Element 'value' is missing");
+    return this.toResult_xwzc9p$((tmp$ = key_0) == null || Kotlin.isType(tmp$, Any) ? tmp$ : throwCCE(), (tmp$_0 = value_0) == null || Kotlin.isType(tmp$_0, Any) ? tmp$_0 : throwCCE());
+  };
+  KeyValueSerializer.$metadata$ = {kind: Kind_CLASS, simpleName: 'KeyValueSerializer', interfaces: [KSerializer]};
+  function MapEntrySerializer_0(keySerializer, valueSerializer) {
+    KeyValueSerializer.call(this, keySerializer, valueSerializer);
+    this.descriptor_cnmk75$_0 = buildSerialDescriptor('kotlin.collections.Map.Entry', StructureKind$MAP_getInstance(), [], MapEntrySerializer$descriptor$lambda(keySerializer, valueSerializer));
+  }
+  function MapEntrySerializer$MapEntry(key, value) {
+    this.key_7uv6mv$_0 = key;
+    this.value_gjenjd$_0 = value;
+  }
+  Object.defineProperty(MapEntrySerializer$MapEntry.prototype, 'key', {get: function () {
+    return this.key_7uv6mv$_0;
+  }});
+  Object.defineProperty(MapEntrySerializer$MapEntry.prototype, 'value', {get: function () {
+    return this.value_gjenjd$_0;
+  }});
+  MapEntrySerializer$MapEntry.$metadata$ = {kind: Kind_CLASS, simpleName: 'MapEntry', interfaces: [Map$Entry]};
+  MapEntrySerializer$MapEntry.prototype.component1 = function () {
+    return this.key;
+  };
+  MapEntrySerializer$MapEntry.prototype.component2 = function () {
+    return this.value;
+  };
+  MapEntrySerializer$MapEntry.prototype.copy_xwzc9p$ = function (key, value) {
+    return new MapEntrySerializer$MapEntry(key === void 0 ? this.key : key, value === void 0 ? this.value : value);
+  };
+  MapEntrySerializer$MapEntry.prototype.toString = function () {
+    return 'MapEntry(key=' + Kotlin.toString(this.key) + (', value=' + Kotlin.toString(this.value)) + ')';
+  };
+  MapEntrySerializer$MapEntry.prototype.hashCode = function () {
+    var result = 0;
+    result = result * 31 + Kotlin.hashCode(this.key) | 0;
+    result = result * 31 + Kotlin.hashCode(this.value) | 0;
+    return result;
+  };
+  MapEntrySerializer$MapEntry.prototype.equals = function (other) {
+    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.key, other.key) && Kotlin.equals(this.value, other.value)))));
+  };
+  Object.defineProperty(MapEntrySerializer_0.prototype, 'descriptor', {configurable: true, get: function () {
+    return this.descriptor_cnmk75$_0;
+  }});
+  MapEntrySerializer_0.prototype.get_key_wili$ = function ($receiver) {
+    return $receiver.key;
+  };
+  MapEntrySerializer_0.prototype.get_value_wili$ = function ($receiver) {
+    return $receiver.value;
+  };
+  MapEntrySerializer_0.prototype.toResult_xwzc9p$ = function (key, value) {
+    return new MapEntrySerializer$MapEntry(key, value);
+  };
+  function MapEntrySerializer$descriptor$lambda(closure$keySerializer, closure$valueSerializer) {
+    return function ($receiver) {
+      $receiver.element_vxrguq$('key', closure$keySerializer.descriptor);
+      $receiver.element_vxrguq$('value', closure$valueSerializer.descriptor);
+      return Unit;
+    };
+  }
+  MapEntrySerializer_0.$metadata$ = {kind: Kind_CLASS, simpleName: 'MapEntrySerializer', interfaces: [KeyValueSerializer]};
+  function PairSerializer_0(keySerializer, valueSerializer) {
+    KeyValueSerializer.call(this, keySerializer, valueSerializer);
+    this.descriptor_utc4rp$_0 = buildClassSerialDescriptor('kotlin.Pair', [], PairSerializer$descriptor$lambda(keySerializer, valueSerializer));
+  }
+  Object.defineProperty(PairSerializer_0.prototype, 'descriptor', {configurable: true, get: function () {
+    return this.descriptor_utc4rp$_0;
+  }});
+  PairSerializer_0.prototype.get_key_wili$ = function ($receiver) {
+    return $receiver.first;
+  };
+  PairSerializer_0.prototype.get_value_wili$ = function ($receiver) {
+    return $receiver.second;
+  };
+  PairSerializer_0.prototype.toResult_xwzc9p$ = function (key, value) {
+    return to(key, value);
+  };
+  function PairSerializer$descriptor$lambda(closure$keySerializer, closure$valueSerializer) {
+    return function ($receiver) {
+      $receiver.element_vxrguq$('first', closure$keySerializer.descriptor);
+      $receiver.element_vxrguq$('second', closure$valueSerializer.descriptor);
+      return Unit;
+    };
+  }
+  PairSerializer_0.$metadata$ = {kind: Kind_CLASS, simpleName: 'PairSerializer', interfaces: [KeyValueSerializer]};
+  function TripleSerializer_0(aSerializer, bSerializer, cSerializer) {
+    this.aSerializer_0 = aSerializer;
+    this.bSerializer_0 = bSerializer;
+    this.cSerializer_0 = cSerializer;
+    this.descriptor_73a6vr$_0 = buildClassSerialDescriptor('kotlin.Triple', [], TripleSerializer$descriptor$lambda(this));
+  }
+  Object.defineProperty(TripleSerializer_0.prototype, 'descriptor', {configurable: true, get: function () {
+    return this.descriptor_73a6vr$_0;
+  }});
+  TripleSerializer_0.prototype.serialize_55azsf$ = function (encoder, value) {
+    var structuredEncoder = encoder.beginStructure_24f42q$(this.descriptor);
+    structuredEncoder.encodeSerializableElement_r4qlx7$(this.descriptor, 0, this.aSerializer_0, value.first);
+    structuredEncoder.encodeSerializableElement_r4qlx7$(this.descriptor, 1, this.bSerializer_0, value.second);
+    structuredEncoder.encodeSerializableElement_r4qlx7$(this.descriptor, 2, this.cSerializer_0, value.third);
+    structuredEncoder.endStructure_24f42q$(this.descriptor);
+  };
+  TripleSerializer_0.prototype.deserialize_bq71mq$ = function (decoder) {
+    var composite = decoder.beginStructure_24f42q$(this.descriptor);
+    if (composite.decodeSequentially()) {
+      return this.decodeSequentially_0(composite);
+    }return this.decodeStructure_0(composite);
+  };
+  TripleSerializer_0.prototype.decodeSequentially_0 = function (composite) {
+    var a = composite.decodeSerializableElement_12e8id$(this.descriptor, 0, this.aSerializer_0);
+    var b = composite.decodeSerializableElement_12e8id$(this.descriptor, 1, this.bSerializer_0);
+    var c = composite.decodeSerializableElement_12e8id$(this.descriptor, 2, this.cSerializer_0);
+    composite.endStructure_24f42q$(this.descriptor);
+    return new Triple(a, b, c);
+  };
+  TripleSerializer_0.prototype.decodeStructure_0 = function (composite) {
+    var tmp$, tmp$_0, tmp$_1;
+    var a = NULL;
+    var b = NULL;
+    var c = NULL;
+    mainLoop: while (true) {
+      var index = composite.decodeElementIndex_24f42q$(this.descriptor);
+      switch (index) {
+        case -1:
+          break mainLoop;
+        case 0:
+          a = composite.decodeSerializableElement_12e8id$(this.descriptor, 0, this.aSerializer_0);
+          break;
+        case 1:
+          b = composite.decodeSerializableElement_12e8id$(this.descriptor, 1, this.bSerializer_0);
+          break;
+        case 2:
+          c = composite.decodeSerializableElement_12e8id$(this.descriptor, 2, this.cSerializer_0);
+          break;
+        default:throw SerializationException_init_0('Unexpected index ' + index);
+      }
+    }
+    composite.endStructure_24f42q$(this.descriptor);
+    if (a === NULL)
+      throw SerializationException_init_0("Element 'first' is missing");
+    if (b === NULL)
+      throw SerializationException_init_0("Element 'second' is missing");
+    if (c === NULL)
+      throw SerializationException_init_0("Element 'third' is missing");
+    return new Triple((tmp$ = a) == null || Kotlin.isType(tmp$, Any) ? tmp$ : throwCCE(), (tmp$_0 = b) == null || Kotlin.isType(tmp$_0, Any) ? tmp$_0 : throwCCE(), (tmp$_1 = c) == null || Kotlin.isType(tmp$_1, Any) ? tmp$_1 : throwCCE());
+  };
+  function TripleSerializer$descriptor$lambda(this$TripleSerializer) {
+    return function ($receiver) {
+      $receiver.element_vxrguq$('first', this$TripleSerializer.aSerializer_0.descriptor);
+      $receiver.element_vxrguq$('second', this$TripleSerializer.bSerializer_0.descriptor);
+      $receiver.element_vxrguq$('third', this$TripleSerializer.cSerializer_0.descriptor);
+      return Unit;
+    };
+  }
+  TripleSerializer_0.$metadata$ = {kind: Kind_CLASS, simpleName: 'TripleSerializer', interfaces: [KSerializer]};
   function SerializersModule() {
   }
   SerializersModule.prototype.getContextual_lmshww$ = function (kclass) {
@@ -3480,6 +4070,10 @@
     this.polymorphicDefaultDeserializer_yd5wsm$(baseClass, defaultDeserializerProvider);
   };
   SerializersModuleCollector.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'SerializersModuleCollector', interfaces: []};
+  function SerializableWith(serializer) {
+    this.serializer = serializer;
+  }
+  SerializableWith.$metadata$ = {kind: Kind_CLASS, simpleName: 'SerializableWith', interfaces: [Annotation]};
   function getChecked($receiver, index) {
     if (!get_indices($receiver).contains_mef7kx$(index))
       throw new IndexOutOfBoundsException('Index ' + index + ' out of bounds ' + get_indices($receiver));
@@ -3490,14 +4084,48 @@
       throw new IndexOutOfBoundsException('Index ' + index + ' out of bounds ' + get_indices_0($receiver));
     return $receiver[index];
   }
+  function compiledSerializerImpl($receiver) {
+    var tmp$, tmp$_0, tmp$_1;
+    return (tmp$_1 = constructSerializerForGivenTypeArgs($receiver, [])) != null ? tmp$_1 : Kotlin.isType(tmp$_0 = (tmp$ = get_js($receiver).Companion) != null ? tmp$.serializer() : null, KSerializer) ? tmp$_0 : null;
+  }
+  function toNativeArrayImpl($receiver, eClass) {
+    return copyToArray($receiver);
+  }
   function isInstanceOf($receiver, kclass) {
     return kclass.isInstance_s8jyv4$($receiver);
+  }
+  function platformSpecificSerializerNotRegistered($receiver) {
+    throw SerializationException_init_0("Serializer for class '" + toString($receiver.simpleName) + "' is not found." + '\n' + 'Mark the class as @Serializable or provide the serializer explicitly.\n' + 'On Kotlin/JS explicitly declared serializer should be used for interfaces and enums without @Serializable annotation');
+  }
+  function constructSerializerForGivenTypeArgs($receiver, args) {
+    var tmp$, tmp$_0;
+    try {
+      var assocObject = findAssociatedObject($receiver, getKClass(SerializableWith));
+      if (Kotlin.isType(assocObject, KSerializer))
+        return Kotlin.isType(tmp$ = assocObject, KSerializer) ? tmp$ : throwCCE();
+      else if (Kotlin.isType(assocObject, SerializerFactory))
+        return Kotlin.isType(tmp$_0 = assocObject.serializer_lu48y9$(args.slice()), KSerializer) ? tmp$_0 : throwCCE();
+      else if (get_isInterface($receiver))
+        return new PolymorphicSerializer($receiver);
+      else
+        return null;
+    } catch (e) {
+      return null;
+    }
+  }
+  function isReferenceArray(rootClass) {
+    return rootClass != null ? rootClass.equals(PrimitiveClasses$arrayClass) : null;
+  }
+  function get_isInterface($receiver) {
+    var tmp$;
+    return ((tmp$ = get_js($receiver).$metadata$) != null ? tmp$.kind : null) == 'interface';
   }
   var package$kotlinx = _.kotlinx || (_.kotlinx = {});
   var package$serialization = package$kotlinx.serialization || (package$kotlinx.serialization = {});
   package$serialization.KSerializer = KSerializer;
   package$serialization.SerializationStrategy = SerializationStrategy;
   package$serialization.DeserializationStrategy = DeserializationStrategy;
+  package$serialization.PolymorphicSerializer = PolymorphicSerializer;
   package$serialization.findPolymorphicSerializer_uce5au$ = findPolymorphicSerializer;
   package$serialization.findPolymorphicSerializer_dz33bw$ = findPolymorphicSerializer_0;
   package$serialization.SealedClassSerializer = SealedClassSerializer;
@@ -3506,7 +4134,15 @@
   package$serialization.SerializationException_init_pdl1vj$ = SerializationException_init_0;
   package$serialization.SerializationException = SerializationException;
   var package$internal = package$serialization.internal || (package$serialization.internal = {});
+  package$serialization.serializer_ca95z9$ = serializer_2;
+  package$serialization.serializerOrNull_ca95z9$ = serializerOrNull_0;
+  package$serialization.reflectiveOrContextual_plakug$ = reflectiveOrContextual;
+  package$serialization.serializerOrNull_1yb8b7$ = serializerOrNull_1;
   var package$builtins = package$serialization.builtins || (package$serialization.builtins = {});
+  package$builtins.get_nullable_2418p6$ = get_nullable;
+  package$builtins.PairSerializer_2yqygg$ = PairSerializer;
+  package$builtins.MapEntrySerializer_2yqygg$ = MapEntrySerializer;
+  package$builtins.TripleSerializer_jww85o$ = TripleSerializer;
   package$builtins.serializer_n24eoe$ = serializer_4;
   package$builtins.CharArraySerializer = CharArraySerializer;
   package$builtins.serializer_k5zfx8$ = serializer_5;
@@ -3525,6 +4161,7 @@
   package$builtins.BooleanArraySerializer = BooleanArraySerializer;
   package$builtins.serializer_mours2$ = serializer_12;
   package$builtins.serializer_6eet4j$ = serializer_13;
+  package$builtins.ArraySerializer_8tn5u0$ = ArraySerializer_0;
   package$builtins.ListSerializer_swdriu$ = ListSerializer;
   package$builtins.MapSerializer_2yqygg$ = MapSerializer;
   package$builtins.serializer_wxu9yi$ = serializer_14;
@@ -3534,8 +4171,10 @@
   var package$descriptors = package$serialization.descriptors || (package$serialization.descriptors = {});
   package$descriptors.get_capturedKClass_583jlf$ = get_capturedKClass;
   package$descriptors.getContextualDescriptor_6wk734$ = getContextualDescriptor;
+  package$descriptors.withContext_k9hcuj$ = withContext;
   package$descriptors.SerialDescriptor = SerialDescriptor;
   package$descriptors.get_elementDescriptors_583jlf$ = get_elementDescriptors;
+  package$descriptors.buildClassSerialDescriptor_dowfwv$ = buildClassSerialDescriptor;
   package$descriptors.PrimitiveSerialDescriptor_xytc2a$ = PrimitiveSerialDescriptor;
   package$descriptors.buildSerialDescriptor_2yu4m$ = buildSerialDescriptor;
   package$descriptors.ClassSerialDescriptorBuilder = ClassSerialDescriptorBuilder;
@@ -3576,15 +4215,23 @@
   package$internal.ListLikeDescriptor = ListLikeDescriptor;
   package$internal.MapLikeDescriptor = MapLikeDescriptor;
   package$internal.PrimitiveArrayDescriptor = PrimitiveArrayDescriptor;
+  package$internal.ArrayClassDesc = ArrayClassDesc;
   package$internal.ArrayListClassDesc = ArrayListClassDesc;
+  package$internal.LinkedHashSetClassDesc = LinkedHashSetClassDesc;
+  package$internal.HashSetClassDesc = HashSetClassDesc;
   package$internal.LinkedHashMapClassDesc = LinkedHashMapClassDesc;
+  package$internal.HashMapClassDesc = HashMapClassDesc;
   package$internal.AbstractCollectionSerializer = AbstractCollectionSerializer;
   package$internal.ListLikeSerializer = ListLikeSerializer;
   package$internal.MapLikeSerializer = MapLikeSerializer;
   package$internal.PrimitiveArrayBuilder = PrimitiveArrayBuilder;
   package$internal.PrimitiveArraySerializer = PrimitiveArraySerializer;
+  package$internal.ReferenceArraySerializer = ReferenceArraySerializer;
   package$internal.ArrayListSerializer = ArrayListSerializer;
+  package$internal.LinkedHashSetSerializer = LinkedHashSetSerializer;
+  package$internal.HashSetSerializer = HashSetSerializer;
   package$internal.LinkedHashMapSerializer = LinkedHashMapSerializer;
+  package$internal.HashMapSerializer = HashMapSerializer;
   package$internal.ElementMarker = ElementMarker;
   package$internal.InlineClassDescriptor = InlineClassDescriptor;
   package$internal.InlinePrimitiveDescriptor_adhoip$ = InlinePrimitiveDescriptor;
@@ -3594,10 +4241,12 @@
   Object.defineProperty(package$internal, 'UShortSerializer', {get: UShortSerializer_getInstance});
   package$internal.jsonCachedSerialNames_583jlf$ = jsonCachedSerialNames;
   Object.defineProperty(package$internal, 'NoOpEncoder', {get: NoOpEncoder_getInstance});
+  package$internal.NullableSerializer = NullableSerializer;
   package$internal.SerialDescriptorForNullable = SerialDescriptorForNullable;
   package$internal.ObjectSerializer = ObjectSerializer;
   package$internal.cachedSerialNames_tie8r4$ = cachedSerialNames;
   package$internal.compactArray_b0lhx2$ = compactArray;
+  package$internal.kclass_7v1px$ = kclass;
   package$internal.PluginGeneratedSerialDescriptor = PluginGeneratedSerialDescriptor;
   package$internal.hashCodeImpl_y01f7g$ = hashCodeImpl;
   package$internal.GeneratedSerializer = GeneratedSerializer;
@@ -3620,6 +4269,7 @@
   package$internal.BooleanArrayBuilder = BooleanArrayBuilder;
   package$internal.PrimitiveSerialDescriptor = PrimitiveSerialDescriptor_0;
   package$internal.PrimitiveDescriptorSafe_2z23zl$ = PrimitiveDescriptorSafe;
+  package$internal.builtinSerializerOrNull_beh9s$ = builtinSerializerOrNull;
   Object.defineProperty(package$internal, 'UnitSerializer', {get: UnitSerializer_getInstance});
   Object.defineProperty(package$internal, 'BooleanSerializer', {get: BooleanSerializer_getInstance});
   Object.defineProperty(package$internal, 'ByteSerializer', {get: ByteSerializer_getInstance});
@@ -3634,6 +4284,10 @@
   package$internal.NamedValueEncoder = NamedValueEncoder;
   package$internal.TaggedDecoder = TaggedDecoder;
   package$internal.NamedValueDecoder = NamedValueDecoder;
+  package$internal.KeyValueSerializer = KeyValueSerializer;
+  package$internal.MapEntrySerializer = MapEntrySerializer_0;
+  package$internal.PairSerializer = PairSerializer_0;
+  package$internal.TripleSerializer = TripleSerializer_0;
   var package$modules = package$serialization.modules || (package$serialization.modules = {});
   package$modules.SerializersModule = SerializersModule;
   Object.defineProperty(package$modules, 'EmptySerializersModule', {get: function () {
@@ -3645,9 +4299,15 @@
   package$modules.ContextualProvider = ContextualProvider;
   package$modules.SerializersModuleBuilder = SerializersModuleBuilder;
   package$modules.SerializersModuleCollector = SerializersModuleCollector;
+  package$serialization.SerializableWith = SerializableWith;
   package$internal.getChecked_4bqw6o$ = getChecked;
   package$internal.getChecked_3zu3yo$ = getChecked_0;
+  package$internal.compiledSerializerImpl_beh9s$ = compiledSerializerImpl;
+  package$internal.toNativeArrayImpl_wfz7v1$ = toNativeArrayImpl;
   package$internal.isInstanceOf_ofcvxk$ = isInstanceOf;
+  package$internal.platformSpecificSerializerNotRegistered_lu5d9p$ = platformSpecificSerializerNotRegistered;
+  package$internal.constructSerializerForGivenTypeArgs_f7nown$ = constructSerializerForGivenTypeArgs;
+  package$internal.isReferenceArray_79m3vz$ = isReferenceArray;
   Object.defineProperty(SerialDescriptorImpl.prototype, 'isNullable', Object.getOwnPropertyDescriptor(SerialDescriptor.prototype, 'isNullable'));
   Object.defineProperty(SerialDescriptorImpl.prototype, 'isInline', Object.getOwnPropertyDescriptor(SerialDescriptor.prototype, 'isInline'));
   AbstractDecoder.prototype.decodeSerializableValue_w63s0f$ = Decoder.prototype.decodeSerializableValue_w63s0f$;

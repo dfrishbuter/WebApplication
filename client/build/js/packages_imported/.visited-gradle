@@ -159,6 +159,10 @@
     "91ca718f62bb1f352744fcd5b1a471a1": {
       "src": "/Users/d.frishbuter/IdeaProjects/NewWebApplication/model/build/libs/model-js-0.1.jar",
       "target": "model/0.0.0"
+    },
+    "cf72148981935f25495fb871ab2641cd": {
+      "src": "/Users/d.frishbuter/IdeaProjects/NewWebApplication/model/build/libs/model-js-0.1.jar",
+      "target": "model/0.0.0"
     }
   }
 }
