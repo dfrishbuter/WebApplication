@@ -38,6 +38,7 @@ fun Application.main(test: Boolean = true) {
         json()
     }
     routing {
+        import()
         teacher()
         group() // надо объявить маршуты, поэтому прописываем здесь их
         subject()

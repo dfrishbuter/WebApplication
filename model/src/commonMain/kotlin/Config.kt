@@ -30,5 +30,8 @@ class Config {
         const val workPlansBySubjectURL = "$serverUrl$workPlansBySubjectPath"
 
         const val workPlansBaseURL = "$serverUrl$pathPrefix/work_plans"
+
+        const val importURL = "$serverUrl$pathPrefix/source_file"
+        var sourceFileURL = ""
     }
 }
