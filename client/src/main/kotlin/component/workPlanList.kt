@@ -30,7 +30,7 @@ external interface WorkPlanListProps : Props {
     var workPlans: List<Item<WorkPlan>>
 }
 
-fun fcWorkPlanList() = fc("WorkPlanList") { props: WorkPlanListProps ->
+fun fcWorkPlanList(exclude: String) = fc("WorkPlanList") { props: WorkPlanListProps ->
     val borderStyle = "border: 2px solid #095484;"
     h3 { + "Work Plans" }
 
@@ -54,17 +54,21 @@ fun fcWorkPlanList() = fc("WorkPlanList") { props: WorkPlanListProps ->
             th {
                 + "Блок"
             }
-            th {
-                + "Дисциплина (вид учебной работы)"
+            if (exclude != "by_subject") {
+                th {
+                    +"Дисциплина (вид учебной работы)"
+                }
             }
             th {
                 + "Семестр"
             }
-            th {
-                + "Группа"
-            }
-            th {
-                + "Кол-во обучающихся"
+            if (exclude != "by_group") {
+                th {
+                    +"Группа"
+                }
+                th {
+                    + "Кол-во обучающихся"
+                }
             }
             th {
                 + "Вид нагрузки"
@@ -72,11 +76,13 @@ fun fcWorkPlanList() = fc("WorkPlanList") { props: WorkPlanListProps ->
             th {
                 + "Нагрузка, часов"
             }
-            th {
-                + "Преподаватель"
-            }
-            th {
-                + "Вид занятости, ставка"
+            if (exclude != "by_teacher") {
+                th {
+                    +"Преподаватель"
+                }
+                th {
+                    +"Вид занятости, ставка"
+                }
             }
         }
         props.workPlans.mapIndexed { index, workPlan ->
@@ -93,20 +99,24 @@ fun fcWorkPlanList() = fc("WorkPlanList") { props: WorkPlanListProps ->
                 td {
                     + "${workPlan.elem.block}" // "Блок"
                 }
-                td { // "Дисциплина (вид учебной работы)"
-                    + "${workPlan.elem.subject}"
+                if (exclude != "by_subject") {
+                    td { // "Дисциплина (вид учебной работы)"
+                        + "${workPlan.elem.subject}"
+                    }
                 }
                 td { // "Семестр"
                     + "${workPlan.elem.semester}"
                 }
-                td { // "Группа"
-                    + workPlan.elem.groups.joinToString(
-                        separator = ";\n",
-                        transform = { "${it.code} ${it.name}, ${it.formOfEducation}" }
-                    )
-                }
-                td { // "Кол-во обучающихся"
-                    + "${workPlan.elem.numberOfStudents}"
+                if (exclude != "by_group") {
+                    td { // "Группа"
+                        + workPlan.elem.groups.joinToString(
+                            separator = ";\n",
+                            transform = { "${it.code} ${it.name}, ${it.formOfEducation}" }
+                        )
+                    }
+                    td { // "Кол-во обучающихся"
+                        + "${workPlan.elem.numberOfStudents}"
+                    }
                 }
                 td { // "Вид нагрузки"
                     + "${workPlan.elem.typeOfLoad}"
@@ -114,11 +124,13 @@ fun fcWorkPlanList() = fc("WorkPlanList") { props: WorkPlanListProps ->
                 td { // "Нагрузка, часов"
                     + "${workPlan.elem.hours}"
                 }
-                td { // "Преподаватель"
-                    +"${workPlan.elem.teacher.firstName} ${workPlan.elem.teacher.lastName} ${workPlan.elem.teacher.patronymic}"
-                }
-                td { // "Вид занятости, ставка"
-                    + "${workPlan.elem.typeOfEmployment}"
+                if (exclude != "by_teacher") {
+                    td { // "Преподаватель"
+                        +"${workPlan.elem.teacher.firstName} ${workPlan.elem.teacher.lastName} ${workPlan.elem.teacher.patronymic}"
+                    }
+                    td { // "Вид занятости, ставка"
+                        + "${workPlan.elem.typeOfEmployment}"
+                    }
                 }
             }
         }
@@ -140,7 +152,7 @@ fun fcContainerWorkPlanList(lastPathComponent: String) = fc("QueryWorkPlanList")
     else if (query.isError) div { + "Error!" }
     else {
         val items = query.data?.data?.toList() ?: emptyList()
-        child(fcWorkPlanList()) {
+        child(fcWorkPlanList(lastPathComponent.trim('/'))) {
             attrs.workPlans = items
         }
     }
